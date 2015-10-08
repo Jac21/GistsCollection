@@ -13,5 +13,8 @@ Current Folder Layout
 > - Node.js
 	- async_module (snippets of Javascript code that utilize asynchronous programming)
 	- general
+	- Gulp
+	- Koa_module (snippets of functionality from Express' spiritual successor)
+	- Lo-Dash_module (snippets of functionality from underscore's fork for dealing with array, objects, JSON, etc)
 > - Python
 	- MatasanoChallenges (Crypto and security-oriented python scripts, intended to solve the Matasano [CryptoPals](http://cryptopals.com/) challenges)
