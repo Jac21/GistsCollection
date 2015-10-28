@@ -20,6 +20,9 @@ namespace MySeleniumApi
             Driver = new ChromeDriver(driverResourceString);
         }
 
+        /// <summary>
+        /// Basic test to ensure working state of the Webdriver
+        /// </summary>
         [Test]
         public void BasicDriverTest()
         {
