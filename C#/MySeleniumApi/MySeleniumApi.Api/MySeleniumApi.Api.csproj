@@ -53,12 +53,6 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\MySeleniumApi\MySeleniumApi.csproj">
-      <Project>{06c50fb6-5f93-4120-9fff-7ae5ca945f0c}</Project>
-      <Name>MySeleniumApi</Name>
-    </ProjectReference>
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

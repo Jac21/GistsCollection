@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using OpenQA.Selenium;
 
 namespace MySeleniumApi.Api
 {
-    class SeleniumApi
+    public class SeleniumApi
     {
         // class fields
         private IWebDriver Driver;
@@ -103,6 +104,36 @@ namespace MySeleniumApi.Api
                 // wait for page load once more
                 Thread.Sleep(5000);
             }
+        }
+
+        /// <summary>
+        /// Intakes a string array of (assuming) test data, uses Regex to
+        /// find and replace portions of text specified and appends the new text
+        /// to a copy of the initial array. Use for batch conversion of data to
+        /// further de-couple tests and test data
+        /// </summary>
+        /// <param name="urls"></param>
+        /// <param name="oldSegment"></param>
+        /// <param name="newSegment"></param>
+        /// <returns></returns>
+        public string[] ReplaceTextPortion(string[] textData, string oldText, string newText)
+        {
+            // data string array copy
+            string[] newTextData = new string[textData.Length];
+
+            // loop through original string array, regex matching based on the
+            // oldText argument, replacing it with the new, and adding it to
+            // the string data array copy
+            for (int index = 0; index < textData.Length; index++)
+            {
+                if (Regex.IsMatch(textData[index], oldText, RegexOptions.IgnoreCase))
+                {
+                    var newData = Regex.Replace(textData[index], oldText, newText);
+                    newTextData[index] = newData;
+                }
+            }
+
+            return newTextData;
         }
 
         static void Main(string[] args) { }
