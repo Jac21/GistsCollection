@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.21005.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "MatasanoCryptoChallengeSetOneQThree", "MatasanoCryptoChallengeSetOneQThree\MatasanoCryptoChallengeSetOneQThree.pyproj", "{315EEEB9-F468-4FD6-A3B2-771A7D5E2902}"
+Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "SetOneQuestionTwo", "SetOneQuestionTwo\SetOneQuestionTwo.pyproj", "{D934667B-208B-4867-9999-0239823AD546}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,8 +11,8 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{315EEEB9-F468-4FD6-A3B2-771A7D5E2902}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{315EEEB9-F468-4FD6-A3B2-771A7D5E2902}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D934667B-208B-4867-9999-0239823AD546}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D934667B-208B-4867-9999-0239823AD546}.Release|Any CPU.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

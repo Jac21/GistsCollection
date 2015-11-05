@@ -3,15 +3,15 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>315eeeb9-f468-4fd6-a3b2-771a7d5e2902</ProjectGuid>
+    <ProjectGuid>44c4128b-8cc1-4a35-a2ff-5d2e9aa5495d</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>MatasanoCryptoChallengeSetOneQThree.py</StartupFile>
+    <StartupFile>SetOneQuestionThree.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
     <OutputPath>.</OutputPath>
-    <Name>MatasanoCryptoChallengeSetOneQThree</Name>
-    <RootNamespace>MatasanoCryptoChallengeSetOneQThree</RootNamespace>
+    <Name>SetOneQuestionThree</Name>
+    <RootNamespace>SetOneQuestionThree</RootNamespace>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <DebugSymbols>true</DebugSymbols>
@@ -22,7 +22,7 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="MatasanoCryptoChallengeSetOneQThree.py" />
+    <Compile Include="SetOneQuestionThree.py" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
