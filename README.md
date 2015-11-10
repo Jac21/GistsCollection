@@ -7,6 +7,8 @@ Collection of miniature projects, programming challenges, and useful code snippe
 Current Folder Layout
 -------------
 
+> - AngularJS
+	- Protractor (test suites to model for AngularJS end-to-end testing)
 > - C#
 	- FileByteInverter (mini-utility that uses C# indexers to invert the bytes of a given file)
 	- Shuffler (Generic C# object shuffler)
