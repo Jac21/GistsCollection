@@ -23,3 +23,4 @@ Current Folder Layout
 	- Lo-Dash_module (snippets of functionality from underscore's fork for dealing with array, objects, JSON, etc)
 > - Python
 	- MatasanoChallenges (Crypto and security-oriented python scripts, intended to solve the Matasano [CryptoPals](http://cryptopals.com/) challenges)
+	- Intermediate Python (https://github.com/yasoob/intermediatePython)
