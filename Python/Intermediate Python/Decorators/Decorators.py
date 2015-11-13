@@ -26,3 +26,14 @@ a_function_requiring_decoration = a_new_decorator(a_function_requiring_decoratio
 
 a_function_requiring_decoration()
 # i am doing something boring...
+
+# using the @ symbol
+@a_new_decorator
+def a_new_function_decoration():
+	print("I am the new function requiring decoration")
+
+a_new_function_decoration()
+
+# although...
+print(a_function_requiring_decoration.__name__) #wrapTheFunction
+
