@@ -1,12 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
-using System.Threading.Tasks;
 using OpenQA.Selenium;
+using OpenQA.Selenium.Support.UI;
 
 namespace MySeleniumApi.Api
 {
@@ -34,9 +31,62 @@ namespace MySeleniumApi.Api
             {
                 Driver.FindElement(By.Id(id));
             }
-            catch (NoSuchElementException)
+            catch (Exception ex)
             {
-                return false;
+                if (ex is NoSuchElementException || ex is WebDriverTimeoutException)
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+        /// <summary>
+        /// Simple Boolean-returning function to both ensure
+        /// an element exists in a test flow and catch
+        /// the Selenium exception thrown in the event
+        /// of that same element not existing
+        /// </summary>
+        /// <param name="xPath"></param>
+        /// <returns></returns>
+        public Boolean ElementExistsByXpath(string xPath)
+        {
+            try
+            {
+                Driver.FindElement(By.XPath(xPath));
+            }
+            catch (Exception ex)
+            {
+                if (ex is NoSuchElementException || ex is WebDriverTimeoutException)
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+        /// <summary>
+        /// Simple Boolean-returning function to both ensure
+        /// an element exists in a test flow and catch
+        /// the Selenium exception thrown in the event
+        /// of that same element not existing
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
+        public Boolean ElementExistsByName(string name)
+        {
+            try
+            {
+                Driver.FindElement(By.Name(name));
+            }
+            catch (Exception ex)
+            {
+                if (ex is NoSuchElementException || ex is WebDriverTimeoutException)
+                {
+                    return false;
+                }
             }
 
             return true;
@@ -112,9 +162,9 @@ namespace MySeleniumApi.Api
         /// to a copy of the initial array. Use for batch conversion of data to
         /// further de-couple tests and test data
         /// </summary>
-        /// <param name="urls"></param>
-        /// <param name="oldSegment"></param>
-        /// <param name="newSegment"></param>
+        /// <param name="textData"></param>
+        /// <param name="oldText"></param>
+        /// <param name="newText"></param>
         /// <returns></returns>
         public string[] ReplaceTextPortion(string[] textData, string oldText, string newText)
         {
@@ -134,6 +184,21 @@ namespace MySeleniumApi.Api
             }
 
             return newTextData;
+        }
+
+        /// <summary>
+        /// Function to aid in the loading of new tabs being spawned during the application
+        /// flow, prevents exceptions dealing with elements not being found due to the tab
+        /// taking a longer amount of time than usual to load in its entirety. Intakes the 
+        /// webdriver in use, the number of windows desired (which it uses to compare to the
+        /// actual number of handles to halt execution), and the timespan to halt flow
+        /// </summary>
+        /// <param name="driver"></param>
+        /// <param name="numberOfWindows"></param>
+        /// <param name="timeSpan"></param>
+        public void WaitForWindowHandleLoad(IWebDriver driver, int numberOfWindows, double timeSpan)
+        {
+            new WebDriverWait(driver, TimeSpan.FromSeconds(timeSpan)).Until(waitDriver => driver.WindowHandles.Count == numberOfWindows);
         }
 
         static void Main(string[] args) { }

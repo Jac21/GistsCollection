@@ -44,8 +44,6 @@ namespace MySeleniumApi
             inputBox.SendKeys(Keys.Enter);
 
             // assert
-            var infoPaneHeader = Driver.FindElement(By.XPath("//*[@id=\"rhs_block\"]/ol/li/div[1]/div/div[1]/ol/div[2]/div/div[1]"));
-            infoPaneHeader.Text.ShouldBe("Google");
         }
 
         [TearDown]

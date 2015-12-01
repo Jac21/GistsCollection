@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.21005.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MySeleniumApi", "MySeleniumApi\MySeleniumApi.csproj", "{06C50FB6-5F93-4120-9FFF-7AE5CA945F0C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MySeleniumApi.Tests", "MySeleniumApi\MySeleniumApi.Tests.csproj", "{06C50FB6-5F93-4120-9FFF-7AE5CA945F0C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MySeleniumApi.Api", "MySeleniumApi.Api\MySeleniumApi.Api.csproj", "{DC92015D-74A5-4D45-B379-F5A28BBB8C7B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MySeleniumApi", "MySeleniumApi.Api\MySeleniumApi.csproj", "{DC92015D-74A5-4D45-B379-F5A28BBB8C7B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -70,9 +70,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\MySeleniumApi.Api\MySeleniumApi.Api.csproj">
+    <ProjectReference Include="..\MySeleniumApi.Api\MySeleniumApi.csproj">
       <Project>{dc92015d-74a5-4d45-b379-f5a28bbb8c7b}</Project>
-      <Name>MySeleniumApi.Api</Name>
+      <Name>MySeleniumApi</Name>
     </ProjectReference>
   </ItemGroup>
   <Choose>
