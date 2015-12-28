@@ -11,8 +11,9 @@ Current Folder Layout
 	- Protractor (test suites to model for AngularJS end-to-end testing)
 > - C#
 	- FileByteInverter (mini-utility that uses C# indexers to invert the bytes of a given file)
-	- Shuffler (Generic C# object shuffler)
+	- IocPractice (example class that takes advantage of the Inversion-of-Control design pattern)
 	- MySeleniumApi (helpful methods for automated UI testing in Selenium Webdriver)
+	- Shuffler (Generic C# object shuffler)
 > - Elixir
 	- portal (Basic Elixir tutorial project that deals with the Mix toolset, Agents, Protocols, and Supervisions for distributed list transfer)
 > - Node.js
