@@ -4,6 +4,9 @@ var React = require('react');
 
 var About = React.createClass({
 	statics: {
+
+		// defines a hook into React that triggers when the router is being transitioned 
+		// to the particular page/component (useful for auth, etc.)
 		willTransitionTo: function(transition, params, query, callback) {
 			if (!confirm('Are you sure you want to read a page that\'s this boring?')) {
 				transition.about();
@@ -12,6 +15,8 @@ var About = React.createClass({
 			}
 		},
 
+		// defines a hook into React that triggers when the router is being transitioned 
+		// from the particular page/component (useful for form-checking, etc.)
 		willTransitionFrom: function(transition, component) {
 			if (!confirm('Are you sure you want to leave a page that\'s this exciting?')) {
 				transition.about();

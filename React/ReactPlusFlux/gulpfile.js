@@ -9,6 +9,7 @@ var source = require('vinyl-source-stream');	// use conventional text streams wi
 var concat = require('gulp-concat'); 			// concats files
 var lint = require('gulp-eslint');				// lint JS files, JSX files
 
+// config object for port, url, and folder paths needed by gulp tasks
 var config = {
 	port: 9005,
 	devBaseUrl: 'http://localhost',

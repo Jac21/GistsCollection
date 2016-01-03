@@ -4,6 +4,9 @@ var React = require('react');
 var Router = require('react-router');
 var Link = Router.Link;
 
+// Takes advantage of Router.Link functionality to maintain stable
+// page linking throughout application and future growth with the
+// "Link to =(component)" syntax 
 var Header = React.createClass({
 	render: function() {
 		return (

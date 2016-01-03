@@ -8,6 +8,9 @@ var Route = Router.Route;
 var NotFoundRoute = Router.NotFoundRoute;
 var Redirect = Router.Redirect;
 
+// Routes needed by the entirety of the application, dictates the routes
+// handled by React-Router and used for the navigation throughout app
+// flow
 var routes = (
 	<Route name = "app" path = "/" handler = {require('./components/app')}>
 		<DefaultRoute handler = {require('./components/homePage')} />

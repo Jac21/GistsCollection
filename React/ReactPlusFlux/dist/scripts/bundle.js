@@ -44506,9 +44506,9 @@ module.exports = {
 	authors: 
 	[
 		{
-			id: 'cory-house', 
-			firstName: 'Cory', 
-			lastName: 'House'
+			id: 'jeremy-cantu', 
+			firstName: 'Jeremy', 
+			lastName: 'Cantu'
 		},	
 		{
 			id: 'scott-allen', 
@@ -44530,6 +44530,9 @@ var React = require('react');
 
 var About = React.createClass({displayName: "About",
 	statics: {
+
+		// defines a hook into React that triggers when the router is being transitioned 
+		// to the particular page/component (useful for auth, etc.)
 		willTransitionTo: function(transition, params, query, callback) {
 			if (!confirm('Are you sure you want to read a page that\'s this boring?')) {
 				transition.about();
@@ -44538,6 +44541,8 @@ var About = React.createClass({displayName: "About",
 			}
 		},
 
+		// defines a hook into React that triggers when the router is being transitioned 
+		// from the particular page/component (useful for form-checking, etc.)
 		willTransitionFrom: function(transition, component) {
 			if (!confirm('Are you sure you want to leave a page that\'s this exciting?')) {
 				transition.about();
@@ -44590,6 +44595,7 @@ var App = React.createClass({displayName: "App",
 		}
 		*/
 
+		// React-Router functional implementation
 		return (
 			React.createElement("div", null, 
 				React.createElement(Header, null), 
@@ -44693,6 +44699,9 @@ var AuthorPage = React.createClass({displayName: "AuthorPage",
 	},
 
 	componentDidMount: function() {
+		//  returns true if the component is rendered into the DOM, false 
+		// otherwise. You can use this method to guard asynchronous calls 
+		// to setState() or forceUpdate()
 		if (this.isMounted()) { 
 			this.setState({ authors: AuthorApi.getAllAuthors() });
 		}
@@ -44749,6 +44758,9 @@ var React = require('react');
 var Router = require('react-router');
 var Link = Router.Link;
 
+// Takes advantage of Router.Link functionality to maintain stable
+// page linking throughout application and future growth with the
+// "Link to =(component)" syntax 
 var Header = React.createClass({displayName: "Header",
 	render: function() {
 		return (
@@ -44777,6 +44789,8 @@ var React = require('react');
 
 var Input = React.createClass({displayName: "Input",
 
+	// Property types necessary for Bootstrap form class, and 
+	// application use as a whole for smart component mocking
 	propTypes: {
 		name: React.PropTypes.string.isRequired,
 		label: React.PropTypes.string.isRequired,
@@ -44789,6 +44803,7 @@ var Input = React.createClass({displayName: "Input",
 
 	render: function() {
 
+		// changes class based on error state with plain concat.
 		var wrapperClass = "form-group";
 		if(this.props.error && this.props.error.length > 0) {
 			wrapperClass += " " + 'has-error';
@@ -44841,6 +44856,7 @@ module.exports = Home;
 var React = require('react');
 var Link = require('react-router').Link;
 
+// Defualt 404 page
 var NotFoundPage = React.createClass({displayName: "NotFoundPage",
 	render: function() {
 		return (
@@ -44897,6 +44913,9 @@ var Route = Router.Route;
 var NotFoundRoute = Router.NotFoundRoute;
 var Redirect = Router.Redirect;
 
+// Routes needed by the entirety of the application, dictates the routes
+// handled by React-Router and used for the navigation throughout app
+// flow
 var routes = (
 	React.createElement(Route, {name: "app", path: "/", handler: require('./components/app')}, 
 		React.createElement(DefaultRoute, {handler: require('./components/homePage')}), 

@@ -14,6 +14,9 @@ var AuthorPage = React.createClass({
 	},
 
 	componentDidMount: function() {
+		//  returns true if the component is rendered into the DOM, false 
+		// otherwise. You can use this method to guard asynchronous calls 
+		// to setState() or forceUpdate()
 		if (this.isMounted()) { 
 			this.setState({ authors: AuthorApi.getAllAuthors() });
 		}

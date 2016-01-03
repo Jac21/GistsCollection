@@ -19,6 +19,7 @@ var App = React.createClass({
 		}
 		*/
 
+		// React-Router functional implementation
 		return (
 			<div>
 				<Header/>

@@ -3,6 +3,7 @@
 var React = require('react');
 var Link = require('react-router').Link;
 
+// Defualt 404 page
 var NotFoundPage = React.createClass({
 	render: function() {
 		return (

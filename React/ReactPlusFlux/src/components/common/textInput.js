@@ -4,6 +4,8 @@ var React = require('react');
 
 var Input = React.createClass({
 
+	// Property types necessary for Bootstrap form class, and 
+	// application use as a whole for smart component mocking
 	propTypes: {
 		name: React.PropTypes.string.isRequired,
 		label: React.PropTypes.string.isRequired,
@@ -16,6 +18,7 @@ var Input = React.createClass({
 
 	render: function() {
 
+		// changes class based on error state with plain concat.
 		var wrapperClass = "form-group";
 		if(this.props.error && this.props.error.length > 0) {
 			wrapperClass += " " + 'has-error';
