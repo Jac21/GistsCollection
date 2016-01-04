@@ -44993,6 +44993,13 @@ var Input = require('../common/textInput.js');
 
 var AuthorForm = React.createClass({displayName: "AuthorForm",
 
+	propTypes: {
+		author: React.PropTypes.object.isRequired,
+		onSave: React.PropTypes.func.isRequired,
+		onChange: React.PropTypes.func.isRequired,
+		errors: React.PropTypes.object
+	},
+
 	render: function() {
 		return (
 			React.createElement("form", null, 
@@ -45115,14 +45122,24 @@ var ManageAuthorPage = React.createClass({displayName: "ManageAuthorPage",
 		Router.Navigation
 	],
 
+	statics: {
+		willTransitionFrom: function(transition, component) {
+			if(component.state.dirty && !confirm('Leave without saving?')) {
+				transition.abort();
+			} 
+		}
+	},
+
 	getInitialState: function() {
 		return {
 			author: {id: '', firstName: '', lastName: ''},
-			errors: {}
+			errors: {},
+			dirty: false
 		};
 	},
 
 	setAuthorState: function(event) {
+		this.setState({dirty: true});
 		var field = event.target.name;
 		var value = event.target.value;
 		this.state.author[field] = value;
@@ -45158,8 +45175,9 @@ var ManageAuthorPage = React.createClass({displayName: "ManageAuthorPage",
 			return;
 		}
 
-		// call api's save author function
+		// call api's save author function, set dirty state back to false
 		AuthorApi.saveAuthor(this.state.author);
+		this.setState({dirty: false});
 
 		// show toastr success message on transition
 		toastr.success('Author ' + this.state.author.firstName + ' ' + this.state.author.lastName + ' saved');
