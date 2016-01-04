@@ -45002,6 +45002,7 @@ var AuthorForm = React.createClass({displayName: "AuthorForm",
 					label: "First Name", 
 					value: this.props.author.firstName, 
 					onChange: this.props.onChange, 
+					error: this.props.errors.firstName, 
 					placeholder: "First Name"}), 
 
 				React.createElement(Input, {
@@ -45009,6 +45010,7 @@ var AuthorForm = React.createClass({displayName: "AuthorForm",
 					label: "Last Name", 
 					value: this.props.author.lastName, 
 					onChange: this.props.onChange, 
+					error: this.props.errors.lastName, 
 					placeholder: "Last Name"}), 
 
 				React.createElement("input", {type: "submit", value: "Save", className: "btn btn-default", 
@@ -45115,7 +45117,8 @@ var ManageAuthorPage = React.createClass({displayName: "ManageAuthorPage",
 
 	getInitialState: function() {
 		return {
-			author: {id: '', firstName: '', lastName: ''}
+			author: {id: '', firstName: '', lastName: ''},
+			errors: {}
 		};
 	},
 
@@ -45126,9 +45129,34 @@ var ManageAuthorPage = React.createClass({displayName: "ManageAuthorPage",
 		return this.setState({author: this.state.author});
 	},
 
+	authorFormIsValid: function() {
+		var formIsValid = true;
+
+		// clear any previous errors
+		this.state.errors = {};
+
+		if(this.state.author.firstName.length < 3) {
+			this.state.errors.firstName = "First name must be at least 3 characters long";
+			formIsValid = false;
+		}
+
+		if(this.state.author.lastName.length < 3) {
+			this.state.errors.lastName = "Last name must be at least 3 characters long";
+			formIsValid = false;
+		}
+
+		this.setState({errors: this.state.errors});
+		return formIsValid;
+	},
+
 	saveAuthor: function(event) {
 		// prevent default browser form save
 		event.preventDefault();
+
+		// validation
+		if(!this.authorFormIsValid()) {
+			return;
+		}
 
 		// call api's save author function
 		AuthorApi.saveAuthor(this.state.author);
@@ -45144,7 +45172,8 @@ var ManageAuthorPage = React.createClass({displayName: "ManageAuthorPage",
 			React.createElement(AuthorForm, {
 				author: this.state.author, 
 				onChange: this.setAuthorState, 
-				onSave: this.saveAuthor})
+				onSave: this.saveAuthor, 
+				errors: this.state.errors})
 		);
 	}
 });
