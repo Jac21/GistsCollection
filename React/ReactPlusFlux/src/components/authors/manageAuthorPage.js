@@ -4,6 +4,7 @@ var React = require('react');
 var Router = require('react-router');
 var AuthorForm = require('./authorForm.js');
 var AuthorApi = require('../../api/authorApi');
+var toastr = require('toastr');
 
 var ManageAuthorPage = React.createClass({
 	// array reference to react router navigation mixin
@@ -27,7 +28,13 @@ var ManageAuthorPage = React.createClass({
 	saveAuthor: function(event) {
 		// prevent default browser form save
 		event.preventDefault();
+
+		// call api's save author function
 		AuthorApi.saveAuthor(this.state.author);
+
+		// show toastr success message on transition
+		toastr.success('Author ' + this.state.author.firstName + ' ' + this.state.author.lastName + ' saved');
+
 		this.transitionTo('authors');
 	},
 
