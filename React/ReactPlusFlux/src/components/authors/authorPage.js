@@ -3,23 +3,28 @@
 var React = require('react');
 var Router = require('react-router');
 var Link = require('react-router').Link;
-var AuthorApi = require('../../api/authorApi.js');
+var AuthorActions = require('../../actions/authorActions.js');
+var AuthorStore = require('../../stores/authorStore.js');
 var AuthorList = require('./authorList.js');
 
 var AuthorPage = React.createClass({
 	getInitialState: function() {
 		return {
-			authors: []
+			authors: AuthorStore.getAllAuthors()
 		};
 	},
 
-	componentDidMount: function() {
-		//  returns true if the component is rendered into the DOM, false 
-		// otherwise. You can use this method to guard asynchronous calls 
-		// to setState() or forceUpdate()
-		if (this.isMounted()) { 
-			this.setState({ authors: AuthorApi.getAllAuthors() });
-		}
+	componentWillMount: function() {
+		AuthorStore.addChangeListener(this._onChange);
+	},
+
+	// clean up when component is unmounted
+	componentWillUnmount: function() {
+		AuthorStore.removeChangeListener(this._onChange);
+	},
+
+	_onChange: function() {
+		this.setState({authors: AuthorStore.getAllAuthors()});
 	},
 
 	render: function() {
