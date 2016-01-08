@@ -46242,7 +46242,7 @@ var CourseList = React.createClass({displayName: "CourseList",
 				React.createElement("tr", {key: course.id}, 
 					React.createElement("td", null, React.createElement("a", {href: "#"}, "Watch")), 
 					React.createElement("td", null, React.createElement("a", {href: "#", onClick: this.deleteCourse.bind(this, course.id)}, "Delete")), 
-					React.createElement("td", null, course.title), 
+					React.createElement("td", null, React.createElement(Link, {to: "manageCourse", params: {id: course.id}}, course.title)), 
 					React.createElement("td", null, course.author.name), 
 					React.createElement("td", null, course.category), 
 					React.createElement("td", null, course.length)
@@ -46459,6 +46459,7 @@ var routes = (
 		
 		React.createElement(Route, {name: "courses", handler: require('./components/courses/coursePage')}), 
 		React.createElement(Route, {name: "addCourse", path: "course", handler: require('./components/courses/manageCoursePage')}), 
+		React.createElement(Route, {name: "manageCourse", path: "course/:id", handler: require('./components/courses/manageCoursePage')}), 
 		
 		React.createElement(Route, {name: "about", handler: require('./components/about/aboutPage')}), 
 		React.createElement(NotFoundRoute, {handler: require('./components/notFoundPage')}), 
@@ -46575,6 +46576,13 @@ Dispatcher.register(function(action) {
 	switch(action.actionType) {
 		case ActionTypes.INITIALIZE:
 			_courses = action.initialData.courses;
+			CourseStore.emitChange();
+			break;
+		case ActionTypes.DELETE_COURSE:
+			// debugger //F8
+			_.remove(_courses, function(course) {
+				return action.id === course.id;
+			});
 			CourseStore.emitChange();
 			break;
 		default:

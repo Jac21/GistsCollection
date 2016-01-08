@@ -38,6 +38,13 @@ Dispatcher.register(function(action) {
 			_courses = action.initialData.courses;
 			CourseStore.emitChange();
 			break;
+		case ActionTypes.DELETE_COURSE:
+			// debugger //F8
+			_.remove(_courses, function(course) {
+				return action.id === course.id;
+			});
+			CourseStore.emitChange();
+			break;
 		default:
 			// no op
 	}
