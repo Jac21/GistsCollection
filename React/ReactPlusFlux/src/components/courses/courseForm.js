@@ -5,40 +5,32 @@ var Input = require('../common/textInput.js');
 
 var CourseForm = React.createClass({
 
-	/*
 	propTypes: {
 		course: React.PropTypes.object.isRequired,
 		onSave: React.PropTypes.func.isRequired,
 		onChange: React.PropTypes.func.isRequired,
 		errors: React.PropTypes.object
-	},*/
+	},
 
 	render: function() {
 		return (
 			<form>
 				<h1>Edit Course</h1>
 
-			</form>
-		);
-	}
-});
-
-module.exports = CourseForm;
-
-				/*<Input
-					name = "courseTitle"
+				<Input
+					name = "title"
 					label = "Title"
-					value = {this.props.course.courseTitle}
+					value = {this.props.course.title}
 					onChange = {this.props.onChange}
-					error = {this.props.errors.courseTitle}
+					error = {this.props.errors.title}
 					placeholder = "Enter here..." />
 
 				<Input
-					name = "courseAuthor"
+					name = "author"
 					label = "Author"
-					value = {this.props.course.courseAuthor}
+					value = {this.props.course.author}
 					onChange = {this.props.onChange}
-					error = {this.props.errors.courseAuthor}
+					error = {this.props.errors.author}
 					placeholder = "Enter here..." />
 
 				<Input
@@ -50,12 +42,19 @@ module.exports = CourseForm;
 					placeholder = "Enter here..." />
 
 				<Input
-					name = "courseLength"
+					name = "length"
 					label = "Length"
-					value = {this.props.course.courseLength}
+					value = {this.props.course.length}
 					onChange = {this.props.onChange}
-					error = {this.props.errors.courseLength}
+					error = {this.props.errors.length}
 					placeholder = "Enter here..." />
 
 				<input type="submit" value = "Save" className = "btn btn-default" 
-				onClick = {this.props.onSave} />*/
+					onClick = {this.props.onSave} />
+
+			</form>
+		);
+	}
+});
+
+module.exports = CourseForm;

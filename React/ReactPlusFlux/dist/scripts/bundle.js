@@ -46160,18 +46160,52 @@ var Input = require('../common/textInput.js');
 
 var CourseForm = React.createClass({displayName: "CourseForm",
 
-	/*
 	propTypes: {
 		course: React.PropTypes.object.isRequired,
 		onSave: React.PropTypes.func.isRequired,
 		onChange: React.PropTypes.func.isRequired,
 		errors: React.PropTypes.object
-	},*/
+	},
 
 	render: function() {
 		return (
 			React.createElement("form", null, 
-				React.createElement("h1", null, "Edit Course")
+				React.createElement("h1", null, "Edit Course"), 
+
+				React.createElement(Input, {
+					name: "title", 
+					label: "Title", 
+					value: this.props.course.title, 
+					onChange: this.props.onChange, 
+					error: this.props.errors.title, 
+					placeholder: "Enter here..."}), 
+
+				React.createElement(Input, {
+					name: "author", 
+					label: "Author", 
+					value: this.props.course.author, 
+					onChange: this.props.onChange, 
+					error: this.props.errors.author, 
+					placeholder: "Enter here..."}), 
+
+				React.createElement(Input, {
+					name: "category", 
+					label: "Category", 
+					value: this.props.course.category, 
+					onChange: this.props.onChange, 
+					error: this.props.errors.category, 
+					placeholder: "Enter here..."}), 
+
+				React.createElement(Input, {
+					name: "length", 
+					label: "Length", 
+					value: this.props.course.length, 
+					onChange: this.props.onChange, 
+					error: this.props.errors.length, 
+					placeholder: "Enter here..."}), 
+
+				React.createElement("input", {type: "submit", value: "Save", className: "btn btn-default", 
+					onClick: this.props.onSave})
 
 			)
 		);
@@ -46179,41 +46213,6 @@ var CourseForm = React.createClass({displayName: "CourseForm",
 });
 
 module.exports = CourseForm;
-
-				/*<Input
-					name = "courseTitle"
-					label = "Title"
-					value = {this.props.course.courseTitle}
-					onChange = {this.props.onChange}
-					error = {this.props.errors.courseTitle}
-					placeholder = "Enter here..." />
-
-				<Input
-					name = "courseAuthor"
-					label = "Author"
-					value = {this.props.course.courseAuthor}
-					onChange = {this.props.onChange}
-					error = {this.props.errors.courseAuthor}
-					placeholder = "Enter here..." />
-
-				<Input
-					name = "category"
-					label = "Category"
-					value = {this.props.course.category}
-					onChange = {this.props.onChange}
-					error = {this.props.errors.category}
-					placeholder = "Enter here..." />
-
-				<Input
-					name = "courseLength"
-					label = "Length"
-					value = {this.props.course.courseLength}
-					onChange = {this.props.onChange}
-					error = {this.props.errors.courseLength}
-					placeholder = "Enter here..." />
-
-				<input type="submit" value = "Save" className = "btn btn-default" 
-				onClick = {this.props.onSave} />*/
 
 },{"../common/textInput.js":221,"react":205}],223:[function(require,module,exports){
 "use strict";
@@ -46322,6 +46321,8 @@ module.exports = CoursePage;
 var React = require('react');
 var Router = require('react-router');
 var CourseForm = require('./courseForm.js');
+var CourseActions = require('../../actions/courseActions.js');
+var CourseStore = require('../../stores/courseStore.js');
 var toastr = require('toastr');
 
 var ManageCoursePage = React.createClass({displayName: "ManageCoursePage",
@@ -46330,16 +46331,90 @@ var ManageCoursePage = React.createClass({displayName: "ManageCoursePage",
 		Router.Navigation
 	],
 
+	statics: {
+		willTransitionFrom: function(transition, component) {
+			if(component.state.dirty && !confirm('Leave without saving?')) {
+				transition.abort();
+			} 
+		}
+	},
+
+	getInitialState: function() {
+		return {
+			course: {id: '', title: '', author: '', category: '', length: ''},
+			errors: {},
+			dirty: false
+		};
+	},
+
+	componentWillMount: function() {
+		// from the past '/course:id'
+		var courseId = this.props.params.id; 
+
+		if (courseId) {
+			this.setState({course: CourseStore.getCoursesById(courseId)});
+		}
+	},
+
+	setCourseState: function(event) {
+		this.setState({dirty: true});
+		var field = event.target.name;
+		var value = event.target.value;
+		this.state.course[field] = value;
+		return this.setState({course: this.state.course});
+	},
+
+	courseFormIsValid: function() {
+		var formIsValid = true;
+
+		// clear any previous errors
+		this.state.errors = {};
+
+		if(this.state.course.title.length < 3) {
+			this.state.errors.firstName = "Course title must be at least 3 characters long";
+			formIsValid = false;
+		}
+
+		this.setState({errors: this.state.errors});
+		return formIsValid;
+	},
+
+	saveCourse: function(event) {
+		// prevent default browser form save
+		event.preventDefault();
+
+		// validation
+		if(!this.courseFormIsValid()) {
+			return;
+		}
+
+		if(this.state.course.id) {
+			CourseActions.updateCourse(this.state.course);
+		} else {
+			CourseActions.updateCourse(this.state.course);
+		}
+
+		this.setState({dirty: false});
+
+		// show toastr success message on transition
+		toastr.success('Course \"' + this.state.course.title + '\" saved');
+		this.transitionTo('courses');
+	},
+
 	render: function() {
 		return (
-			React.createElement(CourseForm, null)
+			React.createElement(CourseForm, {
+				course: this.state.course, 
+				onChange: this.setCourseState, 
+				onSave: this.saveCourse, 
+				errors: this.state.errors})
 		);
 	}
 });
 
 module.exports = ManageCoursePage;
 
-},{"./courseForm.js":222,"react":205,"react-router":33,"toastr":206}],226:[function(require,module,exports){
+},{"../../actions/courseActions.js":208,"../../stores/courseStore.js":233,"./courseForm.js":222,"react":205,"react-router":33,"toastr":206}],226:[function(require,module,exports){
 "use strict";
 
 var React = require('react');
@@ -46576,6 +46651,16 @@ Dispatcher.register(function(action) {
 	switch(action.actionType) {
 		case ActionTypes.INITIALIZE:
 			_courses = action.initialData.courses;
+			CourseStore.emitChange();
+			break;
+		case ActionTypes.CREATE_COURSE:
+			_courses.push(action.course);
+			CourseStore.emitChange();
+			break;
+		case ActionTypes.UPDATE_COURSE:
+			var existingCourse = _.find(_courses, {id: action.course.id});
+			var existingCourseIndex = _.indexOf(_courses, existingCourse);
+			_courses.splice(existingCourseIndex, 1, action.course);
 			CourseStore.emitChange();
 			break;
 		case ActionTypes.DELETE_COURSE:
