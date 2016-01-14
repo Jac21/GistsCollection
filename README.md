@@ -11,6 +11,7 @@ Current Folder Layout
 	- Protractor (test suites to model for AngularJS end-to-end testing)
 > - C#
 	- FileByteInverter (mini-utility that uses C# indexers to invert the bytes of a given file)
+	- GenericMemoizer (example project detailing C# memoization, mainly in a generics context)
 	- IocPractice (example class that takes advantage of the Inversion-of-Control design pattern)
 	- MySeleniumApi (helpful methods for automated UI testing in Selenium Webdriver)
 	- Shuffler (Generic C# object shuffler)
@@ -25,5 +26,6 @@ Current Folder Layout
 > - Python
 	- MatasanoChallenges (Crypto and security-oriented python scripts, intended to solve the Matasano [CryptoPals](http://cryptopals.com/) challenges)
 	- Intermediate Python (https://github.com/yasoob/intermediatePython)
+	- Rosalind (Bioinformatic challenges, implemented in Python)
 > - React
 	- ReactPlusFlux (starter React project, taking advantage of React, React Router, Flux, Node, Gulp, Browserify and Bootstrap)
