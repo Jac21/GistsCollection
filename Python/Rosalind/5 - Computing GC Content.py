@@ -11,25 +11,24 @@ Given: At most 10 DNA strings in FASTA format (of length at most 1 kbp each).
 
 Return: The ID of the string having the highest GC-content, followed by the GC-content of that string. Rosalind allows for a default error of 0.001 in all decimal answers unless otherwise stated; please see the note on absolute error below.
 """
+from itertools import islice
 
-input = (">Rosalind_6404\n"
-"CCTGCGGAAGATCGGCACTAGAATAGCCAGAACCGTTTCTCTGAGGCTTCCGGCCTTCCC"
-"TCCCACTAATAATTCTGAGG\n"
-">Rosalind_5959\n"
-"CCATCGGTAGCGCATCCTTAGTCCAATTAAGTCCCTATCCAGGCGCTCCGCCGAAGGTCT"
-"ATATCCATTTGTCAGCAGACACGC\n"
-">Rosalind_0808\n"
-"CCACCCTCGTGGTATGGCTAGGCATTCAGGAACCGGAGAACGCTTCAGACCAGCCCGGAC"
-"TGGGAACCTGCGGGCAGTAGGTGGAAT\n")
+def compute_gc_content(file_path):
+	percentage = 0.0
+	dna_strings = []
+	with open(file_path, "r") as f:
+		for line in islice(f, 1, None, 2):
+			dna_strings.append(line)
+	for string in dna_strings:
+		print str(string)
+	return percentage
 
-"""
-# dataset read-in and processing
-r = open('rosalind_revc.txt', 'r')
-reverse_complement = "".join(complement.get(base, base) for base in reversed(r.read()))
 
-# new dataset output
-f = open('workfile.txt', 'w')
-f.write(reverse_complement)
-"""
+if __name__ == "__main__":
 
-print input
+	result = compute_gc_content("working.txt")
+	print str(result)
+
+	# new dataset output
+	f = open('workfile.txt', 'w')
+	f.write(str(result))

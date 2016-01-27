@@ -13,12 +13,13 @@ Return: The reverse complement scsc of ss.
 complement = {'A': 'T', 'C': 'G', 'G': 'C', 'T': 'A'}
 dna_seq = 'AAAACCCGGT'
 
-# dataset read-in and processing
-r = open('rosalind_revc.txt', 'r')
-reverse_complement = "".join(complement.get(base, base) for base in reversed(r.read()))
+if __name__ == "__main__":
+	# dataset read-in and processing
+	r = open('rosalind_revc.txt', 'r')
+	reverse_complement = "".join(complement.get(base, base) for base in reversed(r.read()))
 
-# new dataset output
-f = open('workfile.txt', 'w')
-f.write(reverse_complement)
+	print reverse_complement
 
-print reverse_complement
+	# new dataset output
+	f = open('workfile.txt', 'w')
+	f.write(reverse_complement)

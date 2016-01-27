@@ -26,6 +26,6 @@ Current Folder Layout
 > - Python
 	- MatasanoChallenges (Crypto and security-oriented python scripts, intended to solve the Matasano [CryptoPals](http://cryptopals.com/) challenges)
 	- Intermediate Python (https://github.com/yasoob/intermediatePython)
-	- Rosalind (Bioinformatic challenges, implemented in Python)
+	- Rosalind (Bioinformatic challenges, implemented in Python (http://rosalind.info/users/jcantu521/))
 > - React
 	- ReactPlusFlux (starter React project, taking advantage of React, React Router, Flux, Node, Gulp, Browserify and Bootstrap)

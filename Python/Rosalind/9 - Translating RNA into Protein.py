@@ -15,7 +15,7 @@ Return: The protein string encoded by ss.
 import itertools
 
 rna_codon_table = {"UUU":"F", "UUC":"F", "UUA":"L", "UUG":"L",
-    "UCU":"S", "UCC":"s", "UCA":"S", "UCG":"S",
+    "UCU":"S", "UCC":"S", "UCA":"S", "UCG":"S",
     "UAU":"Y", "UAC":"Y", "UAA":"STOP", "UAG":"STOP",
     "UGU":"C", "UGC":"C", "UGA":"STOP", "UGG":"W",
     "CUU":"L", "CUC":"L", "CUA":"L", "CUG":"L",
@@ -53,6 +53,9 @@ if __name__ == "__main__":
 	# dataset read-in and processing
 	r = open('rosalind_prot.txt', 'r')
 	lines = [line.rstrip('\n') for line in r]
+
+	# quick assertion test
+	assert translate('AUGGCCAUGGCGCCCAGAACUGAGAUCAAUAGUACCCGUAUUAACGGGUGA') == 'MAMAPRTEINSTRING'
 
 	result = translate(lines[0])
 	print result
