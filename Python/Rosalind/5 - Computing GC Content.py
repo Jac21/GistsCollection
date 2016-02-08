@@ -20,12 +20,27 @@ def compute_gc_content(file_path):
 
 	return 0
 
+# main parsing function
 def parse_fasta_file(file):
+	# list structure declarations
+
+	# holds lines beginning with ">"
 	fasta_ids = []
+
+	# holds sequence lines
 	gc_strings = []
+
+	# holds
 	concat_gc_list = []
+
+	# holds
 	ratio_gc_list = []
 
+	""" 
+	iterates through every line in given file, strips of newlines,
+	appends to fasta_ids list of line starts with an ">", appends
+	to gc_strings otherwise 
+	"""
 	for line in file:
 		line = line.rstrip("\n")
 
@@ -35,14 +50,19 @@ def parse_fasta_file(file):
 		if not line.startswith(">"):
 			gc_strings.append(line)
 
+	print gc_strings
+	# splits lits into len of list divided by half, kinda hacky
 	new_list = split_list(gc_strings, (len(gc_strings)/2))
 
+	# concats list items into once sequence, also kinda hacky
 	for list_item in new_list:
 		concat_gc_list.append(list_item[0] + list_item[1])
 
+	# performs get_ration function on each sequence list
 	for gc_list_item in concat_gc_list:
 		ratio_gc_list.append(get_ratio(gc_list_item))
 		
+	# multiply each ratio by 100 for margin of error
 	gc_percentage_list = list(map(lambda x: x * 100, ratio_gc_list))
 
 	fasta_ids_newline = list(map(lambda x: x + '\n', fasta_ids))
@@ -50,6 +70,8 @@ def parse_fasta_file(file):
 
 	return final_gc_list
 
+# Gets the proper ratio of a line of sequences, sorts into either
+# regexed GC for gc count or all bases, takes ratio at the end and returns
 def get_ratio(gc_list_item):
 	gc_count = 0
 	total_base_count = 0
@@ -61,6 +83,7 @@ def get_ratio(gc_list_item):
 	gc_ratio = float(gc_count) / total_base_count
 	return gc_ratio
 
+# Helper function to split a given 'alist' into wanted_parts
 def split_list(alist, wanted_parts=1):
     length = len(alist)
     return [ alist[i*length // wanted_parts : (i+1)*length // wanted_parts] 
