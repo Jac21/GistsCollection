@@ -1,5 +1,8 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
+using IoOperations.Communication;
 using IoOperations.FileStructureObjects;
+using System.Configuration;
 
 namespace IoOperations
 {
@@ -7,29 +10,68 @@ namespace IoOperations
     {
         static void Main(string[] args)
         {
-            /*
-             *  Drives class declaration and use
-             */
+            string functionalitySwitch = ConfigurationManager.AppSettings["Functions"];
 
-            Drives drives = new Drives();
-            drives.ListDriveInfo();
+            switch (functionalitySwitch)
+            {
+                case "FileStructureObjects":
 
-            /*
-             *  Directories class declaration and use
-             */
+                    /*
+                     *  Drives class declaration and use
+                     */
 
-            Directories directories = new Directories(@"C:\Temp\CSharp\Directory");
-            directories.CreateDirectoryInfo(true);
+                    Drives drives = new Drives();
+                    drives.ListDriveInfo();
 
-            DirectoryInfo directoryInfo = new DirectoryInfo(@"C:\Program Files");
-            directories.BuildDirectoryTree(directoryInfo, "*", 2, 0);
+                    /*
+                     *  Directories class declaration and use
+                     */
 
-            /*
-             *  Files class declaration and use
-             */
+                    Directories directories = new Directories(@"C:\Temp\CSharp\Directory");
+                    directories.CreateDirectoryInfo(true);
 
-            Files files = new Files(@"C:\Temp\CSharp\Directory", "test.txt");
-            files.ParsePath();
+                    DirectoryInfo directoryInfo = new DirectoryInfo(@"C:\Program Files");
+                    directories.BuildDirectoryTree(directoryInfo, "*", 2, 0);
+
+                    /*
+                     *  Files class declaration and use
+                     */
+
+                    Files files = new Files(@"C:\Temp\CSharp\Directory", "test.txt");
+                    files.ParsePath();
+
+                    break;
+                case "Communication":
+
+                    /*
+                     *  Streams class declaration and use
+                     */
+
+                    Streams streams = new Streams(@"C:\Temp\Csharp");
+
+                    /*
+                     *  WebObjects class declaration and use
+                     */
+
+                    WebObjects webObjects = new WebObjects("https://news.ycombinator.com/");
+                    webObjects.DisplayHtml();
+
+                    /*
+                     *  Async class declaration and use
+                     */
+
+                    Async async = new Async();
+                    async.CreateAndWriteAsyncToFile(@"C:\Temp\Csharp\test.dat");
+                    async.ReadAsyncHttpRequest();
+                    async.ExecuteMultipleRequestsInParallel();
+
+                    break;
+                default:
+                    Console.WriteLine("AppSetting invalid!");
+                    break;
+            }
+
+
         }
     }
 }
