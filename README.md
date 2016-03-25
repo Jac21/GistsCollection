@@ -9,11 +9,14 @@ Current Folder Layout
 
 > - AngularJS
 	- Protractor (test suites to model for AngularJS end-to-end testing)
+> - Boilerplates
+	- GulpExpressBrowserSync
 > - C#
 	- FileByteInverter (mini-utility that uses C# indexers to invert the bytes of a given file)
 	- GenericMemoizer (example project detailing C# memoization, mainly in a generics context)
 	- IocPractice (example class that takes advantage of the Inversion-of-Control design pattern)
 	- MySeleniumApi (helpful methods for automated UI testing in Selenium Webdriver)
+	- Ref (C# reference book implementations)
 	- Shuffler (Generic C# object shuffler)
 > - Elixir
 	- portal (Basic Elixir tutorial project that deals with the Mix toolset, Agents, Protocols, and Supervisions for distributed list transfer)
@@ -28,4 +31,8 @@ Current Folder Layout
 	- Intermediate Python (https://github.com/yasoob/intermediatePython)
 	- Rosalind (Bioinformatic challenges, implemented in Python (http://rosalind.info/users/jcantu521/))
 > - React
+	- GraphQlApp (starter project using Facebook's GraphQl library)
 	- ReactPlusFlux (starter React project, taking advantage of React, React Router, Flux, Node, Gulp, Browserify and Bootstrap)
+	- WebpackBabelProjectSkeleton
+> - d3.js
+	- Trees
