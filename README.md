@@ -35,4 +35,7 @@ Current Folder Layout
 	- ReactPlusFlux (starter React project, taking advantage of React, React Router, Flux, Node, Gulp, Browserify and Bootstrap)
 	- WebpackBabelProjectSkeleton
 > - d3.js
+	- Bullet Charts
+	- Force Layout
+	- Sankey
 	- Trees

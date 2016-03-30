@@ -1,0 +1,16 @@
+[
+  {
+    "title":"CPU Load",
+    "subtitle":"GHz",
+    "ranges":[1500,2250,3000],
+    "measures":[2200],
+    "markers":[2500]
+  },
+  {
+    "title":"Memory Used",
+    "subtitle":"MBytes",
+    "ranges":[256,512,1024],
+    "measures":[768],
+    "markers":[900]
+  }
+]
