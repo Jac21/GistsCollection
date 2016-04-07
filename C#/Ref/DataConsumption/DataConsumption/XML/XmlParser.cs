@@ -7,11 +7,11 @@ namespace DataConsumption.XML
 {
     public class XmlParser
     {
-        private static string _xmlString;
+        public string XmlString;
 
         public XmlParser()
         {
-            _xmlString = @"<?xml version = ""1.0"" encoding = ""utf-8"" ?>
+            XmlString = @"<?xml version = ""1.0"" encoding = ""utf-8"" ?>
                             <people>
                                 <person firstname = ""john"" lastname = ""doe"">
                                     <contactdetails>
@@ -26,7 +26,7 @@ namespace DataConsumption.XML
         /// </summary>
         public void XmlRead()
         {
-            using (StringReader stringReader = new StringReader(_xmlString))
+            using (StringReader stringReader = new StringReader(XmlString))
             {
                 using (
                     XmlReader xmlReader = XmlReader.Create(stringReader,
@@ -85,7 +85,7 @@ namespace DataConsumption.XML
         {
             XmlDocument doc = new XmlDocument();
 
-            doc.LoadXml(_xmlString);
+            doc.LoadXml(XmlString);
             XmlNodeList nodes = doc.GetElementsByTagName("person");
 
             // output the names of the people in the document
@@ -125,7 +125,7 @@ namespace DataConsumption.XML
         public void XpathQuery()
         {
             XmlDocument doc = new XmlDocument();
-            doc.LoadXml(_xmlString);
+            doc.LoadXml(XmlString);
 
             XPathNavigator nav = doc.CreateNavigator();
             string query = "//people/person[@firstname='john']";
