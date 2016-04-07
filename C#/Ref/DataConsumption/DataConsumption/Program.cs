@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using DataConsumption.XML;
+﻿using DataConsumption.XML;
+using DataConsumption.JSON;
 
 namespace DataConsumption
 {
@@ -16,6 +12,12 @@ namespace DataConsumption
             xmlParser.XmlWrite();
             xmlParser.XmlDoc();
             xmlParser.XpathQuery();
+
+            JsonParser jsonParser = new JsonParser();
+            jsonParser.SerializeObject();
+            jsonParser.SerializeList();
+            jsonParser.SerializeDictionary();
+            jsonParser.SerializeToFile();
         }
     }
 }

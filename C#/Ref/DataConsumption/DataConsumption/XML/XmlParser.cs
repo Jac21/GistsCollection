@@ -1,10 +1,5 @@
 ﻿using System;
-using System.CodeDom.Compiler;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Xml;
 using System.Xml.XPath;
 
@@ -96,9 +91,12 @@ namespace DataConsumption.XML
             // output the names of the people in the document
             foreach (XmlNode node in nodes)
             {
-                string firstName = node.Attributes["firstname"].Value;
-                string lastName = node.Attributes["lastname"].Value;
-                Console.WriteLine("Name: {0} {1}", firstName, lastName);
+                if (node.Attributes != null)
+                {
+                    string firstName = node.Attributes["firstname"].Value;
+                    string lastName = node.Attributes["lastname"].Value;
+                    Console.WriteLine("Name: {0} {1}", firstName, lastName);
+                }
             }
 
             // start creating a new node
@@ -110,10 +108,13 @@ namespace DataConsumption.XML
             XmlAttribute lastNameAttribute = doc.CreateAttribute("lastname");
             lastNameAttribute.Value = "Bar";
 
-            newNode.Attributes.Append(firstNameAttribute);
-            newNode.Attributes.Append(lastNameAttribute);
+            if (newNode.Attributes != null)
+            {
+                newNode.Attributes.Append(firstNameAttribute);
+                newNode.Attributes.Append(lastNameAttribute);
+            }
 
-            doc.DocumentElement.AppendChild(newNode);
+            if (doc.DocumentElement != null) doc.DocumentElement.AppendChild(newNode);
             Console.WriteLine("Modified xml...");
             doc.Save(Console.Out);
         }
