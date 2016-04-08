@@ -1,16 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Xml.Linq;
 
 namespace DataConsumption.LINQ
 {
+    // From the reference, page 297:
+    // The standard query operators are: All, Any, Average, Cast, Count, Distinct, GroupBy, Join,
+    // Max, Min, OrderBy, Select, SelectMany, Skip, SkipWhile, Sum, Take, Take-While, ThenBy,
+    // Where
     public class LinqOperations
     {
         // class fields
         private readonly int[] _data;
+        private readonly string[] _textData;
 
         /// <summary>
         /// constructor, initialize data array
@@ -18,6 +21,7 @@ namespace DataConsumption.LINQ
         public LinqOperations()
         {
             _data = new[] {1, 2, 5, 6, 11};
+            _textData = new[] {"AngularJS", "React", "Riot", "Mithril"};
         }
 
         /// <summary>
@@ -25,6 +29,8 @@ namespace DataConsumption.LINQ
         /// </summary>
         public void WhereOperator()
         {
+            // return values where those values are divisible by 2 and 
+            // contain a remainder of 0
             var result = _data.Where(d => d%2 == 0);
 
             foreach (var i in result)
@@ -38,6 +44,7 @@ namespace DataConsumption.LINQ
         /// </summary>
         public void OrderByOperator()
         {
+            // order data array values that are greater than 5 in a descending fashion
             var result = _data.Where(d => d > 5).OrderByDescending(d => d);
 
             foreach (var i in result)
@@ -52,6 +59,7 @@ namespace DataConsumption.LINQ
         /// <param name="xml"></param>
         public void LinqToXml(string xml)
         {
+            // parse XML using LINQ, find descendents and attributes in XML
             XDocument doc = XDocument.Parse(xml);
             IEnumerable<string> personNames = from p in doc.Descendants("person")
                 select (string) p.Attribute("firstname") + " " + (string) p.Attribute("lastname");
@@ -59,6 +67,63 @@ namespace DataConsumption.LINQ
             foreach (string s in personNames)
             {
                 Console.WriteLine("LINQ to XML: {0}", s);
+            }
+        }
+
+        /// <summary>
+        /// LINQ All Operator example
+        /// </summary>
+        public void AllOperator()
+        {
+            // check if all values in data array are less than
+            // or equal to 2000
+            bool result = _data.All(d => d <= 2000);
+
+            Console.WriteLine("Linq All: {0}", result);
+        }
+
+        /// <summary>
+        /// LINQ Any operator example
+        /// </summary>
+        public void AnyOperator()
+        {
+            // check if any value in data array contains a remainder
+            // of 0 when divided by 2, return true if so
+            bool result = _data.Any(d => d%2 == 0);
+
+            Console.WriteLine("LINQ Any: {0}", result);
+        }
+
+        /// <summary>
+        /// LINQ Average operator example
+        /// </summary>
+        public void AverageOperator()
+        {
+            // compute average of data array values
+            double average = _data.Average();
+            Console.WriteLine("LINQ Average Ints: {0}", average);
+
+            // compute average of string array value lengths
+            double textLengthAverage = _textData.Average(t => t.Length);
+            Console.WriteLine("LINQ Average strings: {0}", textLengthAverage);
+        }
+
+        /// <summary>
+        /// LINQ Cast operator example
+        /// </summary>
+        public void CastOperator()
+        {
+            // declare B classes
+            B[] values = new B[3];
+            values[0] = new B();
+            values[1] = new B();
+            values[2] = new B();
+
+            // cast all object to a base type
+            var result = values.Cast<A>();
+            foreach (A value in result)
+            {
+                value.Y();
             }
         }
     }
@@ -83,5 +148,22 @@ namespace DataConsumption.LINQ
                 }
             }
         }
+    }
+
+    /*
+     *  Example classes for use in LINQs
+     */
+
+    class A
+    {
+        public void Y()
+        {
+            Console.WriteLine("A.Y");
+        }
+    }
+
+    class B : A
+    {
+        
     }
 }
