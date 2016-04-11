@@ -79,31 +79,40 @@ namespace DataConsumption.JSON
         /// <summary>
         /// serialize and output object JSON
         /// </summary>
-        public void SerializeObject()
+        public string SerializeObject()
         {
             JsonObject = JsonConvert.SerializeObject(_account, Formatting.Indented);
 
+            Console.WriteLine("Serialized JSON object:");
             Console.WriteLine(JsonObject);
+
+            return JsonObject;
         }
 
         /// <summary>
         /// serialize and output list JSON
         /// </summary>
-        public void SerializeList()
+        public string SerializeList()
         {
             JsonList = JsonConvert.SerializeObject(_videogamesList);
 
+            Console.WriteLine("Serialized JSON list:");
             Console.WriteLine(JsonList);
+
+            return JsonList;
         }
 
         /// <summary>
         /// serialize and output dictionary JSON
         /// </summary>
-        public void SerializeDictionary()
+        public string SerializeDictionary()
         {
             JsonDictionary = JsonConvert.SerializeObject(_points, Formatting.Indented);
 
+            Console.WriteLine("Serialized JSON dictionary:");
             Console.WriteLine(JsonDictionary);
+
+            return JsonDictionary;
         }
 
         /// <summary>
@@ -120,12 +129,14 @@ namespace DataConsumption.JSON
                 JsonSerializer serializer = new JsonSerializer();
                 serializer.Serialize(file, _movie);
             }
+
+            Console.WriteLine("Serialized JSON file written to Temp directory...");
         }
 
         /// <summary>
         /// Serialize a DataSet and it's descending tables and ids
         /// </summary>
-        public void SerializeDataset()
+        public string SerializeDataset()
         {
             DataSet dataSet = new DataSet("dataSet");
             dataSet.Namespace = "NetFramework";
@@ -148,7 +159,55 @@ namespace DataConsumption.JSON
 
             string json = JsonConvert.SerializeObject(dataSet, Formatting.Indented);
 
+            Console.WriteLine("Serialized JSON DataSet:");
             Console.WriteLine(json);
+
+            return json;
+        }
+
+        /*
+         *  Deserializing Methods
+         */
+
+        /// <summary>
+        /// Deserialize an object, output JSON key-value pair
+        /// </summary>
+        /// <param name="jsonObject"></param>
+        public void DeserializeObject(string jsonObject)
+        {
+            Account account = JsonConvert.DeserializeObject<Account>(jsonObject);
+            
+            Console.WriteLine("Deserialized JSON object:");
+
+            Console.WriteLine(account.Email);
+        }
+
+        /// <summary>
+        /// Deserialize a dictionary, output JSON values
+        /// </summary>
+        /// <param name="jsonList"></param>
+        public void DeserializeList(string jsonList)
+        {
+            List<string> videogames = JsonConvert.DeserializeObject<List<string>>(jsonList);
+
+            Console.WriteLine("Deserialized JSON list:");
+
+            Console.WriteLine(string.Join(", ", videogames.ToArray()));
+        }
+
+        public void DeserializeDictionary()
+        {
+            string json = @"{
+                'href': '/account/login.aspx',
+                'target': '_blank'
+            }";
+
+            Dictionary<string, string> htmlAttributes = JsonConvert.DeserializeObject<Dictionary<string, string>>(json);
+
+            Console.WriteLine("Deserialized JSON dictionary:");
+
+            Console.WriteLine(htmlAttributes["href"]);
+            Console.WriteLine(htmlAttributes["target"]);
         }
     }
 }

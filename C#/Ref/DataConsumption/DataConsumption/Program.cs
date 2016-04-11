@@ -33,6 +33,11 @@ namespace DataConsumption
                     jsonParser.SerializeToFile();
                     jsonParser.SerializeDataset();
 
+                    // deserializer methods
+                    jsonParser.DeserializeObject(jsonParser.SerializeObject());
+                    jsonParser.DeserializeList(jsonParser.SerializeList());
+                    jsonParser.DeserializeDictionary();
+
                     break;
                 case "LINQ":
                     // declare and initialize LinqOperations class, as well as XmlParser
