@@ -126,6 +126,70 @@ namespace DataConsumption.LINQ
                 value.Y();
             }
         }
+
+        /// <summary>
+        /// LINQ Count operator example
+        /// </summary>
+        public void CountOperator()
+        {
+            // count number of elements greater than two
+            int greaterThanTwo = _data.Count(d => d > 2);
+            Console.WriteLine("LINQ Count: {0}", greaterThanTwo);
+        }
+
+        /// <summary>
+        /// LINQ Distinct operator example
+        /// </summary>
+        public void DistinctOperator()
+        {
+            // invoke distinct on data array, set to enumerable integer object
+            IEnumerable<int> distinctIntegers = _data.Distinct();
+
+            // output values to console
+            foreach (int value in distinctIntegers)
+            {
+                Console.WriteLine("LINQ Distinct: {0}", value);
+            }
+        }
+
+        /// <summary>
+        /// LINQ GroupBy operator example
+        /// </summary>
+        public void GroupByOperator()
+        {
+            // group elements by IsEven method call
+            var result = _data.GroupBy(d => IsEven(d));
+
+            // iterate over group results
+            foreach (var group in result)
+            {
+                // output key from each group (false and true)
+                Console.WriteLine("LINQ Distinct IsEven: {0}", group.Key);
+
+                // output value for each group
+                foreach (var value in group)
+                {
+                    Console.WriteLine("{0}", value);
+                }
+
+                // newline
+                Console.WriteLine();
+            }
+        }
+
+        
+        static bool IsEven(int value)
+        {
+            return value%2 == 0;
+        }
+
+        /// <summary>
+        /// LINQ Join operator example
+        /// </summary>
+        public void JoinOperator()
+        {
+            Console.WriteLine(string.Join(" is the only real frontend framework, \n", _textData));
+        }
     }
 
 

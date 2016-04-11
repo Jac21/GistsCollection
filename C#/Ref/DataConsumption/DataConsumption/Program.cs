@@ -55,6 +55,10 @@ namespace DataConsumption
                     linqOperations.AnyOperator();
                     linqOperations.AverageOperator();
                     linqOperations.CastOperator();
+                    linqOperations.CountOperator();
+                    linqOperations.DistinctOperator();
+                    linqOperations.GroupByOperator();
+                    linqOperations.JoinOperator();
 
                     break;
             }
