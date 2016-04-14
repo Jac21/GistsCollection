@@ -1,0 +1,40 @@
+// lessc style.less > style.css
+
+@import "colors";
+@import "radius";
+@import "borders";
+
+/* Applications */
+.shape {
+	display:inline-block;
+	width:200px;
+	height:200px;
+	background:@defaultThemeColor;
+	margin:20px;
+	border:@borderSize solid @borderColor;
+	&:hover {	/* pseudo-class */
+		background:@lightGreen;
+		@borderColor:@lightGreen;
+		border:@borderSize solid @borderColor;
+	}
+}
+
+#shape1{
+	.Round;
+}
+
+#shape2{
+	.RoundedSquare;
+}
+
+#shape3{
+	.RoundedSquare(60px);
+}
+
+/*
+Less provides the following color functions:
+darken() and lighten(), which add some black or white,
+saturate() and desaturate(), to make a color more "colorful" or more "grayscale",
+fadein() and fadeout(), to increase or reduce transparency,
+and spin(), which modifies the hue of the color.
+*/

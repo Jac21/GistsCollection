@@ -142,6 +142,7 @@ namespace DataConsumption.JSON
             dataSet.Namespace = "NetFramework";
             DataTable table = new DataTable();
             DataColumn idColumn = new DataColumn("id", typeof(int));
+            idColumn.AutoIncrement = true;
 
             DataColumn itemColumn = new DataColumn("item");
             table.Columns.Add(idColumn);
@@ -183,7 +184,7 @@ namespace DataConsumption.JSON
         }
 
         /// <summary>
-        /// Deserialize a dictionary, output JSON values
+        /// Deserialize a list, output JSON values
         /// </summary>
         /// <param name="jsonList"></param>
         public void DeserializeList(string jsonList)
@@ -195,6 +196,9 @@ namespace DataConsumption.JSON
             Console.WriteLine(string.Join(", ", videogames.ToArray()));
         }
 
+        /// <summary>
+        /// Deserialize a dictionary, output JSON values
+        /// </summary>
         public void DeserializeDictionary()
         {
             string json = @"{
@@ -208,6 +212,64 @@ namespace DataConsumption.JSON
 
             Console.WriteLine(htmlAttributes["href"]);
             Console.WriteLine(htmlAttributes["target"]);
+        }
+
+        /// <summary>
+        /// Deserialize an anonymous type, output JSON values
+        /// </summary>
+        public void DeserializeAnonymousTypes()
+        {
+            var definition = new {Name = ""};
+
+            string json1 = @"{'Name':'James'}";
+            var customer1 = JsonConvert.DeserializeAnonymousType(json1, definition);
+
+            string json2 = @"{'Name':'Mike'}";
+            var customer2 = JsonConvert.DeserializeAnonymousType(json2, definition);
+
+            Console.WriteLine("Deserialized JSON Anonymous Type:");
+            Console.WriteLine(customer1.Name);
+            Console.WriteLine(customer2.Name);
+        }
+
+        /// <summary>
+        /// Deserialize a DataSet, output JSON values
+        /// </summary>
+        /// <param name="json"></param>
+        public void DeserializeDataSet(string json)
+        {
+            DataSet dataSet = JsonConvert.DeserializeObject<DataSet>(json);
+
+            DataTable dataTable = dataSet.Tables["Table1"];
+
+            Console.WriteLine("Deserialized JSON DataSet:");
+            Console.WriteLine(dataTable.Rows.Count);
+
+            foreach (DataRow row in dataTable.Rows)
+            {
+                Console.WriteLine(row["id"] + " - " + row["item"]);
+            }
+        }
+
+        /// <summary>
+        /// Deserialize JSON from a file
+        /// </summary>
+        public void DeserializeFromFile()
+        {
+            // read file into a string, deserialize JSON to a type
+            Movie movieOne = JsonConvert.DeserializeObject<Movie>(File.ReadAllText(@"c:\Temp\movie.json"));
+
+            Console.WriteLine("Deserialized JSON from file:");
+            Console.WriteLine(movieOne.Name);
+            Console.WriteLine(movieOne.Year);
+
+            // deserialize directly from file
+            using (StreamReader file = File.OpenText(@"c:\Temp\movie.json"))
+            {
+                JsonSerializer serializer = new JsonSerializer();
+                Movie movie = (Movie) serializer.Deserialize(file, typeof (Movie));
+                Console.WriteLine(movie);
+            }
         }
     }
 }

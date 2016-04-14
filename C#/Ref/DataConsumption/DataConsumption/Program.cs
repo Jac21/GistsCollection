@@ -37,6 +37,9 @@ namespace DataConsumption
                     jsonParser.DeserializeObject(jsonParser.SerializeObject());
                     jsonParser.DeserializeList(jsonParser.SerializeList());
                     jsonParser.DeserializeDictionary();
+                    jsonParser.DeserializeAnonymousTypes();
+                    jsonParser.DeserializeDataSet(jsonParser.SerializeDataset());
+                    jsonParser.DeserializeFromFile();
 
                     break;
                 case "LINQ":
