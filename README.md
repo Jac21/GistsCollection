@@ -18,8 +18,12 @@ Current Folder Layout
 	- MySeleniumApi (helpful methods for automated UI testing in Selenium Webdriver)
 	- Ref (C# reference book implementations)
 	- Shuffler (Generic C# object shuffler)
+> - CSS
+	- LESS (Small sample projects involving the LESS CSS pre-processor)
 > - Elixir
 	- portal (Basic Elixir tutorial project that deals with the Mix toolset, Agents, Protocols, and Supervisions for distributed list transfer)
+> - JavaScript
+	- CasperJS (Grouping of projects involving the headless web-scraper framework)
 > - Node.js
 	- async_module (snippets of Javascript code that utilize asynchronous programming)
 	- general
@@ -34,6 +38,7 @@ Current Folder Layout
 	- GraphQlApp (starter project using Facebook's GraphQl library)
 	- ReactPlusFlux (starter React project, taking advantage of React, React Router, Flux, Node, Gulp, Browserify and Bootstrap)
 	- WebpackBabelProjectSkeleton
+> - Riot
 > - d3.js
 	- Bullet Charts
 	- Force Layout
