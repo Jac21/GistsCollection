@@ -1,20 +1,29 @@
 var riot = require('riot');
 var redux = require('redux');
-require('./tags/sample-output.tag');
-require('./tags/title-form.tag');
+var thunk = require('redux-thunk').default;
 
-var reducer = function(state = {title:'Default title'}, action) {
+require('./tags/todo-app.tag');
+require('./tags/tasks-list.tag');
+require('./tags/loading-indicator.tag');
+
+var reducer = function(state = {tasks:[]}, action) {
 	console.log(action);
 	switch(action.type) {
-		case 'CHANGE_TITLE':
-			// return state with new title...
-			return Object.assign({}, state, {title:action.data});
+		case 'TASKS_LOADED':
+			return Object.assign({}, state, {tasks:action.data})
+		case 'TOGGLE_LOADING':
+			return Object.assign({}, state, {isLoading:action.data})
 		default:
 			// return current state
 			return state;
 	}
 }
 
-var reduxStore = redux.createStore(reducer);
+// var reduxStore = redux.createStore(reducer);
+var createStoreWithMiddleware = redux.compose(
+	redux.applyMiddleware(thunk)
+)(redux.createStore);
 
-document.addEventListener('DOMContentLoaded', () => riot.mount('*', {store:reduxStore}));
+var reduxStore = createStoreWithMiddleware(reducer);
+
+document.addEventListener('DOMContentLoaded', () => riot.mount('todo-app', {store:reduxStore}));
