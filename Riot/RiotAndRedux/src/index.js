@@ -16,6 +16,23 @@ var reducer = function(state = {tasks:[]}, action) {
 			return Object.assign({}, state, {isLoading:action.data})
 		case 'TASK_ADDED':
 			return Object.assign({}, state, {tasks:state.tasks.concat(action.data)})
+		case 'TASK_COMPLETION_CHANGED':
+			var taskIndex = state.tasks.findIndex(function(task) {
+				return task.id == action.data.id;
+			});
+
+			var newTasks = state.tasks.slice(0, taskIndex)
+			 .concat(Object.assign({}, state.tasks[taskIndex], {isComplete:action.data.isComplete}))
+			 .concat(state.tasks.slice(taskIndex+1));
+
+			// babel didn't like the spread operator =(
+			// var newTasks = {
+			// 	...state.tasks.slice(0, taskIndex),
+			// 	Object.assign({}, state.tasks[taskIndex], {isComplete:action.data.isComplete}),
+			// 	...state.tasks.slice(taskIndex+1)
+			// }
+
+			return Object.assign({}, state, {tasks:newTasks});
 		default:
 			// return current state
 			return state;

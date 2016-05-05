@@ -1,6 +1,7 @@
 module.exports = {
 	loadTasks: loadTasks,
-	addTask: addTask
+	addTask: addTask,
+	toggleComplete:toggleComplete
 }
 
 function loadTasks() {
@@ -54,4 +55,31 @@ function addTask(newTask) {
 
 function newTaskAdded(id, name) {
 	return {type: 'TASK_ADDED', data:{id:id, name:name}};
+}
+
+function toggleComplete(id, isComplete) {
+	return function(dispatch, getState) {
+		var request = new XMLHttpRequest();
+
+		request.open('PATCH', `http://localhost:3000/tasks/${id}`, true);
+		request.setRequestHeader("Content-Type", "application/json");
+
+		request.onload = function() {
+			if (request.status >= 200 && request.status < 400) {
+				dispatch(completeChanged(id, isComplete));
+			}
+		}
+
+		request.send(JSON.stringify({isComplete:isComplete}));
+	}
+}
+
+function completeChanged(id, isComplete) {
+	return {
+		type:'TASK_COMPLETION_CHANGED',
+		data: {
+			id: id,
+			isComplete: isComplete
+		}
+	}
 }
