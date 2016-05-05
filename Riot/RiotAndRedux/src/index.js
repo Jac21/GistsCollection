@@ -5,6 +5,7 @@ var thunk = require('redux-thunk').default;
 require('./tags/todo-app.tag');
 require('./tags/tasks-list.tag');
 require('./tags/loading-indicator.tag');
+require('./tags/task-form.tag');
 
 var reducer = function(state = {tasks:[]}, action) {
 	console.log(action);
@@ -13,6 +14,8 @@ var reducer = function(state = {tasks:[]}, action) {
 			return Object.assign({}, state, {tasks:action.data})
 		case 'TOGGLE_LOADING':
 			return Object.assign({}, state, {isLoading:action.data})
+		case 'TASK_ADDED':
+			return Object.assign({}, state, {tasks:state.tasks.concat(action.data)})
 		default:
 			// return current state
 			return state;
