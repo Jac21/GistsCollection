@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading;
 using OpenQA.Selenium;
@@ -10,11 +11,11 @@ namespace MySeleniumApi.Api
     public class SeleniumApi
     {
         // class fields
-        private IWebDriver Driver;
+        private readonly IWebDriver _driver;
 
         public SeleniumApi(IWebDriver driver)
         {
-            this.Driver = driver;
+            this._driver = driver;
         }
 
         /// <summary>
@@ -29,7 +30,7 @@ namespace MySeleniumApi.Api
         {
             try
             {
-                Driver.FindElement(By.Id(id));
+                _driver.FindElement(By.Id(id));
             }
             catch (Exception ex)
             {
@@ -54,7 +55,7 @@ namespace MySeleniumApi.Api
         {
             try
             {
-                Driver.FindElement(By.XPath(xPath));
+                _driver.FindElement(By.XPath(xPath));
             }
             catch (Exception ex)
             {
@@ -79,7 +80,7 @@ namespace MySeleniumApi.Api
         {
             try
             {
-                Driver.FindElement(By.Name(name));
+                _driver.FindElement(By.Name(name));
             }
             catch (Exception ex)
             {
@@ -101,7 +102,7 @@ namespace MySeleniumApi.Api
         /// <param name="element"></param>
         public void ScrollToElement(IWebElement element)
         {
-            IJavaScriptExecutor jse = (IJavaScriptExecutor) Driver;
+            IJavaScriptExecutor jse = (IJavaScriptExecutor) _driver;
             jse.ExecuteScript("arguments[0].scrollIntoView()", element);
         }
 
@@ -120,7 +121,7 @@ namespace MySeleniumApi.Api
                                     string inputElement, string checkElement)
         {
             //head to URL
-            Driver.Navigate().GoToUrl(url);
+            _driver.Navigate().GoToUrl(url);
 
             // create string array from file containing all elements
             string[] fileElements = File.ReadAllLines(inFile);
@@ -129,7 +130,7 @@ namespace MySeleniumApi.Api
             foreach (string el in fileElements)
             {
                 // need to find, clear, and click input element
-                IWebElement webInputElement = Driver.FindElement(By.Id(inputElement));
+                IWebElement webInputElement = _driver.FindElement(By.Id(inputElement));
                 webInputElement.Clear();
                 webInputElement.Click();
 
@@ -149,7 +150,7 @@ namespace MySeleniumApi.Api
                 }
 
                 // reload the page
-                Driver.Navigate().GoToUrl(url);
+                _driver.Navigate().GoToUrl(url);
 
                 // wait for page load once more
                 Thread.Sleep(5000);
@@ -198,9 +199,71 @@ namespace MySeleniumApi.Api
         /// <param name="timeSpan"></param>
         public void WaitForWindowHandleLoad(IWebDriver driver, int numberOfWindows, double timeSpan)
         {
-            new WebDriverWait(driver, TimeSpan.FromSeconds(timeSpan)).Until(waitDriver => driver.WindowHandles.Count == numberOfWindows);
+            new WebDriverWait(driver, TimeSpan.FromSeconds(timeSpan)).Until(
+                waitDriver => driver.WindowHandles.Count == numberOfWindows);
         }
 
-        static void Main(string[] args) { }
+        public static bool WaitForPageToLoad(IWebDriver driver, int timeOutInSeconds)
+        {
+
+            string state = string.Empty;
+            try
+            {
+                WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(timeOutInSeconds));
+
+                //Checks every 500 ms whether predicate returns true if returns exit otherwise keep trying till it returns ture
+                wait.Until(d =>
+                {
+
+                    try
+                    {
+                        state = ((IJavaScriptExecutor)driver).ExecuteScript(@"return document.readyState").ToString();
+                    }
+                    catch (InvalidOperationException)
+                    {
+                        //Ignore
+                    }
+                    catch (NoSuchWindowException)
+                    {
+                        //when popup is closed, switch to last windows
+                        driver.SwitchTo().Window(driver.WindowHandles.Last());
+                    }
+                    //In IE7 there are chances we may get state as loaded instead of complete
+                    return (state.Equals("complete", StringComparison.InvariantCultureIgnoreCase) ||
+                            state.Equals("loaded", StringComparison.InvariantCultureIgnoreCase));
+
+                });
+            }
+            catch (TimeoutException)
+            {
+                //sometimes Page remains in Interactive mode and never becomes Complete, then we can still try to access the controls
+                if (!state.Equals("interactive", StringComparison.InvariantCultureIgnoreCase))
+                    throw;
+            }
+            catch (NullReferenceException)
+            {
+                //sometimes Page remains in Interactive mode and never becomes Complete, then we can still try to access the controls
+                if (!state.Equals("interactive", StringComparison.InvariantCultureIgnoreCase))
+                    throw;
+            }
+            catch (WebDriverException)
+            {
+                if (driver.WindowHandles.Count == 1)
+                {
+                    driver.SwitchTo().Window(driver.WindowHandles[0]);
+                }
+                state = ((IJavaScriptExecutor)driver).ExecuteScript(@"return document.readyState").ToString();
+                if (
+                    !(state.Equals("complete", StringComparison.InvariantCultureIgnoreCase) ||
+                      state.Equals("loaded", StringComparison.InvariantCultureIgnoreCase)))
+                    throw;
+            }
+            return true;
+        }
+
+        static void Main()
+        {
+            Console.WriteLine("My Selenium API's main entry point.");
+        }
     }
 }
