@@ -40,45 +40,36 @@ namespace MySeleniumApi
     /// <summary>
     /// Test class
     /// </summary>
-    public class MyApiTests : IClassFixture<TestFixture>
+    public class MyApiTests : TestFixture
     {
-        // class declarations
-        private readonly TestFixture _fixture;
-
-        public MyApiTests(TestFixture fixture)
-        {
-            // set test fixture
-            this._fixture = fixture;
-        }
-
         [Fact]
         public void TestElementExistsMethods()
         {
             // arrange
 
             // act
-            _fixture.SeleniumApi.ElementExistsById("ID");
+            SeleniumApi.ElementExistsById("ID");
 
-            _fixture.SeleniumApi.ElementExistsByXpath("//a[@href=\"www.google.com\"]");
+            SeleniumApi.ElementExistsByXpath("//a[@href=\"www.google.com\"]");
 
-            _fixture.SeleniumApi.ElementExistsByName("Name");
+            SeleniumApi.ElementExistsByName("Name");
 
             // assert
-            _fixture.Dispose();
+            Dispose();
         }
 
         [Fact]
         public void TestScrollToElementMethod()
         {
             // arrange
-            _fixture.Driver.Navigate().GoToUrl("https://frontendfront.com/");
-            IWebElement builtByElement = _fixture.Driver.FindElement(By.ClassName("built-by"));
+            Driver.Navigate().GoToUrl("https://frontendfront.com/");
+            IWebElement builtByElement = Driver.FindElement(By.ClassName("built-by"));
 
             // act
-            _fixture.SeleniumApi.ScrollToElement(builtByElement);
+            SeleniumApi.ScrollToElement(builtByElement);
 
             // assert
-            _fixture.Dispose();
+            Dispose();
         }
 
     }
