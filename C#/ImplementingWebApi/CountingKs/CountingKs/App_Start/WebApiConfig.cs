@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http.Formatting;
+using System.Security.Cryptography.X509Certificates;
 using System.Web.Http;
 using Newtonsoft.Json.Serialization;
 
@@ -12,9 +13,10 @@ namespace CountingKs
     public static void Register(HttpConfiguration config)
     {
       config.Routes.MapHttpRoute(
-          name: "DefaultApi",
-          routeTemplate: "api/{controller}/{id}",
-          defaults: new { id = RouteParameter.Optional }
+          name: "Food",
+          routeTemplate: "api/nutrition/foods/{id}",
+          defaults: new { controller = "Foods", id = RouteParameter.Optional }
+          // constraints: new { id = "/d+" }
       );
 
       // Uncomment the following line of code to enable query support for actions with an IQueryable or IQueryable<T> return type.
