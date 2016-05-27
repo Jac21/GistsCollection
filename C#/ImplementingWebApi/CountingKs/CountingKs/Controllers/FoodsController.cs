@@ -10,15 +10,10 @@ using CountingKs.Models;
 
 namespace CountingKs.Controllers
 {
-    public class FoodsController : ApiController
+    public class FoodsController : BaseApiController
     {
-        private ICountingKsRepository _repo;
-        private ModelFactory _modelFactory;
-
-        public FoodsController(ICountingKsRepository repo)
+        public FoodsController(ICountingKsRepository repo) : base(repo)
         {
-            _repo = repo;
-            _modelFactory = new ModelFactory();
         }
 
         public IEnumerable<FoodModel> Get(bool includeMeasures = true)
@@ -27,24 +22,24 @@ namespace CountingKs.Controllers
 
             if (includeMeasures)
             {
-                query = _repo.GetAllFoodsWithMeasures();
+                query = TheRepository.GetAllFoodsWithMeasures();
             } 
             else
             {
-                query = _repo.GetAllFoods();
+                query = TheRepository.GetAllFoods();
             }
 
             var results = query
                     .OrderBy(f => f.Description)
                     .Take(25)
                     .ToList()
-                    .Select(f => _modelFactory.Create(f));
+                    .Select(f => TheModelFactory.Create(f));
 
             return results;
         }
 
         public FoodModel Get(int id) {
-            return _modelFactory.Create(_repo.GetFood(id));
+            return TheModelFactory.Create(TheRepository.GetFood(id));
         }
     }
 }
