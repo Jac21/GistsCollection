@@ -30,6 +30,12 @@ namespace CountingKs.Controllers
             return results;
         }
 
+        /// <summary>
+        /// Diary entry get method
+        /// </summary>
+        /// <param name="diaryId"></param>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public HttpResponseMessage Get(DateTime diaryId, int id)
         {
             var result = TheRepository.GetDiaryEntry(_identityService.CurrentUser, diaryId.Date, id);
@@ -42,6 +48,13 @@ namespace CountingKs.Controllers
             return Request.CreateResponse(HttpStatusCode.OK, TheModelFactory.Create(result));
         }
 
+        /// <summary>
+        /// Diary entry post method
+        /// </summary>
+        /// <param name="diaryId"></param>
+        /// <param name="model"></param>
+        /// <returns>Based on success or error of operation, returns an HTTP Status Code
+        /// with either a message, or on success, the creation of the entry entity</returns>
         public HttpResponseMessage Post(DateTime diaryId, [FromBody]DiaryEntryModel model)
         {
             try
@@ -84,6 +97,12 @@ namespace CountingKs.Controllers
             }
         }
 
+        /// <summary>
+        /// Diary entry deletion method
+        /// </summary>
+        /// <param name="diaryId"></param>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public HttpResponseMessage Delete(DateTime diaryId, int id)
         {
             try
@@ -106,6 +125,51 @@ namespace CountingKs.Controllers
             catch (Exception ex)
             {
                 return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ex); 
+            }
+        }
+
+        /// <summary>
+        /// Diary entry patch method
+        /// </summary>
+        /// <param name="diaryId"></param>
+        /// <param name="id"></param>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        [HttpPut]
+        [HttpPatch]
+        public HttpResponseMessage Patch(DateTime diaryId, int id, 
+            [FromBody] DiaryEntryModel model)
+        {
+            try
+            {
+                var entity = TheRepository.GetDiaryEntry(_identityService.CurrentUser, diaryId, id);
+
+                if (entity == null)
+                {
+                    return Request.CreateResponse(HttpStatusCode.NotFound, "Diary entry not found!");
+                }
+
+                var parsedValue = TheModelFactory.Parse(model);
+                if (parsedValue == null)
+                {
+                    return Request.CreateResponse(HttpStatusCode.BadRequest, "Parsed value is null!");
+                }
+
+                if (entity.Quantity != parsedValue.Quantity)
+                {
+                    entity.Quantity = parsedValue.Quantity;
+
+                    if (TheRepository.SaveAll())
+                    {
+                        return Request.CreateResponse(HttpStatusCode.OK);
+                    }
+                }
+
+                return Request.CreateResponse(HttpStatusCode.BadRequest, "Bad request!");
+            }
+            catch (Exception ex)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ex);
             }
         }
     }
