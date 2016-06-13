@@ -31,6 +31,18 @@ namespace CountingKs
                 defaults: new { controller = "diaries", diaryId = RouteParameter.Optional }
             );
 
+            config.Routes.MapHttpRoute(
+                name: "DiaryEntries",
+                routeTemplate: "api/user/diaries/{diaryId}/entries/{id}",
+                defaults: new { controller = "diaries", id = RouteParameter.Optional }
+            );
+
+            config.Routes.MapHttpRoute(
+                name: "DiarySummary",
+                routeTemplate: "api/user/diaries/{diaryId}/summary",
+                defaults: new { controller = "diarysummary"}
+            );
+
             // Uncomment the following line of code to enable query support for actions with an IQueryable or IQueryable<T> return type.
             // To avoid processing unexpected or malicious queries, use the validation settings on QueryableAttribute to validate incoming queries.
             // For more information, visit http://go.microsoft.com/fwlink/?LinkId=279712.
