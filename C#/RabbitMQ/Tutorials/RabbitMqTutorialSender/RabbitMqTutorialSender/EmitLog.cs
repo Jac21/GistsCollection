@@ -7,7 +7,7 @@ namespace RabbitMqTutorialSender
     /// <summary>
     /// Message Sender
     /// </summary>
-    class NewTask
+    class EmitLog
     {
         static void Main(string[] args)
         {
@@ -22,23 +22,17 @@ namespace RabbitMqTutorialSender
                 // Declare a channel and queues for publishing
                 using (var channel = connection.CreateModel())
                 {
-                    channel.QueueDeclare(queue: "task_queue",
-                                         durable: true,
-                                         exclusive: false,
-                                         autoDelete: false,
-                                         arguments: null);
+                    // Declare an exchange, receives messages from producers and 
+                    // pushes them to queues, knows what to do with messages received
+                    channel.ExchangeDeclare("logs", "fanout"); // just broadcasts all the messages it receives to all the queues it knows.
 
                     var message = GetMessage(args);
                     var body = Encoding.UTF8.GetBytes(message);
 
-                    // marking messages as persistent for durability
-                    var properties = channel.CreateBasicProperties();
-                    properties.SetPersistent(true);
-
                     // Publish message to queue
-                    channel.BasicPublish(exchange: "",
-                                         routingKey: "task_queue",
-                                         basicProperties: properties,
+                    channel.BasicPublish(exchange: "logs",
+                                         routingKey: "",
+                                         basicProperties: null,
                                          body: body);
 
                     Console.WriteLine("[X] Sent {0} with {1} byte size", message,
@@ -53,7 +47,9 @@ namespace RabbitMqTutorialSender
         // get message from the command line argument
         private static string GetMessage(string[] args)
         {
-            return ((args.Length > 0) ? string.Join(" ", args) : "Hello, World!");
+            return ((args.Length > 0) 
+                ? string.Join(" ", args) 
+                : "Hello, World!");
         }
     }
 }
