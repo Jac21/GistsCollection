@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net.Http.Formatting;
 using System.Security.Cryptography.X509Certificates;
 using System.Web.Http;
+using CountingKs.Filters;
 using Newtonsoft.Json.Serialization;
 
 namespace CountingKs
@@ -50,6 +51,12 @@ namespace CountingKs
 
             var jsonFormatter = config.Formatters.OfType<JsonMediaTypeFormatter>().FirstOrDefault();
             jsonFormatter.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+
+#if !DEBUG
+            // Force HTTPs over entire API
+            config.Filters.Add(new RequireHttpsAttribute());
+#endif
+
         }
     }
 }
