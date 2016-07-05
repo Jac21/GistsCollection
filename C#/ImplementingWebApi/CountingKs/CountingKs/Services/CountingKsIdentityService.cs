@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Web;
 
 namespace CountingKs.Services
@@ -9,7 +10,10 @@ namespace CountingKs.Services
     {
         public string CurrentUser
         {
-            get { return "shawnwildermuth"; }
+            get
+            {
+                return Thread.CurrentPrincipal.Identity.Name;
+            }
         }
     }
 }

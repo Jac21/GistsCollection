@@ -11,6 +11,7 @@ using CountingKs.Services;
 
 namespace CountingKs.Controllers
 {
+    [Authorize]
     public class DiariesController : BaseApiController
     {
         private ICountingKsIdentityService _identityService;
