@@ -1,0 +1,24 @@
+body {
+	font-family: 'Roboto', sans-serif;
+}
+
+a {
+	font-size: 30px;
+}
+
+.profile-picture {
+	display: block;
+	height: 50px;
+	width: 50px;
+	background-color: #57D131;
+	float: left;
+	margin-right: 30px;
+}
+
+#comments:not(:target) {
+	display: none;
+}
+
+#comments:target {
+	display: block;
+}

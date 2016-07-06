@@ -1,0 +1,35 @@
+body {
+	font-family: 'Roboto', sans-serif;
+}
+
+a {
+	font-size: 30px;
+}
+
+.profile-picture {
+	display: block;
+	height: 50px;
+	width: 50px;
+	background-color: #57D131;
+	float: left;
+	margin-right: 30px;
+}
+
+#nav {
+	position: fixed;
+	background-color: #B9E937;
+	top:0;
+	height: 100%;
+	width: 80%;
+	max-width: 400px;
+}
+
+#nav:not(:target) {
+	right:-100%;
+	transition: right 1.5s;
+}
+
+#nav:target {
+	right:0;
+	transition: right 1s;
+}
