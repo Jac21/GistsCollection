@@ -1,0 +1,48 @@
+body {
+	font-family: 'Roboto', sans-serif;
+}
+
+a {
+	font-size: 30px;
+}
+
+.profile-picture {
+	display: block;
+	height: 50px;
+	width: 50px;
+	background-color: #57D131;
+	float: left;
+	margin-right: 30px;
+}
+
+#modal-container {
+	position: fixed;
+	background: rgba(0,0,0,0.8);
+	top:0;
+	left: 0;
+	height: 100%;
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.modal {
+	width: 70%;
+	background-color: #57D131;
+	color: #fff;
+	padding: 20px;
+	text-align: center;
+}
+
+#modal-container:not(:target) {
+	opacity: 0;
+	visibility: hidden;
+	transition: opacity 1s, visibility 1s;
+}
+
+#modal-container:target {
+	opacity: 1;
+	visibility: visible;
+	transition: opacity 1s, visibility 1s;
+}
