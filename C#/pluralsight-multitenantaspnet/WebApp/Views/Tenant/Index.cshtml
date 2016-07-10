@@ -1,0 +1,26 @@
+﻿@model List<WebApp.Models.Tenant>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>List of Tenants</title>
+</head>
+<body>
+<div>
+    <ul>
+        @foreach (var tenant in @Model)
+        {
+            <li>@tenant.Name - @tenant.DomainName</li>
+        }
+
+
+    </ul>
+
+</div>
+</body>
+</html>
