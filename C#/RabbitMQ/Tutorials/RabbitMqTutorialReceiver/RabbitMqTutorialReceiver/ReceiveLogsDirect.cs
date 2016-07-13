@@ -5,9 +5,9 @@ using RabbitMQ.Client.Events;
 
 namespace RabbitMqTutorialReceiver
 {
-    class ReceiveLogs
+    class ReceiveLogsDirect
     {
-        static void Main()
+        static void Main(string[] args)
         {
             var factory = new ConnectionFactory()
             {
@@ -20,16 +20,29 @@ namespace RabbitMqTutorialReceiver
                 {
                     // Declare an exchange, receives messages from producers and 
                     // pushes them to queues, knows what to do with messages received
-                    channel.ExchangeDeclare("logs", "fanout"); // just broadcasts all the messages it receives to all the queues it knows.
+                    channel.ExchangeDeclare("direct_logs", "direct");
 
                     // random queue name
                     var queueName = channel.QueueDeclare().QueueName;
 
-                    channel.QueueBind(queue:queueName,
-                                      exchange:"logs",
-                                      routingKey:"");
+                    if (args.Length < 1)
+                    {
+                        Console.Error.WriteLine("Usage: {0} [info] [warning] [error]",
+                            Environment.GetCommandLineArgs()[0]);
+                        Console.WriteLine("Press [enter] to exit");
+                        Console.ReadLine();
+                        Environment.ExitCode = 1;
+                        return;
+                    }
 
-                    Console.WriteLine("[*] Waiting for logs...");
+                    foreach (var severity in args)
+                    {
+                        channel.QueueBind(queue: queueName,
+                            exchange: "direct_logs",
+                            routingKey: severity);
+                    }
+
+                    Console.WriteLine("[*] Waiting for messages...");
 
                     // Push messages from the queue asynchronously
                     var consumer = new EventingBasicConsumer(channel);
@@ -37,14 +50,15 @@ namespace RabbitMqTutorialReceiver
                     {
                         var body = ea.Body;
                         var message = Encoding.UTF8.GetString(body);
-                        Console.WriteLine("[X] Received {0}", message);
+                        var routingKey = ea.RoutingKey;
+                        Console.WriteLine("[X] Received '{0}' : '{1}'", routingKey, message);
                     };
 
                     channel.BasicConsume(queue: queueName,
                         noAck: true,
                         consumer: consumer);
 
-                    Console.WriteLine("Press [Enter] to exit");
+                    Console.WriteLine("Press [enter] to exit");
                     Console.ReadLine();
                 }
 
