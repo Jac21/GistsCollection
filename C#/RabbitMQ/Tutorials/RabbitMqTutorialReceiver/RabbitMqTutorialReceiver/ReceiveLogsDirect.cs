@@ -20,26 +20,30 @@ namespace RabbitMqTutorialReceiver
                 {
                     // Declare an exchange, receives messages from producers and 
                     // pushes them to queues, knows what to do with messages received
-                    channel.ExchangeDeclare("direct_logs", "direct");
+                    channel.ExchangeDeclare("topic_logs", "topic");
 
                     // random queue name
                     var queueName = channel.QueueDeclare().QueueName;
 
                     if (args.Length < 1)
                     {
-                        Console.Error.WriteLine("Usage: {0} [info] [warning] [error]",
+                        Console.Error.WriteLine("Usage: {0} [binding_key...]",
                             Environment.GetCommandLineArgs()[0]);
-                        Console.WriteLine("Press [enter] to exit");
+
+                        Console.WriteLine("Press [enter] to exit...");
+
                         Console.ReadLine();
+
                         Environment.ExitCode = 1;
+
                         return;
                     }
 
-                    foreach (var severity in args)
+                    foreach (var bindingKey in args)
                     {
                         channel.QueueBind(queue: queueName,
-                            exchange: "direct_logs",
-                            routingKey: severity);
+                            exchange: "topic_logs",
+                            routingKey: bindingKey);
                     }
 
                     Console.WriteLine("[*] Waiting for messages...");

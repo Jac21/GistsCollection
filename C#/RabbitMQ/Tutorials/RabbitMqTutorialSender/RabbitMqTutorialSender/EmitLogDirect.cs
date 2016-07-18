@@ -26,9 +26,10 @@ namespace RabbitMqTutorialSender
                 {
                     // Declare an exchange, receives messages from producers and 
                     // pushes them to queues, knows what to do with messages received
-                    channel.ExchangeDeclare(exchange:"direct_logs", type:"direct"); // use a routing key to direct messages
+                    channel.ExchangeDeclare(exchange:"topic_logs", type:"topic"); // use a routing key to direct messages
 
-                    var severity = (args.Length > 0) ? args[0] : "info";
+                    var routingKey = (args.Length > 0) ? args[0] : "anon.info";
+
                     var message = (args.Length > 1)
                         ? string.Join(" ", args.Skip(1).ToArray())
                         : "Hello, World!";
@@ -37,12 +38,12 @@ namespace RabbitMqTutorialSender
 
 
                     // Publish message to queue
-                    channel.BasicPublish(exchange: "direct_logs",
-                                         routingKey: severity,
+                    channel.BasicPublish(exchange: "topic_logs",
+                                         routingKey: routingKey,
                                          basicProperties: null,
                                          body: body);
 
-                    Console.WriteLine("[X] Sent '{0}' : '{1}' with '{2}' byte size", message, severity,
+                    Console.WriteLine("[X] Sent '{0}' : '{1}' with '{2}' byte size", message, routingKey,
                         Encoding.UTF8.GetByteCount(message));
                 }
 
