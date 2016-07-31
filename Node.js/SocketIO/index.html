@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Socket.IO Chatroom</title>
+	<link rel = "stylesheet" href="style.css"/>
+</head>
+	<body>
+		<ul id = "messages"></ul>
+		<form action = "">
+			<input id = "m" autocomplete="off" />
+			<button>Send</button>
+		</form>
+		<script type="text/javascript" src="/socket.io/socket.io.js"></script>
+		<script src="http://code.jquery.com/jquery-1.11.1.js"></script>
+		<script type="text/javascript">
+			var socket = io();
+
+			var appendMessageText = function(msg) {
+				$('#messages').append($('<li>').text(msg));
+			};
+
+			$('form').submit(function() {
+				socket.emit('chat message', $('#m').val());
+				$('#m').val('');
+				return false;
+			});
+
+			socket.on('chat message', function(msg) {
+				appendMessageText(msg);
+			});
+
+			/*
+			/ Broadcast a message to connected users when someone connects or disconnects
+			*/
+			
+			socket.on('user connected', function() {
+				appendMessageText('User has connected!');
+			});
+
+			socket.on('user disconnected', function() {
+				appendMessageText('User has disconnected!');
+			});
+		</script>
+	</body>
+</html>
