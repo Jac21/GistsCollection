@@ -4,7 +4,7 @@ GistsCollection
 
 Collection of miniature projects, programming challenges, and useful code snippets in an organized repo for easy traversal and backup, spanning a range of frameworks and languages.
 
-Current Folder Layout
+Current Content
 -------------
 
 > - AngularJS
@@ -20,6 +20,7 @@ Current Folder Layout
 	- RabbitMQ (tutorials and snippets covering the messaging broker framework)
 	- Ref (C# reference book implementations)
 	- Shuffler (Generic C# object shuffler)
+	- SpecFlow (test project using the BDD test-suite framework)
 	- ThirdParty (Snippets involving third party libraries)
 > - CSS
 	- Flexbox (Sample projects involving the CSS component)
@@ -30,11 +31,14 @@ Current Folder Layout
 > - JavaScript
 	- CasperJS (Grouping of projects involving the headless web-scraper framework)
 > - Node.js
-	- async_module (snippets of Javascript code that utilize asynchronous programming)
-	- general
-	- Gulp
-	- Koa_module (snippets of functionality from Express' spiritual successor)
-	- Lo-Dash_module (snippets of functionality from underscore's fork for dealing with array, objects, JSON, etc)
+	- AsyncModule (snippets of Javascript code that utilize asynchronous programming)
+	- General (misc. JavaScript code)
+	- Gulp (snippets of JavaScript code for the task-runner framework)
+	- HapiModule (snippets of functionality from the server-side framework)
+	- KoaModule (snippets of functionality from Express' spiritual successor)
+	- Lo-DashModule (snippets of functionality from underscore's fork for dealing with array, objects, JSON, etc)
+	- Prototypes (snippets dealing with JavaScript prototypal inheritance)
+	- SocketIO (code dealing with the JavaScript web-sockets library)
 > - Python
 	- MatasanoChallenges (Crypto and security-oriented python scripts, intended to solve the Matasano [CryptoPals](http://cryptopals.com/) challenges)
 	- Intermediate Python (https://github.com/yasoob/intermediatePython)
