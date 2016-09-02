@@ -98,3 +98,8 @@ h6,
     -ms-border-radius: 9px;
     border-radius: 9px;
 }
+
+span.field-validation-error {
+    color: red;
+    font-weight: bold;
+}
