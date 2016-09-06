@@ -190,7 +190,6 @@
       <DependentUpon>201609061427285_AddNameToApplicationUser.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
     <Compile Include="Models\Genre.cs" />
     <Compile Include="Models\Gig.cs" />
@@ -198,9 +197,17 @@
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModels\AccountViewModels\ExternalLoginConfirmationViewModel.cs" />
+    <Compile Include="ViewModels\AccountViewModels\ExternalLoginListViewModel.cs" />
+    <Compile Include="ViewModels\AccountViewModels\ForgotPasswordViewModel.cs" />
+    <Compile Include="ViewModels\AccountViewModels\ForgotViewModel.cs" />
+    <Compile Include="ViewModels\AccountViewModels\LoginViewModel.cs" />
+    <Compile Include="ViewModels\AccountViewModels\RegisterViewModel.cs" />
+    <Compile Include="ViewModels\AccountViewModels\ResetPasswordViewModel.cs" />
+    <Compile Include="ViewModels\AccountViewModels\SendCodeViewModel.cs" />
+    <Compile Include="ViewModels\AccountViewModels\VerifyCodeViewModel.cs" />
     <Compile Include="ViewModels\FutureDate.cs" />
     <Compile Include="ViewModels\GigFormViewModel.cs" />
-    <Compile Include="ViewModels\RegisterViewModel.cs" />
     <Compile Include="ViewModels\ValidTime.cs" />
   </ItemGroup>
   <ItemGroup>

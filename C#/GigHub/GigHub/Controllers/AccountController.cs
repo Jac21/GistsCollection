@@ -10,6 +10,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using GigHub.Models;
 using GigHub.ViewModels;
+using GigHub.ViewModels.AccountViewModels;
 
 namespace GigHub.Controllers
 {
