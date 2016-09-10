@@ -1,10 +1,11 @@
-﻿@model GigHub.ViewModels.HomeViewModel
+﻿@model GigHub.ViewModels.GigsViewModel
 
 @{
     ViewBag.Title = "Home Page";
 }
 
-<ul class="gigs">
+<h1>@Model.Heading</h1>
+<ul class="gigs voffset-four">
     @foreach (var gig in Model.UpcomingGigs)
     {
         <li>
@@ -27,7 +28,8 @@
                 <span class="genre">
                     @gig.Genre.Name
                 </span>
-                @if (Model.ShowActions) { 
+                @if (Model.ShowActions)
+                {
                     <button data-gig-id="@gig.Id" class="btn btn-default btn-sm pull-right js-toggle-attendance">Going?</button>
                 }
             </div>

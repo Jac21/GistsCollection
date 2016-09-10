@@ -23,6 +23,13 @@ textarea {
     max-width: 280px;
 }
 
+.voffset {margin-top:2px}
+.voffset-one {margin-top:5px}
+.voffset-two {margin-top:10px}
+.voffset-three {margin-top:20px}
+.voffset-four {margin-top:40px}
+.voffset-five {margin-top:40px}
+
 /* Bootstrap Overrides */
 .navbar-inverse {
     background-color: #ff4342;
