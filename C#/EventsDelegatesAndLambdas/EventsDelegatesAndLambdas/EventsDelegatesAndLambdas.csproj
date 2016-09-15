@@ -4,13 +4,14 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{2D08856A-07D7-4813-9108-EDAC2DCB1F86}</ProjectGuid>
+    <ProjectGuid>{A99DF242-E584-4E37-A0C6-382782CDCFC5}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>IocPractice</RootNamespace>
-    <AssemblyName>IocPractice</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <RootNamespace>EventsDelegatesAndLambdas</RootNamespace>
+    <AssemblyName>EventsDelegatesAndLambdas</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -41,7 +42,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IocExample.cs" />
+    <Compile Include="EventHandlers\Worker.cs" />
+    <Compile Include="EventHandlers\WorkPerformedEventArgs.cs" />
+    <Compile Include="Models\Customer.cs" />
+    <Compile Include="ProcessData.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
