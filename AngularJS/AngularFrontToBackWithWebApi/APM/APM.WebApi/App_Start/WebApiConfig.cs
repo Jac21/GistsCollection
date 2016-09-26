@@ -23,8 +23,8 @@ namespace APM.WebApi
 
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",
-                routeTemplate: "api/{controller}/{search}",
-                defaults: new { search = RouteParameter.Optional }
+                routeTemplate: "api/{controller}/{id}",
+                defaults: new { id = RouteParameter.Optional }
             );
 
             // Send responses as JSON

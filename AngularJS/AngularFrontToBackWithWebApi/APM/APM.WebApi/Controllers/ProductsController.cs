@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
+using System.Web.Http.OData;
 using APM.WebApi.Repository;
 using APM.WebAPI.Models;
 
@@ -8,7 +9,7 @@ namespace APM.WebApi.Controllers
 {
     public class ProductsController : ApiController
     {
-        private ProductRepository _repository;
+        private readonly ProductRepository _repository;
 
         public ProductsController()
         {
@@ -16,9 +17,10 @@ namespace APM.WebApi.Controllers
         }
 
         // GET: api/Products
-        public IEnumerable<Product> Get()
+        [EnableQuery()]
+        public IQueryable<Product> Get()
         {
-            return _repository.Retrieve();
+            return _repository.Retrieve().AsQueryable();
         }
 
         // GET: api/products?search=
@@ -29,19 +31,33 @@ namespace APM.WebApi.Controllers
         }
 
         // GET: api/Products/5
-        public string Get(int id)
+        public Product Get(int id)
         {
-            return "value";
+            Product product;
+
+            if (id > 0)
+            {
+                var products = _repository.Retrieve();
+                product = products.FirstOrDefault(p => p.ProductId == id);
+            }
+            else
+            {
+                product = _repository.Create();
+            }
+
+            return product;
         }
 
         // POST: api/Products
-        public void Post([FromBody]string value)
+        public void Post([FromBody]Product product)
         {
+            var newProduct = _repository.Save(product);
         }
 
         // PUT: api/Products/5
-        public void Put(int id, [FromBody]string value)
+        public void Put(int id, [FromBody]Product product)
         {
+            var updatedProduct = _repository.Save(id, product);
         }
 
         // DELETE: api/Products/5
