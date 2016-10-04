@@ -1,0 +1,10 @@
+1. Author administration (can't delete author that has a course).
+2. Delete course.
+3. Hide empty course list.
+4. Unsaved changes message.
+5. Client-side validation (things like category and link validation).
+6. Handle 404's (mapStateToProps).
+7. Show number of courses in the Header.
+8. Pagination or infinite-scrolling.
+9. Sort course table by title (mapStateToProps).
+10. Revert abandoned changes.
