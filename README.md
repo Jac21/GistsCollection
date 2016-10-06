@@ -47,6 +47,7 @@ Current Content
 	- GraphQlApp (starter project using Facebook's GraphQl library)
 	- ReactJsDotNetTutorial (Basic web-app covering ASP.NET's React bindings)
 	- ReactPlusFlux (starter React project, taking advantage of React, React Router, Flux, Node, Gulp, Browserify and Bootstrap)
+	- ReactPlusRedux (starter React project, taking advantage of React, React Router, Redux, Node, Webpack and Bootstrap)
 	- WebpackBabelProjectSkeleton
 > - Riot
 	- RiotAndRedux
@@ -55,6 +56,7 @@ Current Content
 	- RiotLoopsEventsAndCallbacks
 	- RiotServerSideRendering
 > - d3.js
+	- Bar Charts
 	- Bullet Charts
 	- Force Layout
 	- Mapping
