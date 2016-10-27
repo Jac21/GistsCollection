@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
+using System.Web.Http.Description;
 using System.Web.Http.OData;
 using APM.WebApi.Repository;
 using APM.WebAPI.Models;
@@ -18,9 +19,17 @@ namespace APM.WebApi.Controllers
 
         // GET: api/Products
         [EnableQuery()]
-        public IQueryable<Product> Get()
+        [ResponseType(typeof(Product))]
+        public IHttpActionResult Get()
         {
-            return _repository.Retrieve().AsQueryable();
+            try
+            {
+                return Ok(_repository.Retrieve().AsQueryable());
+            }
+            catch (HttpResponseException ex)
+            {
+                return InternalServerError();
+            }
         }
 
         // GET: api/products?search=
@@ -31,33 +40,94 @@ namespace APM.WebApi.Controllers
         }
 
         // GET: api/Products/5
-        public Product Get(int id)
+        public IHttpActionResult Get(int id)
         {
-            Product product;
-
-            if (id > 0)
+            try
             {
-                var products = _repository.Retrieve();
-                product = products.FirstOrDefault(p => p.ProductId == id);
-            }
-            else
-            {
-                product = _repository.Create();
-            }
+                Product product;
 
-            return product;
+                if (id > 0)
+                {
+                    var products = _repository.Retrieve();
+                    product = products.FirstOrDefault(p => p.ProductId == id);
+
+                    if (product == null)
+                    {
+                        return NotFound();
+                    }
+                }
+                else
+                {
+                    product = _repository.Create();
+                }
+
+                return Ok(product);
+            }
+            catch (HttpResponseException ex)
+            {
+                return InternalServerError();
+            }
         }
 
         // POST: api/Products
-        public void Post([FromBody]Product product)
+        public IHttpActionResult Post([FromBody]Product product)
         {
-            var newProduct = _repository.Save(product);
+            try
+            {
+                if (product == null)
+                {
+                    return BadRequest("Product cannot be null!");
+                }
+
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest(ModelState);
+                }
+
+                var newProduct = _repository.Save(product);
+
+                if (newProduct == null)
+                {
+                    return Conflict();
+                }
+
+                return Created(Request.RequestUri + newProduct.ProductId.ToString(),
+                    newProduct);
+            }
+            catch (HttpResponseException ex)
+            {
+                return InternalServerError();
+            }
         }
 
         // PUT: api/Products/5
-        public void Put(int id, [FromBody]Product product)
+        public IHttpActionResult Put(int id, [FromBody]Product product)
         {
-            var updatedProduct = _repository.Save(id, product);
+            try
+            {
+                if (product == null)
+                {
+                    return BadRequest("Product cannot be null!");
+                }
+
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest(ModelState);
+                }
+
+                var updatedProduct = _repository.Save(id, product);
+
+                if (updatedProduct == null)
+                {
+                    return NotFound();
+                }
+
+                return Ok();
+            }
+            catch (HttpResponseException ex)
+            {
+                return InternalServerError();
+            }
         }
 
         // DELETE: api/Products/5

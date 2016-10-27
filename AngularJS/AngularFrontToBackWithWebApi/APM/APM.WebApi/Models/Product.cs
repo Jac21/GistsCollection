@@ -11,6 +11,10 @@ namespace APM.WebAPI.Models
 
         [Required]
         public int ProductId { get; set; }
+
+        [Required(ErrorMessage = "Product Name is reqiured!", AllowEmptyStrings = false)]
+        [MinLength(4, ErrorMessage = "Product Name minimum length is 5 characters!")]
+        [MaxLength(12, ErrorMessage = "Product Name maximum length is 12 characters!")]
         public string ProductName { get; set; }
         public DateTime ReleaseDate { get; set; }
 
