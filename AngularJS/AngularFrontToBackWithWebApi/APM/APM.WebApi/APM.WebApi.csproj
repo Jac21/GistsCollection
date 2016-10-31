@@ -226,6 +226,10 @@
     <Compile Include="Migrations\201609191931290_Product.Designer.cs">
       <DependentUpon>201609191931290_Product.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201610310031516_ValidationUpdates.cs" />
+    <Compile Include="Migrations\201610310031516_ValidationUpdates.Designer.cs">
+      <DependentUpon>201610310031516_ValidationUpdates.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -301,6 +305,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201609191931290_Product.resx">
       <DependentUpon>201609191931290_Product.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201610310031516_ValidationUpdates.resx">
+      <DependentUpon>201610310031516_ValidationUpdates.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
