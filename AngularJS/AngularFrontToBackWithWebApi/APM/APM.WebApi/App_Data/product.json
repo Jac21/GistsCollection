@@ -5,7 +5,7 @@
     "ProductCode": "GDN-0011",
     "ProductId": 1,
     "ProductName": "Leaf Rake",
-    "ReleaseDate": "2009-03-19T00:00:00-07:00"
+    "ReleaseDate": "2009-03-19T02:00:00-05:00"
   },
   {
     "Description": "15 gallon capacity rolling garden cart",
@@ -13,7 +13,7 @@
     "ProductCode": "GDN-0023",
     "ProductId": 2,
     "ProductName": "Garden Cart",
-    "ReleaseDate": "2010-03-18T00:00:00-07:00"
+    "ReleaseDate": "2010-03-18T02:00:00-05:00"
   },
   {
     "Description": "Ergonomic firm-grim hand cultivator",
@@ -21,7 +21,7 @@
     "ProductCode": "GDN-0035",
     "ProductId": 3,
     "ProductName": "Hand Cultivator",
-    "ReleaseDate": "2012-03-18T00:00:00-07:00"
+    "ReleaseDate": "2012-03-18T02:00:00-05:00"
   },
   {
     "Description": "Firm grip 14-inch hand trowel",
@@ -29,15 +29,15 @@
     "ProductCode": "GDN-0067",
     "ProductId": 4,
     "ProductName": "Hand Trowel",
-    "ReleaseDate": "2013-03-22T00:00:00-07:00"
+    "ReleaseDate": "2013-03-22T02:00:00-05:00"
   },
   {
     "Description": "Curved claw steel hammer",
     "Price": 8.99,
     "ProductCode": "TBX-0048",
     "ProductId": 5,
-    "ProductName": "Hammer",
-    "ReleaseDate": "2013-05-21T00:00:00-07:00"
+    "ProductName": "TESSSSSSSSST",
+    "ReleaseDate": "2013-05-21T02:00:00-05:00"
   },
   {
     "Description": "5.55 mm and 7 mm double open-ended wrench",
@@ -45,7 +45,7 @@
     "ProductCode": "TBX-0045",
     "ProductId": 6,
     "ProductName": "Wrench",
-    "ReleaseDate": "2013-05-15T00:00:00-07:00"
+    "ReleaseDate": "2013-05-15T02:00:00-05:00"
   },
   {
     "Description": "Reel-type push lawn mower",
@@ -53,7 +53,7 @@
     "ProductCode": "GDN-0006",
     "ProductId": 7,
     "ProductName": "Push Mower",
-    "ReleaseDate": "2008-05-01T00:00:00-07:00"
+    "ReleaseDate": "2008-05-01T02:00:00-05:00"
   },
   {
     "Description": "15-inch steel blade hand saw",
@@ -61,7 +61,7 @@
     "ProductCode": "TBX-0022",
     "ProductId": 8,
     "ProductName": "Saw",
-    "ReleaseDate": "2009-05-15T00:00:00-07:00"
+    "ReleaseDate": "2009-05-15T02:00:00-05:00"
   },
   {
     "Description": "14-in Aluminum Pipe Wrench",
@@ -69,7 +69,7 @@
     "ProductCode": "TBX-0045",
     "ProductId": 9,
     "ProductName": "Pipe Wrench",
-    "ReleaseDate": "2009-06-15T00:00:00-07:00"
+    "ReleaseDate": "2009-06-15T02:00:00-05:00"
   },
   {
     "Description": "Standard two-button video game controller",
@@ -77,7 +77,7 @@
     "ProductCode": "GMG-0042",
     "ProductId": 10,
     "ProductName": "Video Game Controller",
-    "ReleaseDate": "2002-10-15T00:00:00-07:00"
+    "ReleaseDate": "2002-10-15T02:00:00-05:00"
   },
   {
     "Description": "Everyone wants one!",
@@ -85,6 +85,6 @@
     "ProductCode": "APL-123456",
     "ProductId": 11,
     "ProductName": "iWatch",
-    "ReleaseDate": "2015-03-10T16:55:08.535279-07:00"
+    "ReleaseDate": "2015-03-10T18:55:08.535279-05:00"
   }
 ]

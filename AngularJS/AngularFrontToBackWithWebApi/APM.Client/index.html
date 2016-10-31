@@ -13,7 +13,7 @@
         <div class="container-fluid">
             <div class="navbar-header">
                 <div class="navbar-brand">Acme Product Management</div>
-                <form ng-hide="vm.isLoggedIn" class="navbar-form navbar-right">
+                <form ng-hide="vm.isLoggedIn()" class="navbar-form navbar-right">
                     <div class="form-group">
                         <input type="text"
                                class="form-control"
@@ -49,7 +49,7 @@
     -->
     
     <div class="container">
-        <div ng-if="vm.isLoggedIn" ng-include="'app/products/productEditView.html'"></div>
+        <div ng-if="vm.isLoggedIn()" ng-include="'app/products/productEditView.html'"></div>
     </div>
     
 
@@ -65,6 +65,7 @@
     <script src="common/common.services.js"></script>
     <script src="common/productResource.js"></script>
     <script src="common/userAccount.js"></script>
+    <script src="common/currentUser.js"></script>
 
     <!-- Product Controllers -->
     <script src="app/products/productListCtrl.js"></script>

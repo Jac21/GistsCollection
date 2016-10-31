@@ -40,6 +40,7 @@ namespace APM.WebApi.Controllers
         }
 
         // GET: api/Products/5
+        [Authorize]
         public IHttpActionResult Get(int id)
         {
             try

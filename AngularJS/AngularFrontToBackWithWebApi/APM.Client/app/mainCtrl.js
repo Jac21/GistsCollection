@@ -2,11 +2,13 @@
     'use strict';
 
     angular.module("productManagement")
-        .controller("MainCtrl", ["userAccount", MainCtrl]);
+        .controller("MainCtrl", ["userAccount", "currentUser",MainCtrl]);
 
-    function MainCtrl(userAccount) {
+    function MainCtrl(userAccount, currentUser) {
         var vm = this;
-        vm.isLoggedIn = false;
+        vm.isLoggedIn = function() {
+            return currentUser.getProfile().isLoggedIn;
+        };
         vm.message = '';
         vm.userData = {
             userName: '',
@@ -46,14 +48,12 @@
 
             userAccount.login.loginUser(vm.userData,
                 function(data) {
-                    vm.isLoggedIn = true;
                     vm.message = "";
                     vm.password = "";
-                    vm.token = data.access_token;
+                    currentUser.setProfile(vm.userData.userName, data.access_token);
                 },
                 function(response) {    // error
                     vm.password = "";
-                    vm.isLoggedIn = false;
                     vm.message = response.statusText + "\r\n";
 
                     if (response.data.exceptionMessage) {
