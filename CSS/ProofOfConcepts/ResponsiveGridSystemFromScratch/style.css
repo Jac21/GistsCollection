@@ -1,0 +1,89 @@
+/* https://zellwk.com/blog/understanding-css-box-sizing/ */
+
+/* Step 2: Set box-sizing to border box */
+html {
+	box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+	box-sizing: inherit;
+}
+
+/* Step 3: Create the grid container */
+.l-wrap {
+	max-width: 71.25em;
+	margin-right: auto;
+	margin-left: auto;
+}
+
+/* Step 4: Calculate column width */
+
+.three-col-grid .grid-item  {
+  width: 33.33333%;
+  float: left;
+}
+
+.three-col-grid:after {
+  display: table;
+  clear: both;
+  content: '';
+}
+
+/* Step 5: Determine gutter position */
+
+.grid-item {
+  /* Need to recalculate width property */
+  width: calc((100% - 1.250em * 2) / 3);
+
+  /* Width property */
+  margin-right: 0.625em;
+  margin-left: 0.625em;
+  float: left;
+}
+
+/* For a 3-column grid */
+.grid-item:nth-child(3n+3) {
+  margin-right: 0;
+  float: right;
+}
+
+.column {
+  width: calc((100% - 1.250em * 12) / 12);
+  height: 5.000em;
+  margin-right: 0.625em;
+  margin-left: 0.625em;
+  background: rgba(0, 0, 255, 0.25);
+  float: left;
+}
+
+/* Guest Article layout example 
+.l-guest-article .l-guest {
+  width: 16.66666667%;
+  padding-left: 0.625em;
+  padding-right: 0.625em;
+  float: left;
+
+  height: 4.000em;
+  background: rgba(0, 0, 255, 0.25);
+}
+.l-guest-article .l-main {
+  width: 58.33333333%;
+  padding-right: 0.625em;
+  padding-left: 0.625em;
+  float: left;
+
+  height: 4.000em;
+  background: rgba(0, 0, 255, 0.25);
+}
+.l-guest-article .l-sidebar {
+  width: 25%;
+  padding-right: 0.625em;
+  padding-left: 0.625em;
+  float: left;
+
+  height: 4.000em;
+  background: rgba(0, 0, 255, 0.25);
+}
+*/
