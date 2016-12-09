@@ -1,38 +1,16 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 
 namespace IteratorDemo
 {
     class Program
     {
-        private static IPainter FindCheapestPainter(double sqMeters, 
-                                                    IEnumerable<IPainter> painters)
-        {
-            return
-                painters
-                    .Where(painter => painter.IsAvailable)
-                    .WithMinimum(painter => painter.EstimateCompensation(sqMeters));
-
-        }
-
         static void Main()
         {
-            List<Painter> painters = new List<Painter>();
-            
-            Painter painterOne = new Painter()
-            {
-                IsAvailable = true
-            };
+            IEnumerable<ProportionalPainter> painters = new ProportionalPainter[10];
 
-            Painter painterTwo = new Painter()
-            {
-                IsAvailable = false
-            };
+            IPainter fastestPainter = CompositePainterFactory.CreateFastestSelector(painters);
+            IPainter groupOfPainters = CompositePainterFactory.CreateGroup(painters);
 
-            painters.Add(painterOne);
-            painters.Add(painterTwo);
-
-            FindCheapestPainter(100, painters);
         }
     }
 }
