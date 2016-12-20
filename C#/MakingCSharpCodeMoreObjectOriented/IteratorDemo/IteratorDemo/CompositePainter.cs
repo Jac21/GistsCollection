@@ -20,14 +20,18 @@ namespace IteratorDemo
         }
 
         private IEnumerable<TPainter> Painters { get; set; }
-
-        private Func<double, IEnumerable<TPainter>, IPainter> Reduce { get; set; }
+        protected Func<double, IEnumerable<TPainter>, IPainter> Reduce { get; set; }
 
         public CompositePainter(IEnumerable<TPainter> painters,
-            Func<double, IEnumerable<TPainter>, IPainter> reduce)
+                                Func<double, IEnumerable<TPainter>, IPainter> reduce)
+            : this(painters)
+        {
+            this.Reduce = reduce;
+        }
+
+        protected CompositePainter(IEnumerable<TPainter> painters)
         {
             this.Painters = painters.ToList();
-            this.Reduce = reduce;
         }
 
         public TimeSpan EstimateTimeToPaint(double sqMeters)

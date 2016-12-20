@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace IteratorDemo
 {
@@ -9,7 +10,7 @@ namespace IteratorDemo
             IEnumerable<ProportionalPainter> painters = new ProportionalPainter[10];
 
             IPainter fastestPainter = CompositePainterFactory.CreateFastestSelector(painters);
-            IPainter groupOfPainters = CompositePainterFactory.CreateGroup(painters);
+            IPainter groupOfPainters = CompositePainterFactory.CombineProportional(painters);
 
         }
     }

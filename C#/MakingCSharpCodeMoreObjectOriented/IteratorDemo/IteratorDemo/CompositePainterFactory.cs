@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 
 namespace IteratorDemo
 {
@@ -21,31 +19,9 @@ namespace IteratorDemo
                 (sqMeters, sequence) => new Painters(sequence).GetAvailable().GetFastestOne(sqMeters));
         }
 
-        public static IPainter CreateGroup(IEnumerable<ProportionalPainter> painters)
+        public static IPainter CombineProportional(IEnumerable<ProportionalPainter> painters)
         {
-            return new CompositePainter<ProportionalPainter>(painters, (sqMeters, sequence) =>
-            {
-                TimeSpan time =
-                    TimeSpan.FromHours(
-                        sequence
-                            .Where(painter => painter.IsAvailable)
-                            .Select(painter => 1/painter.EstimateTimeToPaint(sqMeters).TotalHours)
-                            .Sum());
-
-                double cost =
-                    sequence
-                        .Where(painter => painter.IsAvailable)
-                        .Select(painter =>
-                            painter.EstimateCompensation(sqMeters)/
-                            painter.EstimateTimeToPaint(sqMeters).TotalHours*time.TotalHours)
-                        .Sum();
-
-                return new ProportionalPainter()
-                {
-                    TimePerSqMeter = TimeSpan.FromHours(time.TotalHours/sqMeters),
-                    DollarsPerHour = cost/time.TotalHours
-                };
-            });
+            return new CombiningPainter<ProportionalPainter>(painters, new ProportionalPaintingScheduler());
         }
     }
 }

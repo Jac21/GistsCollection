@@ -42,15 +42,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CombiningPainter.cs" />
     <Compile Include="CompositePainterFactory.cs" />
+    <Compile Include="IPaintingScheduler.cs" />
     <Compile Include="Painter.cs" />
     <Compile Include="EnumerableExtensions.cs" />
     <Compile Include="IPainter.cs" />
     <Compile Include="Painters.cs" />
     <Compile Include="CompositePainter.cs" />
+    <Compile Include="PaintingTask.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ProportionalPainter.cs" />
+    <Compile Include="ProportionalPaintingScheduler.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
