@@ -1,0 +1,3 @@
+CREATE TABLE Users(
+	email VARCHAR(50)
+);
