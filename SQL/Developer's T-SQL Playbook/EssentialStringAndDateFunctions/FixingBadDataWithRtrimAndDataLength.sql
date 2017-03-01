@@ -1,0 +1,5 @@
+SELECT Name, LEN(Name) 
+FROM Artist
+WHERE DATALENGTH(Name) <> DATALENGTH(RTRIM(Name));
+
+-- UPDATE Artist SET Name = RTRIM(Name);
