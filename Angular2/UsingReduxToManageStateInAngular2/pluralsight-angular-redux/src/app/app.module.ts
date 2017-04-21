@@ -18,7 +18,9 @@ import { ToastComponent, ToastService } from './blocks/toast';
 import { SpinnerComponent, SpinnerService } from './blocks/spinner';
 import { ModalComponent, ModalService } from './blocks/modal';
 import { ExceptionService } from './blocks/exception.service';
-
+import { NgReduxModule, NgRedux } from 'ng2-redux';
+import { store, IAppState } from './store';
+import { CourseActions } from './courses/course.actions';
 
 @NgModule({
   declarations: [
@@ -35,7 +37,8 @@ import { ExceptionService } from './blocks/exception.service';
     FormsModule,
     HttpModule,
     InMemoryWebApiModule.forRoot(InMemoryStoryService, { delay: 500 }),
-    AppRoutingModule
+    AppRoutingModule,
+    NgReduxModule
   ],
   providers: [
     CourseService,
@@ -44,7 +47,12 @@ import { ExceptionService } from './blocks/exception.service';
     SpinnerService,
     ModalService,
     ExceptionService,
+    CourseActions
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+  constructor(ngRedux: NgRedux<IAppState>) {
+    ngRedux.provideStore(store);
+  }
+ }
