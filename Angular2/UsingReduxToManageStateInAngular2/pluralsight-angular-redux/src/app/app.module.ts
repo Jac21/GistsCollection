@@ -22,6 +22,46 @@ import { NgReduxModule, NgRedux } from 'ng2-redux';
 import { store, IAppState } from './store';
 import { CourseActions } from './courses/course.actions';
 
+// Object.freeze({}) demo
+const person = Object.freeze({
+  name:"Jeremy",
+  surname:"Cantu",
+  address: { // IS NOT FROZEN!
+    city:"Austin",
+    country:"USA"
+  }
+});
+
+person.address.city = "Somewhere";
+
+// helper function to freeze all objects within
+// a parent object that Object.freeze({}) misses
+function deepFreeze(o) {
+  Object.freeze(o);
+
+  Object.getOwnPropertyNames(o).forEach((prop) => {
+    if(
+      o.hasOwnProperty(prop)
+      && o[prop] != null
+      && typeof o[prop] === 'object'
+      && !Object.isFrozen(o[prop])) {
+        deepFreeze(o[prop]);
+      }
+  });
+
+  return o;
+}
+
+// deepFreeze demo
+const frozenPerson = deepFreeze({
+  name:"Eskimo",
+  surname:"Bob",
+  address: { 
+    city:"Igloo",
+    country:"Antarctica"
+  }
+});
+
 @NgModule({
   declarations: [
     AppComponent,
