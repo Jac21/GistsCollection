@@ -1,0 +1,121 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  font-family: 'Open Sans', sans-serif;
+  min-width: 750px;
+}
+
+.container {
+  width: 100%;
+}
+
+.banner-wrapper {
+  z-index: 4;
+  transition: all 400ms ease-in-out;
+  position: fixed;
+  width: 100%;
+}
+
+.banner {
+  height: 77px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  background: #EA5455;
+  transition: all 400ms ease-in-out;
+}
+
+.content {
+  background: url(https://unsplash.it/1200/1200?random) center no-repeat;
+  background-size: cover;
+  padding-top: 100%;
+}
+
+.top {
+  display: flex;
+  justify-content: space-between;
+}
+
+.logo {
+  font-size: 25px;
+  color: white;
+}
+
+.right-top {
+  text-transform: none;
+  padding-right: 10px;
+  font-size: 14px;
+}
+
+.right-top a {
+  color: #2D4059;
+}
+
+.nav {
+  width: 100%;
+  height: auto;
+}
+
+.nav ul.menu {
+  height: inherit;
+  list-style-type: none;
+  display: flex;
+  align-items: center;
+  width: 50%;
+  font-size: 14px;
+}
+
+.nav ul.menu li {
+  flex: 1 1 auto;
+  height: inherit;
+  display: flex;
+  align-items: center;
+}
+
+.nav ul.menu li a, .left-top a {
+  text-decoration: none;
+  color: black;
+}
+
+.nav ul.menu li a:hover, .left-top a:hover {
+  color: rgba(0, 0, 0, 0.5);
+}
+
+.text {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  color: rgba(255, 255, 255, 0.9);
+  top: 50%;
+  position: absolute;
+  width: 100%
+}
+
+.text p:first-child {
+  font-size: 45px !important;
+  mix-blend-mode: difference;
+}
+
+.text p {
+  font-size: 22px;
+  mix-blend-mode: difference;
+}
+
+@media screen and (max-width: 800px) {
+  .text p:first-child {
+    font-size: 40px;
+  }
+  .text p {
+    font-size: 17px;
+  }
+  .nav ul.menu {
+    font-size: 12px;
+  }
+}
