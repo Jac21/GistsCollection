@@ -31,3 +31,5 @@ when you build this project, follow these steps:
  3. Scroll down to the "AfterBuild" target.
  4. In the "Exec" task, change the value inside "Command" after the -OutputDirectory
     path to point to your local NuGet feed folder.
+
+Published @ https://www.nuget.org/packages/CheekyRegexAnalyzer/ with the help of https://docs.microsoft.com/en-us/nuget/quickstart/create-and-publish-a-package

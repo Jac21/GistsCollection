@@ -71,7 +71,7 @@ namespace RegexAnalyzer.Test
 
         protected override CodeFixProvider GetCSharpCodeFixProvider()
         {
-            return new RegexAnalyzerCodeFixProvider();
+            return new CheekyRegexAnalyzerCodeFixProvider();
         }
 
         protected override DiagnosticAnalyzer GetCSharpDiagnosticAnalyzer()
