@@ -1,0 +1,13 @@
+﻿<div>
+    <h1>Login</h1>
+    @using (Html.BeginForm())
+    { 
+        <label>Username: </label>
+        @Html.TextBox("username")
+
+        <label>Password: </label>
+        @Html.Password("password")
+    
+        <input type="submit" value="Login" />
+    }
+</div>
