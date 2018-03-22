@@ -32,15 +32,14 @@ namespace SocialNetwork.Api
         {
             services.AddMvc();
 
-            services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new Info { Title = "Social Network API", Version = "v1" });
-            });
+            services.AddSwaggerGen(
+                c => { c.SwaggerDoc("v1", new Info {Title = "Social Network API", Version = "v1"}); });
 
             var builder = new ContainerBuilder();
             builder.Populate(services);
-                
-            builder.Register(x => new Func<IDbConnection>(() => new SqlConnection(Configuration.GetConnectionString("SocialNetwork"))));
+
+            builder.Register(x =>
+                new Func<IDbConnection>(() => new SqlConnection(Configuration.GetConnectionString("SocialNetwork"))));
 
             builder.RegisterType<UserRepository>().AsImplementedInterfaces().AsSelf();
             builder.RegisterType<ProfileRepository>().AsImplementedInterfaces().AsSelf();
@@ -59,16 +58,20 @@ namespace SocialNetwork.Api
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
 
+            app.UseIdentityServerAuthentication(new IdentityServerAuthenticationOptions
+            {
+                RequireHttpsMetadata = false,
+                Authority = "http://localhost:59418",
+                ApiName = "socialnetwork"
+            });
+
             app.UseStaticFiles();
 
             app.UseMvcWithDefaultRoute();
 
             app.UseSwagger(_ => { });
 
-            app.UseSwaggerUI(c =>
-            {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
-            });
+            app.UseSwaggerUI(c => { c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1"); });
 
             appLifetime.ApplicationStopped.Register(() => ApplicationContainer.Dispose());
         }
