@@ -1,9 +1,7 @@
-﻿using IdentityServer4.Models;
+﻿using System.Collections.Generic;
+using IdentityServer4;
+using IdentityServer4.Models;
 using IdentityServer4.Test;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace SocialNetwork.OAuth.Configuration
 {
@@ -11,27 +9,58 @@ namespace SocialNetwork.OAuth.Configuration
     {
         public static IEnumerable<ApiResource> ApiResources()
         {
-            return new[] {
+            return new[]
+            {
                 new ApiResource("socialnetwork", "Social Network")
+            };
+        }
+
+        /// <summary>
+        /// Identity resources for in memory configuration, currently supporting
+        /// OpenID Connect and Profile resources
+        /// </summary>
+        /// <returns></returns>
+        public static IEnumerable<IdentityResource> IdentityResource()
+        {
+            return new IdentityResource[]
+            {
+                new IdentityResources.OpenId(),
+                new IdentityResources.Profile()
             };
         }
 
         public static IEnumerable<Client> Clients()
         {
-            return new[] {
+            return new[]
+            {
                 new Client
                 {
                     ClientId = "socialnetwork",
-                    ClientSecrets = new [] { new Secret("secret".Sha256()) },
+                    ClientSecrets = new[] {new Secret("secret".Sha256())},
                     AllowedGrantTypes = GrantTypes.ResourceOwnerPasswordAndClientCredentials,
-                    AllowedScopes = new [] { "socialnetwork" }
+                    AllowedScopes = new[] {"socialnetwork"}
+                },
+                new Client
+                {
+                    ClientId = "socialnetwork_implicit",
+                    ClientSecrets = new[] {new Secret("secret".Sha256())},
+                    AllowedGrantTypes = GrantTypes.Implicit,
+                    AllowedScopes = new[]
+                    {
+                        IdentityServerConstants.StandardScopes.OpenId,
+                        IdentityServerConstants.StandardScopes.Profile,
+                        "socialnetwork"
+                    },
+                    RedirectUris = new[] {"http://localhost:28849/signin-oidc"},
+                    PostLogoutRedirectUris = {"http://localhost:28849/signout-callback-oidc"}
                 }
             };
         }
 
         public static IEnumerable<TestUser> Users()
         {
-            return new[] {
+            return new[]
+            {
                 new TestUser
                 {
                     SubjectId = "1",

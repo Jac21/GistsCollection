@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Linq;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using SocialNetwork.OAuth.Configuration;
-using System.Security.Cryptography.X509Certificates;
 
 namespace SocialNetwork.OAuth
 {
@@ -23,6 +18,7 @@ namespace SocialNetwork.OAuth
                 //.AddSigningCredential(new X509Certificate2(@"C:\Code\Pluralsight\Module2\SocialNetwork\socialnetwork.pfx", "password"))
                 .AddTestUsers(InMemoryConfiguration.Users().ToList())
                 .AddInMemoryClients(InMemoryConfiguration.Clients())
+                .AddInMemoryIdentityResources(InMemoryConfiguration.IdentityResource())
                 .AddInMemoryApiResources(InMemoryConfiguration.ApiResources());
 
             services.AddMvc();

@@ -1,6 +1,7 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using System.Net.Http;
+using Microsoft.AspNetCore.Authorization;
 using Newtonsoft.Json;
 using SocialNetwork.Web.Models;
 
@@ -16,47 +17,24 @@ namespace SocialNetwork.Web.Controllers
         public async Task<ActionResult> Shouts()
         {
             // NEVER DO THIS
-            var username = HttpContext.Request.Cookies["username"]?.ToString();
+            var username = HttpContext.Request.Cookies["username"];
             // NEVER DO THIS
-            var password = HttpContext.Request.Cookies["password"]?.ToString();
-
-            if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
-            {
-                return RedirectToAction("login");
-            }
+            var password = HttpContext.Request.Cookies["password"];
 
             using (var client = new HttpClient())
             {
-                var shoutsResponse = await (await client.GetAsync($"http://localhost:33917/api/shouts?username={username}&password={password}")).Content.ReadAsStringAsync();
+                var shoutsResponse =
+                    await (await client.GetAsync(
+                            $"http://localhost:33917/api/shouts?username={username}&password={password}")).Content
+                        .ReadAsStringAsync();
 
                 var shouts = JsonConvert.DeserializeObject<Shout[]>(shoutsResponse);
-                
+
                 return View(shouts);
             }
         }
 
-        public IActionResult Login()
-        {
-            return View();
-        }
-
-        [HttpPost]
-        public IActionResult Login(string username, string password)
-        {
-            // NEVER DO THIS
-            // NEVER DO THIS
-            // NEVER DO THIS
-            // NEVER DO THIS
-            HttpContext.Response.Cookies.Append("username", username);
-
-            // NEVER DO THIS
-            // NEVER DO THIS
-            // NEVER DO THIS
-            HttpContext.Response.Cookies.Append("password", password);
-
-            return RedirectToAction("Shouts");
-        }
-
+        [Authorize]
         public IActionResult About()
         {
             ViewData["Message"] = "Your application description page.";
