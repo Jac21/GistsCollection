@@ -51,6 +51,7 @@ namespace SocialNetwork.OAuth.Configuration
                         IdentityServerConstants.StandardScopes.Profile,
                         "socialnetwork"
                     },
+                    AllowAccessTokensViaBrowser = true,
                     RedirectUris = new[] {"http://localhost:28849/signin-oidc"},
                     PostLogoutRedirectUris = {"http://localhost:28849/signout-callback-oidc"}
                 }

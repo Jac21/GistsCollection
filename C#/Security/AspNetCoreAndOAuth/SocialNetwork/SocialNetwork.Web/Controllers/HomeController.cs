@@ -42,6 +42,12 @@ namespace SocialNetwork.Web.Controllers
             return View();
         }
 
+        public async Task Logout()
+        {
+            await HttpContext.Authentication.SignOutAsync("Cookies");
+            await HttpContext.Authentication.SignOutAsync("oidc");
+        }
+
         public IActionResult Contact()
         {
             ViewData["Message"] = "Your contact page.";

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using System.IdentityModel.Tokens.Jwt;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -50,6 +51,8 @@ namespace SocialNetwork.Web
                 AuthenticationScheme = "Cookies"
             });
 
+            JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
+
             app.UseOpenIdConnectAuthentication(new OpenIdConnectOptions
             {
                 AuthenticationScheme = "oidc",
@@ -57,6 +60,7 @@ namespace SocialNetwork.Web
                 Authority = "http://localhost:59418",
                 RequireHttpsMetadata = false,
                 ClientId = "socialnetwork_implicit",
+                ResponseType = "id_token token",
                 SaveTokens = true
             });
 
