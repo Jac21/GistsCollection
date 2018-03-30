@@ -53,14 +53,29 @@ namespace SocialNetwork.Web
 
             JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
 
+            //// Implicit flow configuration
+            //app.UseOpenIdConnectAuthentication(new OpenIdConnectOptions
+            //{
+            //    AuthenticationScheme = "oidc",
+            //    SignInScheme = "Cookies",
+            //    Authority = "http://localhost:59418",
+            //    RequireHttpsMetadata = false,
+            //    ClientId = "socialnetwork_implicit",
+            //    ResponseType = "id_token token",
+            //    SaveTokens = true
+            //});
+
             app.UseOpenIdConnectAuthentication(new OpenIdConnectOptions
             {
                 AuthenticationScheme = "oidc",
                 SignInScheme = "Cookies",
                 Authority = "http://localhost:59418",
                 RequireHttpsMetadata = false,
-                ClientId = "socialnetwork_implicit",
-                ResponseType = "id_token token",
+                ClientId = "socialnetwork_code",
+                ClientSecret = "secret",
+                ResponseType = "id_token code",
+                Scope = { "socialnetwork", "offline_access" },
+                GetClaimsFromUserInfoEndpoint = true,
                 SaveTokens = true
             });
 
