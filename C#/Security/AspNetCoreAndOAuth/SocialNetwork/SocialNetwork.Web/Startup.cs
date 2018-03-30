@@ -74,7 +74,7 @@ namespace SocialNetwork.Web
                 ClientId = "socialnetwork_code",
                 ClientSecret = "secret",
                 ResponseType = "id_token code",
-                Scope = { "socialnetwork", "offline_access" },
+                Scope = { "socialnetwork", "offline_access", "email" },
                 GetClaimsFromUserInfoEndpoint = true,
                 SaveTokens = true
             });

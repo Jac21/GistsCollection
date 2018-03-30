@@ -1,8 +1,7 @@
 {
 	"info": {
-		"name": "IdentityServer",
 		"_postman_id": "d37470a3-1f70-5df0-d482-e5ebd3b3db0f",
-		"description": "",
+		"name": "IdentityServer",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
@@ -22,31 +21,26 @@
 						{
 							"key": "client_id",
 							"value": "socialnetwork",
-							"description": "",
 							"type": "text"
 						},
 						{
 							"key": "client_secret",
 							"value": "secret",
-							"description": "",
 							"type": "text"
 						},
 						{
 							"key": "grant_type",
 							"value": "password",
-							"description": "",
 							"type": "text"
 						},
 						{
 							"key": "username",
 							"value": "mail@jeremycantu.com",
-							"description": "",
 							"type": "text"
 						},
 						{
 							"key": "password",
 							"value": "password",
-							"description": "",
 							"type": "text"
 						}
 					]
@@ -62,8 +56,7 @@
 						"connect",
 						"token"
 					]
-				},
-				"description": ""
+				}
 			},
 			"response": []
 		},
@@ -83,32 +76,27 @@
 						{
 							"key": "client_id",
 							"value": "socialnetwork",
-							"description": "",
 							"type": "text"
 						},
 						{
 							"key": "client_secret",
 							"value": "secret",
-							"description": "",
 							"type": "text"
 						},
 						{
 							"key": "grant_type",
 							"value": "client_credentials",
-							"description": "",
 							"type": "text"
 						},
 						{
 							"key": "username",
 							"value": "mail@jeremycantu.com",
-							"description": "",
 							"type": "text",
 							"disabled": true
 						},
 						{
 							"key": "password",
 							"value": "password",
-							"description": "",
 							"type": "text",
 							"disabled": true
 						}
@@ -125,8 +113,7 @@
 						"connect",
 						"token"
 					]
-				},
-				"description": ""
+				}
 			},
 			"response": []
 		},
@@ -152,8 +139,58 @@
 						"api",
 						"values"
 					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "IdentityServer4 Resource Owner Hybrid/Code Flow w/ Refresh Token",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "client_id",
+							"value": "socialnetwork_code",
+							"type": "text"
+						},
+						{
+							"key": "client_secret",
+							"value": "secret",
+							"type": "text"
+						},
+						{
+							"key": "grant_type",
+							"value": "refresh_token",
+							"type": "text"
+						},
+						{
+							"key": "refresh_token",
+							"value": "ce4ea6b485ffdd65e3d30cecaa6c2c1baafd0bf7f7da525275df57cba12e0e72",
+							"description": "",
+							"type": "text"
+						}
+					]
 				},
-				"description": ""
+				"url": {
+					"raw": "http://localhost:59418/connect/token",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "59418",
+					"path": [
+						"connect",
+						"token"
+					]
+				}
 			},
 			"response": []
 		}

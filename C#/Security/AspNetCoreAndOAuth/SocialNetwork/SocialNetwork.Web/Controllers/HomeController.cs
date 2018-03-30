@@ -4,6 +4,7 @@ using System.Net.Http;
 using Microsoft.AspNetCore.Authorization;
 using Newtonsoft.Json;
 using SocialNetwork.Web.Models;
+using Microsoft.AspNetCore.Authentication;
 
 namespace SocialNetwork.Web.Controllers
 {
@@ -14,18 +15,19 @@ namespace SocialNetwork.Web.Controllers
             return View();
         }
 
+        [Authorize]
         public async Task<ActionResult> Shouts()
         {
-            // NEVER DO THIS
-            var username = HttpContext.Request.Cookies["username"];
-            // NEVER DO THIS
-            var password = HttpContext.Request.Cookies["password"];
+            var token = await HttpContext.Authentication.GetTokenAsync("access_token");
 
             using (var client = new HttpClient())
             {
+                client.DefaultRequestHeaders.Authorization = 
+                    new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
+
                 var shoutsResponse =
                     await (await client.GetAsync(
-                            $"http://localhost:33917/api/shouts?username={username}&password={password}")).Content
+                            $"http://localhost:33917/api/shouts")).Content
                         .ReadAsStringAsync();
 
                 var shouts = JsonConvert.DeserializeObject<Shout[]>(shoutsResponse);

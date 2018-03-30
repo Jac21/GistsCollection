@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Security.Claims;
 using IdentityServer4;
 using IdentityServer4.Models;
 using IdentityServer4.Test;
@@ -12,6 +13,9 @@ namespace SocialNetwork.OAuth.Configuration
             return new[]
             {
                 new ApiResource("socialnetwork", "Social Network")
+                {
+                    UserClaims = new [] { "email" }
+                }
             };
         }
 
@@ -25,7 +29,8 @@ namespace SocialNetwork.OAuth.Configuration
             return new IdentityResource[]
             {
                 new IdentityResources.OpenId(),
-                new IdentityResources.Profile()
+                new IdentityResources.Profile(),
+                new IdentityResources.Email()
             };
         }
 
@@ -83,7 +88,8 @@ namespace SocialNetwork.OAuth.Configuration
                 {
                     SubjectId = "1",
                     Username = "mail@jeremycantu.com",
-                    Password = "password"
+                    Password = "password",
+                    Claims = new [] { new Claim("email", "mail@jeremycantu.com")}
                 }
             };
         }
