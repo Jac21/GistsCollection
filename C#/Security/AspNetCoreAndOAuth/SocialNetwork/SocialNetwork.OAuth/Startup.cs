@@ -1,6 +1,11 @@
 ﻿using System.Linq;
+using System.Reflection;
+using IdentityServer4.EntityFramework.DbContexts;
+using IdentityServer4.EntityFramework.Mappers;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using SocialNetwork.OAuth.Configuration;
@@ -9,17 +14,38 @@ namespace SocialNetwork.OAuth
 {
     public class Startup
     {
+        public Startup(IHostingEnvironment env)
+        {
+            var builder = new ConfigurationBuilder()
+                .SetBasePath(env.ContentRootPath)
+                .AddJsonFile("appsettings.json", false, true)
+                .AddJsonFile($"appsettings.{env.EnvironmentName}.json", true)
+                .AddEnvironmentVariables();
+            Configuration = builder.Build();
+        }
+
+        public IConfigurationRoot Configuration { get; }
+
         // This method gets called by the runtime. Use this method to add services to the container.
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            var assembly = typeof(Startup).GetTypeInfo().Assembly.GetName().Name;
+
             services.AddIdentityServer()
                 .AddDeveloperSigningCredential()
                 //.AddSigningCredential(new X509Certificate2(@"C:\Code\Pluralsight\Module2\SocialNetwork\socialnetwork.pfx", "password"))
                 .AddTestUsers(InMemoryConfiguration.Users().ToList())
-                .AddInMemoryClients(InMemoryConfiguration.Clients())
-                .AddInMemoryIdentityResources(InMemoryConfiguration.IdentityResource())
-                .AddInMemoryApiResources(InMemoryConfiguration.ApiResources());
+                .AddConfigurationStore(builder =>
+                    builder.UseSqlServer(Configuration.GetConnectionString("SocialNetwork.OAuth"),
+                        options => options.MigrationsAssembly(assembly)))
+                .AddOperationalStore(builder =>
+                    builder.UseSqlServer(Configuration.GetConnectionString("SocialNetwork.OAuth"),
+                        options => options.MigrationsAssembly(assembly)));
+            // In-Memory Configuration
+            //.AddInMemoryClients(InMemoryConfiguration.Clients())
+            //.AddInMemoryIdentityResources(InMemoryConfiguration.IdentityResource())
+            //.AddInMemoryApiResources(InMemoryConfiguration.ApiResources());
 
             services.AddMvc();
         }
@@ -27,6 +53,8 @@ namespace SocialNetwork.OAuth
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
+            MigrateInMemoryDataToSqlServer(app);
+
             loggerFactory.AddConsole();
 
             app.UseDeveloperExceptionPage();
@@ -36,6 +64,50 @@ namespace SocialNetwork.OAuth
             app.UseStaticFiles();
 
             app.UseMvcWithDefaultRoute();
+        }
+
+        // dotnet ef migrations add InitialIdentityServerPersistedGrantDbMigration -c PersistedGrantDbContext -o Data/Migrations/IdentityServer/PersistedGrantDb
+        // dotnet ef migrations add InitialIdentityServerConfigurationDbMigration -c ConfigurationDbContext -o Data/Migrations/IdentityServer/ConfigurationDb
+        public void MigrateInMemoryDataToSqlServer(IApplicationBuilder app)
+        {
+            using (var scope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())
+            {
+                scope.ServiceProvider.GetRequiredService<PersistedGrantDbContext>().Database.Migrate();
+
+                var context = scope.ServiceProvider.GetRequiredService<ConfigurationDbContext>();
+
+                context.Database.Migrate();
+
+                if (!context.Clients.Any())
+                {
+                    foreach (var client in InMemoryConfiguration.Clients())
+                    {
+                        context.Clients.Add(client.ToEntity());
+                    }
+
+                    context.SaveChanges();
+                }
+
+                if (!context.IdentityResources.Any())
+                {
+                    foreach (var identityResource in InMemoryConfiguration.IdentityResource())
+                    {
+                        context.IdentityResources.Add(identityResource.ToEntity());
+                    }
+
+                    context.SaveChanges();
+                }
+
+                if (!context.ApiResources.Any())
+                {
+                    foreach (var apiResources in InMemoryConfiguration.ApiResources())
+                    {
+                        context.ApiResources.Add(apiResources.ToEntity());
+                    }
+
+                    context.SaveChanges();
+                }
+            }
         }
     }
 }
