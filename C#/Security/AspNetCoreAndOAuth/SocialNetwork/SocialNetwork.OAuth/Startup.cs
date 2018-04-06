@@ -1,4 +1,7 @@
-﻿using System.Linq;
+﻿using System;
+using System.Data;
+using System.Data.SqlClient;
+using System.Linq;
 using System.Reflection;
 using IdentityServer4.EntityFramework.DbContexts;
 using IdentityServer4.EntityFramework.Mappers;
@@ -8,6 +11,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using SocialNetwork.Data.Repositories;
 using SocialNetwork.OAuth.Configuration;
 
 namespace SocialNetwork.OAuth
@@ -30,12 +34,18 @@ namespace SocialNetwork.OAuth
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            // DI construction for User Repository
+            services.AddTransient<IUserValidator, UserValidator>();
+            services.AddTransient<IUserRepository, UserRepository>();
+            services.AddSingleton<Func<IDbConnection>>(() => new SqlConnection(Configuration.GetConnectionString("SocialNetwork")));
+
             var assembly = typeof(Startup).GetTypeInfo().Assembly.GetName().Name;
 
             services.AddIdentityServer()
                 .AddDeveloperSigningCredential()
                 //.AddSigningCredential(new X509Certificate2(@"C:\Code\Pluralsight\Module2\SocialNetwork\socialnetwork.pfx", "password"))
-                .AddTestUsers(InMemoryConfiguration.Users().ToList())
+                //.AddTestUsers(InMemoryConfiguration.Users().ToList())
+                .AddResourceOwnerValidator<ResourceOwnerPasswordValidator>()
                 .AddConfigurationStore(builder =>
                     builder.UseSqlServer(Configuration.GetConnectionString("SocialNetwork.OAuth"),
                         options => options.MigrationsAssembly(assembly)))
