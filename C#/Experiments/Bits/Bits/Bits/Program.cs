@@ -7,9 +7,9 @@ namespace Bits
     {
         static void Main()
         {
+            // BitField testing
+            Console.WriteLine("BitField testing -");
             Stopwatch stopwatch = new Stopwatch();
-
-            // Bitfield testing
             Console.WriteLine("First bit field...");
 
             ExampleBitfield bitFieldOne = new ExampleBitfield
@@ -43,6 +43,19 @@ namespace Bits
             ExampleBitfield bitfieldTwo = BitFieldExtensions.CreateBitField<ExampleBitfield>(0xA3);
             Console.WriteLine("ulong: 0x{0:X2}", bitfieldTwo.ToUInt64());
             Console.WriteLine("string: {0}", bitfieldTwo.ToBinaryString());
+            Console.WriteLine();
+
+            // BitArray testing
+            Console.WriteLine("BitArray testing -");
+            bool[] array = {true, false, true, false, false};
+            foreach (var bit in BitArrayWrapper.CreateBooleanBitArray(array))
+            {
+                Console.WriteLine(bit);
+            }
+
+            Console.WriteLine();
+
+            BitArrayWrapper.CreateBooleanBitArray();
 
             Console.ReadLine();
         }
