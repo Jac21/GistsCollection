@@ -11,11 +11,14 @@ namespace Bits
         /// <returns></returns>
         public static BitArray CreateBooleanBitArray()
         {
-            BitArray bitArray = new BitArray(32);
+            BitArray bitArray = new BitArray(32)
+            {
+                // set some bits using indexer
+                [3] = true,
+                [5] = true
+            };
 
-            // set some bits using indexer
-            bitArray[3] = true;
-            bitArray[5] = true;
+            // set using built-in method
             bitArray.Set(10, true);
 
             // Count returns the total of all bits (1s and 0s)

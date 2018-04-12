@@ -45,6 +45,8 @@ namespace Bits
             Console.WriteLine("string: {0}", bitfieldTwo.ToBinaryString());
             Console.WriteLine();
 
+            //////////////////////////////////////////////////////////////////////////////////////////////////
+
             // BitArray testing
             Console.WriteLine("BitArray testing -");
             bool[] array = {true, false, true, false, false};
@@ -56,6 +58,18 @@ namespace Bits
             Console.WriteLine();
 
             BitArrayWrapper.CreateBooleanBitArray();
+
+            Console.WriteLine();
+
+            //////////////////////////////////////////////////////////////////////////////////////////////////
+
+            // BitVector32 testing
+            Console.WriteLine("BitVector32 testing -");
+            BitVector32Wrapper.CreateBitVector32();
+            
+            Console.WriteLine();
+
+            BitVector32Wrapper.CompareBoolAndBitVector32Sizes();
 
             Console.ReadLine();
         }
