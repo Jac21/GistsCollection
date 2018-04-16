@@ -3,6 +3,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Reflection;
+using IdentityServer4;
 using IdentityServer4.EntityFramework.DbContexts;
 using IdentityServer4.EntityFramework.Mappers;
 using Microsoft.AspNetCore.Builder;
@@ -70,6 +71,15 @@ namespace SocialNetwork.OAuth
             app.UseDeveloperExceptionPage();
 
             app.UseIdentityServer();
+
+            app.UseGoogleAuthentication(new GoogleOptions()
+            {
+                AuthenticationScheme = "Google",
+                DisplayName = "Google",
+                SignInScheme = IdentityServerConstants.ExternalCookieAuthenticationScheme,
+                ClientId = "nice-try.apps.googleusercontent.com",
+                ClientSecret = "nope"
+            });
 
             app.UseStaticFiles();
 

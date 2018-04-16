@@ -10,14 +10,17 @@ namespace SocialNetwork.Data.Repositories
 {
     public class UserRepository : Repository, IUserRepository
     {
-        public UserRepository(Func<IDbConnection> openConnection) : base(openConnection) {}
+        public UserRepository(Func<IDbConnection> openConnection) : base(openConnection)
+        {
+        }
 
         public async Task<User> GetAsync(string username, string password)
         {
             using (var connection = OpenConnection())
             {
-                var queryResult = await connection.QueryAsync<User>("select * from [Users] where [Username]=@username and [Password]=@password", 
-                    new { username, password });
+                var queryResult = await connection.QueryAsync<User>(
+                    "select * from [Users] where [Username]=@username and [Password]=@password",
+                    new {username, password});
 
                 return queryResult.SingleOrDefault();
             }
@@ -28,18 +31,24 @@ namespace SocialNetwork.Data.Repositories
             using (var connection = OpenConnection())
             {
                 var queryResult = await connection.QueryAsync<User>("select * from [Users] where [Username]=@username",
-                    new { username });
+                    new {username});
 
                 return queryResult.SingleOrDefault();
             }
+        }
+
+        public Task<User> AddAsync(User user)
+        {
+            throw new NotImplementedException();
         }
 
         public async Task<IEnumerable<FriendRelation>> GetFriendsForAsync(User user)
         {
             using (var connection = OpenConnection())
             {
-                return await connection.QueryAsync<FriendRelation>("select * from [Friends] where [InitiaterId]=@userId or [FriendId]=@userId", 
-                    new { userId = user.Id });
+                return await connection.QueryAsync<FriendRelation>(
+                    "select * from [Friends] where [InitiaterId]=@userId or [FriendId]=@userId",
+                    new {userId = user.Id});
             }
         }
     }
@@ -49,5 +58,6 @@ namespace SocialNetwork.Data.Repositories
         Task<IEnumerable<FriendRelation>> GetFriendsForAsync(User user);
         Task<User> GetAsync(string username, string password);
         Task<User> GetAsync(string username);
+        Task<User> AddAsync(User user);
     }
 }

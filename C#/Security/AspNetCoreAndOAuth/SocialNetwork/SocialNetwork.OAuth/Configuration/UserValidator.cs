@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using SocialNetwork.Data.Models;
@@ -30,12 +31,21 @@ namespace SocialNetwork.OAuth.Configuration
 
         public Task<User> FindByExternalProviderAsync(string provider, string userId)
         {
-            throw new System.NotImplementedException();
+            return FindByUsernameAsync(userId);
         }
 
-        public Task<User> AutoProvisionUserAsync(string provider, string userId, IEnumerable<Claim> claims)
+        public async Task<User> AutoProvisionUserAsync(string provider, string userId, IEnumerable<Claim> claims)
         {
-            throw new System.NotImplementedException();
+            var user = new User
+            {
+                Id = Guid.NewGuid(),
+                Username = userId,
+                Password = HashHelper.Sha512(Guid.NewGuid() + userId)
+            };
+
+            await repository.AddAsync(user);
+
+            return user;
         }
     }
 
