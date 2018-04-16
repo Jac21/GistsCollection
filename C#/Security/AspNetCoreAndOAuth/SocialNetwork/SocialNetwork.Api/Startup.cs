@@ -58,11 +58,19 @@ namespace SocialNetwork.Api
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
 
-            app.UseIdentityServerAuthentication(new IdentityServerAuthenticationOptions
+            //// IdentityServer4 configuration
+            //app.UseIdentityServerAuthentication(new IdentityServerAuthenticationOptions
+            //{
+            //    RequireHttpsMetadata = false,
+            //    Authority = "http://localhost:59418",
+            //    ApiName = "socialnetwork"
+            //});
+
+            // Auth0 JWT configuration
+            app.UseJwtBearerAuthentication(new JwtBearerOptions
             {
-                RequireHttpsMetadata = false,
-                Authority = "http://localhost:59418",
-                ApiName = "socialnetwork"
+                Audience = "http://localhost:33917/",
+                Authority = "https://jac21.auth0.com"
             });
 
             app.UseStaticFiles();

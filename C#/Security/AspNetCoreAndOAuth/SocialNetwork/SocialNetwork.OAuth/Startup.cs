@@ -72,7 +72,7 @@ namespace SocialNetwork.OAuth
 
             app.UseIdentityServer();
 
-            app.UseGoogleAuthentication(new GoogleOptions()
+            app.UseGoogleAuthentication(new GoogleOptions
             {
                 AuthenticationScheme = "Google",
                 DisplayName = "Google",

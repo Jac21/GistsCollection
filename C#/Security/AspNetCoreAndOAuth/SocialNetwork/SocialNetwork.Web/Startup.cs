@@ -1,6 +1,9 @@
 ﻿using System.IdentityModel.Tokens.Jwt;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -65,18 +68,41 @@ namespace SocialNetwork.Web
             //    SaveTokens = true
             //});
 
+            //// Code flow configuration
+            //app.UseOpenIdConnectAuthentication(new OpenIdConnectOptions
+            //{
+            //    AuthenticationScheme = "oidc",
+            //    SignInScheme = "Cookies",
+            //    Authority = "http://localhost:59418",
+            //    RequireHttpsMetadata = false,
+            //    ClientId = "socialnetwork_code",
+            //    ClientSecret = "secret",
+            //    ResponseType = "id_token code",
+            //    Scope = { "socialnetwork", "offline_access", "email" },
+            //    GetClaimsFromUserInfoEndpoint = true,
+            //    SaveTokens = true
+            //});
+
+            // Auth0 configuration
             app.UseOpenIdConnectAuthentication(new OpenIdConnectOptions
             {
-                AuthenticationScheme = "oidc",
-                SignInScheme = "Cookies",
-                Authority = "http://localhost:59418",
+                Authority = "https://jac21.auth0.com",
+                CallbackPath = new PathString("/signing-auth0"),
                 RequireHttpsMetadata = false,
-                ClientId = "socialnetwork_code",
-                ClientSecret = "secret",
+                ClientId = "nope",
+                ClientSecret = "nada",
+                SaveTokens = true,
                 ResponseType = "id_token code",
-                Scope = { "socialnetwork", "offline_access", "email" },
-                GetClaimsFromUserInfoEndpoint = true,
-                SaveTokens = true
+                Scope = {"socialnetwork", "openid", "offline_access"},
+                SignInScheme = "Cookies",
+                Events = new OpenIdConnectEvents
+                {
+                    OnRedirectToIdentityProvider = context =>
+                    {
+                        context.ProtocolMessage.SetParameter("audience", "http://localhost:33917/");
+                        return Task.CompletedTask;
+                    }
+                }
             });
 
             app.UseStaticFiles();
