@@ -73,6 +73,13 @@ namespace SocialNetwork.Api
                 Authority = "https://jac21.auth0.com"
             });
 
+            // When using Auth0, make sure rule is in place to obtain necessary data for controllers, e.g.,
+            // function (user, context, callback) {
+              // TODO: implement your rule
+              //context.accessToken.email = user.email;
+              //callback(null, user, context);
+            //}
+
             app.UseStaticFiles();
 
             app.UseMvcWithDefaultRoute();

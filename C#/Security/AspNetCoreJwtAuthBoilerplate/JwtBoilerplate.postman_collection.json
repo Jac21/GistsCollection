@@ -1,0 +1,68 @@
+{
+	"info": {
+		"_postman_id": "1da371d5-f229-4e1a-b8fe-c92618dfee8c",
+		"name": "JwtBoilerplate",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Create Account",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"email\":\"mail@jeremycantu.com\",\n\t\"password\": \"PaSSW0rd\",\n\t\"firstName\":\"Jeremy\",\n\t\"lastName\":\"Cantu\",\n\t\"location\":\"Austin, TX\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:19103/api/accounts",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "19103",
+					"path": [
+						"api",
+						"accounts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login/Create JWT",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"userName\":\"mail@jeremycantu.com\",\n\t\"password\": \"PaSSW0rd\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:19103/api/auth/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "19103",
+					"path": [
+						"api",
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
