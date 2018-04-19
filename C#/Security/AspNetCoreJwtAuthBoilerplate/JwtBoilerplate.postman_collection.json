@@ -63,6 +63,33 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "Get Dashboard Home Information",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJtYWlsQGplcmVteWNhbnR1LmNvbSIsImp0aSI6ImExNTg0NmQ1LTJkMTMtNGFlYS04Y2ZkLTkxOTgxYzZjNWYxYiIsImlhdCI6MTUyNDE1ODg5NCwicm9sIjoiYXBpX2FjY2VzcyIsImlkIjoiN2YzYmVjOWItYWYwYy00ZDA1LTkzOGQtZjA4OWJkZDczNmE3IiwibmJmIjoxNTI0MTU4ODk0LCJleHAiOjE1MjQxNjYwOTQsImlzcyI6IndlYkFwaSIsImF1ZCI6Imh0dHA6Ly9sb2NhbGhvc3Q6MTkxMDMvIn0.CkYWjQWnOOFzH16GXKSSiJz76H_Vc0Uya7TSfxuOlYA"
+					}
+				],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:19103/api/dashboard/home",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "19103",
+					"path": [
+						"api",
+						"dashboard",
+						"home"
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }

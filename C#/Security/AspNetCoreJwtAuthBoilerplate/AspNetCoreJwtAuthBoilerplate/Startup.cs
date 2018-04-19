@@ -122,8 +122,9 @@ namespace AspNetCoreJwtAuthBoilerplate
                 app.UseExceptionHandler("/Error");
             }
 
+            app.UseAuthentication();
+            app.UseDefaultFiles();
             app.UseStaticFiles();
-
             app.UseMvc();
         }
     }
