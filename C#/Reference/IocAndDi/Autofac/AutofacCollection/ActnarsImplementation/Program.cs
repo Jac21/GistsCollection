@@ -1,16 +1,17 @@
-﻿using Autofac;
+﻿using ActnarsImplementation.Implementations;
+using Autofac;
+using Autofac.Features.ResolveAnything;
 
-namespace BasicAutofac
+namespace ActnarsImplementation
 {
     public class Program
     {
         private static IContainer Container { get; set; }
 
-        static void Main()
+        private static void Main()
         {
             var builder = new ContainerBuilder();
-            builder.RegisterType<ConsoleOutput>().As<IOutput>();
-            builder.RegisterType<TodayWriter>().As<IDateWriter>();
+            builder.RegisterSource(new AnyConcreteTypeNotAlreadyRegisteredSource());
             Container = builder.Build();
 
             // Make use of our dependency injection
@@ -19,12 +20,12 @@ namespace BasicAutofac
 
         public static void WriteDate()
         {
-            // Create the scope, resolve your IDateWriter,
+            // Create the scope, resolve your concrete type,
             // use it, then dispose of the scope
             using (var scope = Container.BeginLifetimeScope())
             {
-                var writer = scope.Resolve<IDateWriter>();
-                writer.WriteDate();
+                var foo = scope.Resolve<ConsoleOutput>();
+                foo.Write("Resolved!");
             }
         }
     }

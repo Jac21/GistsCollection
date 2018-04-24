@@ -45,12 +45,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ConsoleOutput.cs" />
-    <Compile Include="IDateWriter.cs" />
-    <Compile Include="IOutput.cs" />
+    <Compile Include="Implementations\ConsoleOutput.cs" />
+    <Compile Include="Interfaces\IDateWriter.cs" />
+    <Compile Include="Interfaces\IOutput.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TodayWriter.cs" />
+    <Compile Include="Implementations\TodayWriter.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

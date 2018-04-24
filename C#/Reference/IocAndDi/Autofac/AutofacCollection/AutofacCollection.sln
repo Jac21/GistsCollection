@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.27004.2010
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BasicAutofac", "BasicAutofac\BasicAutofac.csproj", "{6AA15B1A-0814-4318-A881-D66025562553}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ActnarsImplementation", "ActnarsImplementation\ActnarsImplementation.csproj", "{C4B52B44-D8F0-4CAA-96CB-04C1DF9F6F96}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{6AA15B1A-0814-4318-A881-D66025562553}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6AA15B1A-0814-4318-A881-D66025562553}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6AA15B1A-0814-4318-A881-D66025562553}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C4B52B44-D8F0-4CAA-96CB-04C1DF9F6F96}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C4B52B44-D8F0-4CAA-96CB-04C1DF9F6F96}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C4B52B44-D8F0-4CAA-96CB-04C1DF9F6F96}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C4B52B44-D8F0-4CAA-96CB-04C1DF9F6F96}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
