@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BasicAutofac", "BasicAutofa
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ActnarsImplementation", "ActnarsImplementation\ActnarsImplementation.csproj", "{C4B52B44-D8F0-4CAA-96CB-04C1DF9F6F96}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RegistrationSourceImplementation", "RegistrationSourceImplementation\RegistrationSourceImplementation.csproj", "{C6D75D9C-01AD-466E-99A9-A7969E03A730}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{C4B52B44-D8F0-4CAA-96CB-04C1DF9F6F96}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C4B52B44-D8F0-4CAA-96CB-04C1DF9F6F96}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C4B52B44-D8F0-4CAA-96CB-04C1DF9F6F96}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C6D75D9C-01AD-466E-99A9-A7969E03A730}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C6D75D9C-01AD-466E-99A9-A7969E03A730}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C6D75D9C-01AD-466E-99A9-A7969E03A730}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C6D75D9C-01AD-466E-99A9-A7969E03A730}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
