@@ -31,6 +31,10 @@ namespace CircularDependencies
                 .InstancePerLifetimeScope()
                 .PropertiesAutowired(PropertyWiringOptions.AllowCircularDependencies);
 
+            builder
+                .RegisterType<DependsByCtor>()
+                .InstancePerLifetimeScope();
+
             Container = builder.Build();
 
             using (var scope = Container.BeginLifetimeScope())
@@ -38,6 +42,9 @@ namespace CircularDependencies
                 var prop1 = scope.Resolve<DependsByProp1>();
                 prop1.Execute();
                 prop1.Dependency.Execute();
+
+                var propCtor = scope.Resolve<DependsByCtor>();
+                propCtor.Execute();
             }
         }
     }
@@ -59,6 +66,20 @@ namespace CircularDependencies
         public void Execute()
         {
             Console.WriteLine("Prop2 Executed!");
+        }
+    }
+
+    public class DependsByCtor
+    {
+        public DependsByCtor(DependsByProp1 dependency)
+        {
+            Console.Write("Depends by Ctor: ");
+            dependency.Execute();
+        }
+
+        public void Execute()
+        {
+            Console.WriteLine("PropCtor Executed!");
         }
     }
 }
