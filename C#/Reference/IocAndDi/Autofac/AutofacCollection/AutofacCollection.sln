@@ -21,6 +21,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NamedAndKeyedServices", "Na
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DelegateFactories", "DelegateFactories\DelegateFactories.csproj", "{1125ABB0-9C11-4ED1-A071-DD5B3FCA5F5C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OwnedInstances", "OwnedInstances\OwnedInstances.csproj", "{B983EB52-AEF6-44E9-B676-1A7E84CD2C4A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -63,6 +65,10 @@ Global
 		{1125ABB0-9C11-4ED1-A071-DD5B3FCA5F5C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1125ABB0-9C11-4ED1-A071-DD5B3FCA5F5C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1125ABB0-9C11-4ED1-A071-DD5B3FCA5F5C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B983EB52-AEF6-44E9-B676-1A7E84CD2C4A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B983EB52-AEF6-44E9-B676-1A7E84CD2C4A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B983EB52-AEF6-44E9-B676-1A7E84CD2C4A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B983EB52-AEF6-44E9-B676-1A7E84CD2C4A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
