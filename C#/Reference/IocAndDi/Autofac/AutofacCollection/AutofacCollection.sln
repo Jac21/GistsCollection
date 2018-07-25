@@ -25,6 +25,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OwnedInstances", "OwnedInst
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MultitenantApplications", "MultitenantApplications\MultitenantApplications.csproj", "{30ABFD96-1401-4F7F-BFF2-32C4DD61AEF9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AggregateServices", "AggregateServices\AggregateServices.csproj", "{F3D2170A-6183-41B9-9A28-A5E7FAB62B5B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -75,6 +77,10 @@ Global
 		{30ABFD96-1401-4F7F-BFF2-32C4DD61AEF9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{30ABFD96-1401-4F7F-BFF2-32C4DD61AEF9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{30ABFD96-1401-4F7F-BFF2-32C4DD61AEF9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F3D2170A-6183-41B9-9A28-A5E7FAB62B5B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F3D2170A-6183-41B9-9A28-A5E7FAB62B5B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F3D2170A-6183-41B9-9A28-A5E7FAB62B5B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F3D2170A-6183-41B9-9A28-A5E7FAB62B5B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
