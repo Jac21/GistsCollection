@@ -1,0 +1,67 @@
+/* Parent Properties */
+
+/* 
+display
+
+Defines the element as a grid container and 
+establishes a new grid formatting context for its contents. 
+*/
+.container {
+    display: grid;
+}
+
+.container-column {
+    display: grid;
+    grid-auto-flow: column;
+}
+
+/* Custom Helpers */
+
+.spacer {
+    padding: 1em;
+}
+
+.item {
+    background-color: rgba(0, 120, 212, 1);
+    border-style: solid;
+    text-align: center;
+}
+
+/* Custom Layouts */
+
+.minimalist-two-column-design {
+    grid-template-columns: 150px 210px;
+    grid-template-rows: 45px 70px;
+}
+
+.flex-like-column-design {
+    grid-template-columns: 150px;
+    grid-template-rows: 35px;
+    grid-auto-columns: 45px;
+}
+
+.automatic-column-cell-width {
+    grid-template-columns: 150px auto 150px;
+    grid-template-rows: auto;
+}
+
+.grid-column-gap-design {
+    grid-template-columns: 50px 50px 50px 50px;
+    grid-template-rows: 75px 75px 75px 75px;
+    grid-row-gap: 0;
+    grid-column-gap: 25px;
+}
+
+.grid-row-gap-design {
+    grid-template-columns: 50px 50px 50px 50px;
+    grid-template-rows: 75px 75px 75px 75px;
+    grid-row-gap: 25px;
+    grid-column-gap: 0;
+}
+
+.grid-gap-design {
+    grid-template-columns: 50px 50px 50px 50px;
+    grid-template-rows: 75px 75px 75px 75px;
+    grid-row-gap: 25px;
+    grid-column-gap: 25px;
+}
