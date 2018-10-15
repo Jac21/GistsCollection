@@ -1,4 +1,6 @@
 using System;
+using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 using DotNetCoreWebApiBestPractices.Pages;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -14,6 +16,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 
+// ReSharper disable UnusedParameter.Local
+
 namespace DotNetCoreWebApiBestPractices
 {
     /// <summary>
@@ -21,9 +25,12 @@ namespace DotNetCoreWebApiBestPractices
     /// </summary>
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        private readonly ILogger<Startup> logger;
+
+        public Startup(ILogger<Startup> logger, IConfiguration configuration)
         {
             Configuration = configuration;
+            this.logger = logger;
         }
 
         public IConfiguration Configuration { get; }
@@ -35,6 +42,8 @@ namespace DotNetCoreWebApiBestPractices
             services.ConfigureCors();
             services.ConfigureAuthentication();
             services.AddScoped<ModelValidationAttribute>();
+
+            CheckMissingDependenciesOnStartup(services);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -74,6 +83,32 @@ namespace DotNetCoreWebApiBestPractices
         public static IApplicationBuilder UseCustomExceptionMiddleware(IApplicationBuilder builder)
         {
             return builder.UseMiddleware<CustomExceptionMiddleware>();
+        }
+
+        /// <summary>
+        /// https://engineering.gigpin.com/2018-10-08-asp-net-core-check-dependencies/?utm_source=csharpdigest&utm_medium=email&utm_campaign=featured
+        /// </summary>
+        /// <param name="services"></param>
+        public void CheckMissingDependenciesOnStartup(IServiceCollection services)
+        {
+            var controllers = Assembly.GetExecutingAssembly().GetTypes()
+                .Where(type => typeof(ControllerBase).IsAssignableFrom(type))
+                .ToList();
+
+            var sp = services.BuildServiceProvider();
+            foreach (var controllerType in controllers)
+            {
+                logger.LogInformation($"Found {controllerType.Name}");
+                try
+                {
+                    sp.GetService(controllerType);
+                }
+                catch (Exception ex)
+                {
+                    logger.LogCritical(ex,
+                        $"Cannot create instance of controller {controllerType.FullName}, it is missing some services");
+                }
+            }
         }
     }
 
@@ -127,9 +162,10 @@ namespace DotNetCoreWebApiBestPractices
                 .AddJwtBearer(options =>
                 {
                     options.TokenValidationParameters = new TokenValidationParameters
-                    {
-                        //Configuration in here
-                    };
+                        // ReSharper disable once RedundantEmptyObjectOrCollectionInitializer
+                        {
+                            //Configuration in here
+                        };
                 });
         }
     }
