@@ -1,0 +1,4 @@
+/* Instant dark-mode */
+body {
+    filter: invert(1) hue-rotate(180deg);
+}
