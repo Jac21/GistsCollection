@@ -35,8 +35,15 @@ namespace RestfulJobPattern
             var jobProcessor = app.ApplicationServices.GetRequiredService<JobProcessor>();
             jobProcessor.Start();
 
+            var jobRecoveryPoller = app.ApplicationServices.GetRequiredService<JobRecoveryPoller>();
+            jobRecoveryPoller.Start();
+
             var appLifetime = app.ApplicationServices.GetRequiredService<IApplicationLifetime>();
-            appLifetime.ApplicationStopping.Register(() => { jobProcessor.Dispose(); });
+            appLifetime.ApplicationStopping.Register(() =>
+            {
+                jobProcessor.Dispose();
+                jobRecoveryPoller.Dispose();
+            });
         }
     }
 }

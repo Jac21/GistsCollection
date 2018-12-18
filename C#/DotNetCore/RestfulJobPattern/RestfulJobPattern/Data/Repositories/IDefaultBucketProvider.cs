@@ -1,9 +1,8 @@
-﻿using Couchbase.Core;
+﻿using Couchbase.Extensions.DependencyInjection;
 
 namespace RestfulJobPattern.Data.Repositories
 {
-    public interface IDefaultBucketProvider
+    public interface IDefaultBucketProvider : INamedBucketProvider
     {
-        IBucket GetBucket();
     }
 }
