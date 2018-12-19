@@ -15,11 +15,11 @@ services:
       - "./couchbase:/startup"
       - "nodestatus:/nodestatus"
       - "couchbasedata:/opt/couchbase/var"
-  restfuljobpattern:
-    image: ${DOCKER_REGISTRY-}restfuljobpattern
+  couchbaserestfuljobpattern:
+    image: ${DOCKER_REGISTRY-}couchbaserestfuljobpattern
     build:
       context: .
-      dockerfile: RestfulJobPattern/Dockerfile
+      dockerfile: CouchbaseRestfulJobPattern/Dockerfile
     volumes:
       - "nodestatus:/nodestatus"
     environment:

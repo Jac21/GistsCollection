@@ -1,7 +1,11 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using AutoMapper;
+using Couchbase.Extensions.DependencyInjection;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using RestfulJobPattern.Data.Repositories;
 using RestfulJobPattern.Services;
 
 namespace RestfulJobPattern
@@ -18,7 +22,23 @@ namespace RestfulJobPattern
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc();
+            services
+                .AddMvc()
+                .SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+
+            // cbq.exe> CREATE PRIMARY INDEX ON default;
+            services
+                .AddCouchbase(options => Configuration.GetSection("Couchbase").Bind(options))
+                .AddCouchbaseBucket<IDefaultBucketProvider>("default")
+                .AddAutoMapper();
+
+            services
+                .AddTransient<JobRepository>()
+                .AddTransient<StarRepository>()
+                .AddTransient<JobService>()
+                .AddSingleton<JobProcessor>()
+                .AddSingleton<JobRecoveryPoller>()
+                .AddSingleton<MessageBusService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -43,6 +63,11 @@ namespace RestfulJobPattern
             {
                 jobProcessor.Dispose();
                 jobRecoveryPoller.Dispose();
+            });
+
+            appLifetime.ApplicationStopped.Register(() =>
+            {
+                app.ApplicationServices.GetRequiredService<ICouchbaseLifetimeService>().Close();
             });
         }
     }

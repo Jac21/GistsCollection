@@ -6,7 +6,7 @@
     <ProjectGuid>92950c18-2e16-47e6-8b9d-e14ee0e1229b</ProjectGuid>
     <DockerLaunchAction>LaunchBrowser</DockerLaunchAction>
     <DockerServiceUrl>{Scheme}://localhost:{ServicePort}/star</DockerServiceUrl>
-    <DockerServiceName>restfulJobPattern</DockerServiceName>
+    <DockerServiceName>couchbaserestfuljobpattern</DockerServiceName>
   </PropertyGroup>
   <ItemGroup>
     <None Include="docker-compose.override.yml">
