@@ -14,7 +14,7 @@ namespace StringFiltering
     public class Startup
     {
         /// <summary>
-        /// dotnet new razor --auth StringFiltering
+        /// dotnet new razor --auth Individual
         /// dotnet ef migrations add Contacts
         /// dotnet ef database update
         /// </summary>
@@ -37,8 +37,11 @@ namespace StringFiltering
             });
 
             services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlite(
-                    Configuration.GetConnectionString("DefaultConnection")));
+                options
+                    .UseLazyLoadingProxies() // configure Entity Framework Core to use lazy loading
+                    .UseSqlite(
+                        Configuration.GetConnectionString("DefaultConnection")));
+
             services.AddDefaultIdentity<IdentityUser>()
                 .AddDefaultUI(UIFramework.Bootstrap4)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
