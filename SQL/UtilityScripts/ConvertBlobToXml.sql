@@ -1,2 +1,0 @@
-SELECT CAST(cast(Blob AS VARBINARY(MAX)) AS XML) AS MyXml 
-FROM Table WHERE Key = '123'
