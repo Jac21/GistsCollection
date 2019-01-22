@@ -1,8 +1,11 @@
-﻿using AspNetIdentityDeepDive.Models;
-using AspNetIdentityDeepDive.Stores;
+﻿using System.Reflection;
+using AspNetIdentityDeepDive.DbContexts;
+using AspNetIdentityDeepDive.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -22,8 +25,15 @@ namespace AspNetIdentityDeepDive
         {
             services.AddMvc();
 
+            // register DB context, avoid ef migrations error by specifying migrations assembly
+            var migrationAssembly = typeof(Startup).GetTypeInfo().Assembly.GetName().Name;
+            services.AddDbContext<MyIdentityUserDbContext>(opt =>
+                opt.UseSqlServer(
+                    "Data Source=JCANTU\\SQL2016CIAI;Initial Catalog=MyIdentityDatabase2;Integrated Security=True",
+                    sql => sql.MigrationsAssembly(migrationAssembly)));
+
             services.AddIdentityCore<MyIdentityUser>(options => { });
-            services.AddScoped<IUserStore<MyIdentityUser>, MyIdentityUserStore>();
+            services.AddScoped<IUserStore<MyIdentityUser>, UserOnlyStore<MyIdentityUser, MyIdentityUserDbContext>>();
 
             services.AddAuthentication("cookies").AddCookie("cookies", options => options.LoginPath = "/Home/Login");
         }
