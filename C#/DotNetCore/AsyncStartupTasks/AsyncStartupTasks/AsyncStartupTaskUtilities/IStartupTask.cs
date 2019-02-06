@@ -1,12 +1,13 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Hosting;
 
 namespace AsyncStartupTasks.AsyncStartupTaskUtilities
 {
     /// <summary>
     /// Simple interface for the startup tasks
     /// </summary>
-    public interface IStartupTask
+    public interface IStartupTask : IHostedService
     {
         /// <summary>
         /// Execute the startup task, before the WebHost is run
