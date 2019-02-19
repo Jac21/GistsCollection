@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
+using System.Linq;
 using CreativeExtensionMethods.Enums;
 using CreativeExtensionMethods.Interfaces;
 using CreativeExtensionMethods.Models;
+using CreativeExtensionMethods.Enumerables;
+using CreativeExtensionMethods.Strings;
 
 namespace CreativeExtensionMethods
 {
@@ -19,14 +21,14 @@ namespace CreativeExtensionMethods
 
             Console.WriteLine("--------- Models ----------");
 
-            var closedCaptionTrack = new ClosedCaptionTrack("en-US", new List<ClosedCaption>
+            var closedCaptionTracks = new ClosedCaptionTrack("en-US", new List<ClosedCaption>
             {
                 new ClosedCaption("First Caption", TimeSpan.FromMinutes(1), TimeSpan.FromMinutes(1)),
                 new ClosedCaption("Second Caption", TimeSpan.FromMinutes(2), TimeSpan.FromMinutes(2)),
                 new ClosedCaption("Third Caption", TimeSpan.FromMinutes(3), TimeSpan.FromMinutes(3))
             });
 
-            Console.WriteLine(closedCaptionTrack.GetByTime(TimeSpan.FromMinutes(1)).Text);
+            Console.WriteLine(closedCaptionTracks.GetByTime(TimeSpan.FromMinutes(1)).Text);
 
             Console.WriteLine("--------- Interfaces ----------");
 
@@ -37,8 +39,25 @@ namespace CreativeExtensionMethods
                 Name = "Model One"
             };
 
-            // exportService.SaveToFile(model, Directory.GetCurrentDirectory());
             exportService.SaveToMemeory(model);
+
+            Console.WriteLine("--------- Enumerables ----------");
+
+            List<Model> models = new List<Model>
+            {
+                new Model
+                {
+                    Name = string.Empty
+                }
+            };
+
+            models.ForEachInList(t => t.Name = "New Model");
+
+            Console.WriteLine(models.FirstOrDefault()?.Name);
+
+            Console.WriteLine("--------- Strings ----------");
+
+            Console.WriteLine($"Is 192.168.0.0 a valid IP address? {"192.168.0.0".IsValidIpAddress()}");
 
             Console.ReadLine();
         }
