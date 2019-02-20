@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using CreativeExtensionMethods.DateTimes;
 using CreativeExtensionMethods.Enums;
 using CreativeExtensionMethods.Interfaces;
 using CreativeExtensionMethods.Models;
@@ -58,6 +59,15 @@ namespace CreativeExtensionMethods
             Console.WriteLine("--------- Strings ----------");
 
             Console.WriteLine($"Is 192.168.0.0 a valid IP address? {"192.168.0.0".IsValidIpAddress()}");
+
+            var validUrl = "https://www.jeremycantu.com";
+
+            Console.WriteLine($"Is {validUrl} a valid URL? {validUrl.IsValidUrl()}");
+
+            Console.WriteLine("--------- Dates ----------");
+
+            Console.WriteLine($"DateTime.Now in W3C format: {DateTime.Now.ToW3CDate()}");
+            Console.WriteLine($"DateTime.Now current quarter: {DateTime.Now.GetQuarter()}");
 
             Console.ReadLine();
         }

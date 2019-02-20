@@ -1,5 +1,4 @@
-﻿using System;
-using System.Text.RegularExpressions;
+﻿using System.Text.RegularExpressions;
 
 namespace CreativeExtensionMethods.Strings
 {
@@ -13,11 +12,17 @@ namespace CreativeExtensionMethods.Strings
             var ips = ipAddress.Split('.');
             if (ips.Length == 4 || ips.Length == 6)
             {
-                return Int32.Parse(ips[0]) < 256 && Int32.Parse(ips[1]) < 256
-                       & Int32.Parse(ips[2]) < 256 & int.Parse(ips[3]) < 256;
+                return int.Parse(ips[0]) < 256 && int.Parse(ips[1]) < 256
+                       & int.Parse(ips[2]) < 256 & int.Parse(ips[3]) < 256;
             }
 
             return false;
+        }
+
+        public static bool IsValidUrl(this string text)
+        {
+            var rx = new Regex(@"http(s)?://([\w-]+\.)+[\w-]+(/[\w- ./?%&=]*)?");
+            return rx.IsMatch(text);
         }
     }
 }
