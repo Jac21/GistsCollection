@@ -1,10 +1,11 @@
-﻿using System.Reflection;
+﻿using System;
+using System.Reflection;
 using AspNetIdentityDeepDive.DbContexts;
 using AspNetIdentityDeepDive.Models;
+using AspNetIdentityDeepDive.Providers;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -32,10 +33,25 @@ namespace AspNetIdentityDeepDive
                     "Data Source=JCANTU\\SQL2016CIAI;Initial Catalog=MyIdentityDatabase2;Integrated Security=True",
                     sql => sql.MigrationsAssembly(migrationAssembly)));
 
-            services.AddIdentityCore<MyIdentityUser>(options => { });
-            services.AddScoped<IUserStore<MyIdentityUser>, UserOnlyStore<MyIdentityUser, MyIdentityUserDbContext>>();
+            services.AddIdentity<MyIdentityUser, IdentityRole>(options =>
+                {
+                    options.SignIn.RequireConfirmedEmail = true;
+                    options.Tokens.EmailConfirmationTokenProvider = "emailconf";
+                })
+                .AddEntityFrameworkStores<MyIdentityUserDbContext>()
+                .AddDefaultTokenProviders()
+                .AddTokenProvider<EmailConfirmationTokenProvider<MyIdentityUser>>("emailconf");
 
-            services.AddAuthentication("cookies").AddCookie("cookies", options => options.LoginPath = "/Home/Login");
+            services.AddScoped<IUserClaimsPrincipalFactory<MyIdentityUser>, MyIdentityUserClaimsPrincipalFactory>();
+
+            services.Configure<DataProtectionTokenProviderOptions>(options =>
+                options.TokenLifespan = TimeSpan.FromHours(3));
+            services.Configure<EmailConfirmationTokenProviderOptions>(options =>
+            {
+                options.TokenLifespan = TimeSpan.FromDays(2);
+            });
+
+            services.ConfigureApplicationCookie(options => options.LoginPath = "/Home/Login");
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
