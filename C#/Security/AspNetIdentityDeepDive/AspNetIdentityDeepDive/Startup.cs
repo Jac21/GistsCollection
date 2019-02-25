@@ -3,6 +3,7 @@ using System.Reflection;
 using AspNetIdentityDeepDive.DbContexts;
 using AspNetIdentityDeepDive.Models;
 using AspNetIdentityDeepDive.Providers;
+using AspNetIdentityDeepDive.Validators;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
@@ -37,10 +38,23 @@ namespace AspNetIdentityDeepDive
                 {
                     options.SignIn.RequireConfirmedEmail = true;
                     options.Tokens.EmailConfirmationTokenProvider = "emailconf";
+
+                    // Password options configuration
+                    options.Password.RequireNonAlphanumeric = false;
+                    options.Password.RequiredUniqueChars = 4;
+
+                    // User options configuration
+                    options.User.RequireUniqueEmail = true;
+
+                    // Lockout options configurations
+                    options.Lockout.AllowedForNewUsers = true;
+                    options.Lockout.MaxFailedAccessAttempts = 3;
+                    options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(10);
                 })
                 .AddEntityFrameworkStores<MyIdentityUserDbContext>()
                 .AddDefaultTokenProviders()
-                .AddTokenProvider<EmailConfirmationTokenProvider<MyIdentityUser>>("emailconf");
+                .AddTokenProvider<EmailConfirmationTokenProvider<MyIdentityUser>>("emailconf")
+                .AddPasswordValidator<DoesNotContainPasswordValidator<MyIdentityUser>>();
 
             services.AddScoped<IUserClaimsPrincipalFactory<MyIdentityUser>, MyIdentityUserClaimsPrincipalFactory>();
 

@@ -123,19 +123,31 @@ namespace AspNetIdentityDeepDive.Controllers
             {
                 var user = await userManager.FindByNameAsync(model.UserName);
 
-                if (user != null && await userManager.CheckPasswordAsync(user, model.Password))
+                if (user != null && !await userManager.IsLockedOutAsync(user))
                 {
-                    if (!await userManager.IsEmailConfirmedAsync(user))
+                    if (await userManager.CheckPasswordAsync(user, model.Password))
                     {
-                        ModelState.AddModelError(string.Empty, "Email is not confirmed");
-                        return View();
+                        if (!await userManager.IsEmailConfirmedAsync(user))
+                        {
+                            ModelState.AddModelError(string.Empty, "Email is not confirmed");
+                            return View();
+                        }
+
+                        await userManager.ResetAccessFailedCountAsync(user);
+
+                        var principal = await claimsPrincipalFactory.CreateAsync(user);
+
+                        await HttpContext.SignInAsync("Identity.Application", principal);
+
+                        return RedirectToAction("Index");
                     }
 
-                    var principal = await claimsPrincipalFactory.CreateAsync(user);
+                    await userManager.AccessFailedAsync(user);
 
-                    await HttpContext.SignInAsync("Identity.Application", principal);
-
-                    return RedirectToAction("Index");
+                    if (await userManager.IsLockedOutAsync(user))
+                    {
+                        // email the user, notifying them of lockout
+                    }
                 }
 
                 /* If using SignInManager over UserManager */
@@ -212,6 +224,11 @@ namespace AspNetIdentityDeepDive.Controllers
 
 
                         return View();
+                    }
+
+                    if (await userManager.IsLockedOutAsync(user))
+                    {
+                        await userManager.SetLockoutEndDateAsync(user, DateTimeOffset.UtcNow);
                     }
 
                     return View("Success");
