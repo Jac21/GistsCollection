@@ -66,6 +66,14 @@ namespace AspNetIdentityDeepDive
             });
 
             services.ConfigureApplicationCookie(options => options.LoginPath = "/Home/Login");
+
+            // External Application Configuration, using Google as an example
+            services.AddAuthentication().AddGoogle("google", options =>
+            {
+                options.ClientId = "client-id-goes-here";
+                options.ClientSecret = "client-secret-goes-here";
+                options.SignInScheme = IdentityConstants.ExternalScheme;
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

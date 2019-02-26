@@ -364,7 +364,61 @@ namespace AspNetIdentityDeepDive.Controllers
             await userManager.SetTwoFactorEnabledAsync(user, true);
             return View("Success");
         }
+
+        [HttpGet]
+        public IActionResult ExternalLogin(string provider)
+        {
+            var properties = new AuthenticationProperties
+            {
+                RedirectUri = Url.Action("ExternalLoginCallback"),
+                Items = {{"scheme", provider}}
+            };
+
+            return Challenge(properties, provider);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> ExternalLoginCallback()
+        {
+            var result = await HttpContext.AuthenticateAsync(IdentityConstants.ExternalScheme);
+
+            var externalUserId = result.Principal.FindFirstValue("sub")
+                                 ?? result.Principal.FindFirstValue(ClaimTypes.NameIdentifier)
+                                 ?? throw new Exception("Cannot find external user ID");
+
+            var provider = result.Properties.Items["scheme"];
+
+            var user = await userManager.FindByLoginAsync(provider, externalUserId);
+
+            if (user == null)
+            {
+                var email = result.Principal.FindFirstValue("email")
+                            ?? result.Principal.FindFirstValue(ClaimTypes.Email);
+
+                if (email != null)
+                {
+                    user = await userManager.FindByEmailAsync(email);
+
+                    if (user == null)
+                    {
+                        user = new MyIdentityUser {UserName = email, Email = email};
+                        await userManager.CreateAsync(user);
+                    }
+                }
+            }
+
+
+            if (user == null)
+            {
+                return View("Error");
+            }
+
+            await HttpContext.SignOutAsync(IdentityConstants.ExternalScheme);
+
+            var claimsPrincipal = await claimsPrincipalFactory.CreateAsync(user);
+            await HttpContext.SignInAsync(IdentityConstants.ApplicationScheme, claimsPrincipal);
+
+            return RedirectToAction("Index");
+        }
     }
 }
- 
- 
