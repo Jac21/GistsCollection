@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
+using Microsoft.Extensions.Primitives;
 
 namespace BasicApiThrottler.Attributes
 {
@@ -28,7 +30,7 @@ namespace BasicApiThrottler.Attributes
 
             if (throttler.ShouldRequestShouldBeThrottled())
             {
-                context.Result = new BadRequestResult();
+                context.Result = new StatusCodeResult(429);
 
                 AddThrottleHeaders(context.HttpContext.Response);
             }
@@ -62,7 +64,10 @@ namespace BasicApiThrottler.Attributes
 
             foreach (var header in throttler.GetRateLimitHeaders())
             {
-                response.Headers.Add(header.Key, header.Value);
+                if (!response.Headers.Contains(new KeyValuePair<string, StringValues>(header.Key, header.Value)))
+                {
+                    response.Headers.Add(header.Key, header.Value);
+                }
             }
         }
     }

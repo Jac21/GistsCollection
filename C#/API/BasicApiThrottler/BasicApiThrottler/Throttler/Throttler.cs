@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
-using static BasicApiThrottler.Utilities.Utilities;
 
 namespace BasicApiThrottler.Throttler
 {
@@ -17,6 +16,12 @@ namespace BasicApiThrottler.Throttler
         private static readonly ConcurrentDictionary<string, ThrottleInfo> concurrentCache =
             new ConcurrentDictionary<string, ThrottleInfo>();
 
+        /// <summary>
+        /// Throttler class, to be used via ThrottleFilter as decorate/attribute per Controller method
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="requestLimit"></param>
+        /// <param name="timeoutInSeconds"></param>
         public Throttler(string key, int requestLimit = 5, int timeoutInSeconds = 10)
         {
             RequestLimit = requestLimit;
@@ -24,6 +29,10 @@ namespace BasicApiThrottler.Throttler
             ThrottleGroup = key;
         }
 
+        /// <summary>
+        /// Basic check to ensure request fits within specified time window
+        /// </summary>
+        /// <returns></returns>
         public bool ShouldRequestShouldBeThrottled()
         {
             var throttleInfo = GetThrottleInfoFromCache();
@@ -34,6 +43,11 @@ namespace BasicApiThrottler.Throttler
             return throttleInfo.RequestCount > RequestLimit;
         }
 
+        /// <summary>
+        /// Add appropriate response headers to ensure consumers of the API are
+        /// aware of the rate limit window, request count, and reset time in UNIX epoch format
+        /// </summary>
+        /// <returns></returns>
         public Dictionary<string, string> GetRateLimitHeaders()
         {
             var throttleInfo = GetThrottleInfoFromCache();
@@ -42,8 +56,22 @@ namespace BasicApiThrottler.Throttler
             {
                 {"X-RateLimit-Limit", RequestLimit.ToString()},
                 {"X-RateLimit-Remaining", Math.Max(RequestLimit - throttleInfo.RequestCount, 0).ToString()},
-                {"X-RateLimit-Reset", ToUnixTime(throttleInfo.ExpiresAt).ToString()}
+                {"X-RateLimit-Reset", DateTimeOffset.FromUnixTimeSeconds(throttleInfo.ExpiresAt.Second).ToString()}
             };
+        }
+
+        /// <summary>
+        /// Safely increment request count for this particular session
+        /// </summary>
+        public void IncrementRequestCount()
+        {
+            var throttleInfo = GetThrottleInfoFromCache();
+
+            concurrentCache.AddOrUpdate(ThrottleGroup, throttleInfo, (s, info) =>
+            {
+                throttleInfo.RequestCount++;
+                return throttleInfo;
+            });
         }
 
         private ThrottleInfo GetThrottleInfoFromCache()
@@ -62,13 +90,6 @@ namespace BasicApiThrottler.Throttler
             }
 
             return throttleInfo;
-        }
-
-        public void IncrementRequestCount()
-        {
-            var throttleInfo = GetThrottleInfoFromCache();
-            throttleInfo.RequestCount++;
-            concurrentCache[ThrottleGroup] = throttleInfo;
         }
     }
 }
