@@ -28,6 +28,7 @@ namespace DotNetCoreWebApiBestPractices.Controllers
             this.repository = repository;
         }
 
+        [ResponseCache(Duration = 1800)]
         [HttpGet]
         public IActionResult GetAllOwners()
         {
