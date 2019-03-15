@@ -1,4 +1,4 @@
-﻿using DotNetCoreWebApiBestPractices.Controllers;
+﻿using DotNetCoreWebApiBestPractices.Models;
 
 namespace DotNetCoreWebApiBestPractices.Repositories
 {
