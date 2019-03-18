@@ -60,3 +60,28 @@ const userWithPasswordTwo = {
 const mergedUserObjects = mergeObjects(userOne, userWithPasswordTwo);
 
 console.log(mergedUserObjects);
+
+/**
+ * Dynamically excludes properties using computed object property names
+ * 
+ * @param {object} prop Property to dynamically remove.
+ * @returns {object} Object sans property specified.
+ */
+const removeProperty = prop => ({
+    // dynamic destructuring
+    [prop]: _,
+    ...rest
+}) => rest;
+
+// examples 
+const userToRemovePropsFrom = {
+    id: 100,
+    name: 'Howard Moon',
+    password: 'Password!'
+};
+
+const removePassword = removeProperty('password');
+const removeId = removeProperty('id');
+
+console.log(removePassword(userToRemovePropsFrom)); //=> { id: 100, name: 'Howard Moon' }
+console.log(removeId(userToRemovePropsFrom)); //=> { name: 'Howard Moon', password: 'Password!' }
