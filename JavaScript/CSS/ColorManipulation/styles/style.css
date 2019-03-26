@@ -1,0 +1,13 @@
+.container {
+    display: grid;
+}
+
+
+.layout-item {
+    border: 1px solid black;
+}
+
+.color-grid {
+    grid-template-columns: 50vw 50vw;
+    grid-template-rows: 10vw 10vw;
+}
