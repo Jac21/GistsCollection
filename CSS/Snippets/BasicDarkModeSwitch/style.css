@@ -1,0 +1,12 @@
+/* Declare a custom property on the :root pseudo-class */
+:root {
+    --color-bg: #ffffff;
+}
+
+body {
+    background-color: var(--color-bg);
+}
+
+[data-theme="dark"] {
+    --color-bg: #000000;
+}
