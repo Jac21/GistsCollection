@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using TaskParallel.ForEach.ScannerExample;
+using TaskParallel.For.DirectoryExample;
 
 namespace TaskParallel
 {
@@ -9,6 +10,17 @@ namespace TaskParallel
     {
         static void Main()
         {
+            // Parallel.For example
+            Console.WriteLine("------ Parallel.For ------");
+
+            ParallelDirectorySizeReader parallelDirectorySizeReader =
+                new ParallelDirectorySizeReader();
+
+            parallelDirectorySizeReader.DirectoryToRead = "C:\\Users\\jcant\\Documents\\Books";
+
+            parallelDirectorySizeReader.Process();
+
+            // Parallel.ForEach example
             Console.WriteLine("------ Parallel.ForEach ------");
 
             var images = new List<Image>
