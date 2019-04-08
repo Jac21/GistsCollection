@@ -78,3 +78,33 @@ const frozenObj = {
 
 Object.freeze(frozenObj);
 console.log(`frozenObj with 'freeze' applied isFrozen? => ${Object.isFrozen(frozenObj)}`);
+
+// Conditionally add properties into an object literal
+const condition = false;
+
+const objToConditionallyAddTo = {
+  ...condition && {
+    prop: value
+  },
+};
+
+// example
+const formValues = {
+  state: 'The State'
+};
+
+const state = formValues['state']; // 'The State'
+const priority = formValues['priority']; // undefined
+
+const query = {
+  collection: 'Users',
+  sort: 'ASC',
+  ...state && {
+    state
+  },
+  ...priority && {
+    priority
+  }
+};
+
+console.log(query); // {collection: "Users", sort: "ASC", state: "The State"}
