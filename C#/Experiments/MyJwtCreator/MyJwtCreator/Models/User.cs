@@ -1,5 +1,8 @@
 ﻿namespace MyJwtCreator.Models
 {
+    /// <summary>
+    /// Sample User Model
+    /// </summary>
     public class User
     {
         public int UserId { get; set; }

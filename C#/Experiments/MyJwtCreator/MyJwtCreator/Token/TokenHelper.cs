@@ -22,6 +22,7 @@ namespace MyJwtCreator.Token
             var claims = await ClaimsHelper.CreateClaimsIdentityAsync(user, userData);
 
             // Crate JWToken
+            // User Sha256 to digitally sign signature
             var token = tokenHandler.CreateJwtSecurityToken(issuer: issuer,
                 audience: authority,
                 subject: claims,
