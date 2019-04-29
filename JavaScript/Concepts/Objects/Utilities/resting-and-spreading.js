@@ -85,3 +85,20 @@ const removeId = removeProperty('id');
 
 console.log(removePassword(userToRemovePropsFrom)); //=> { id: 100, name: 'Howard Moon' }
 console.log(removeId(userToRemovePropsFrom)); //=> { name: 'Howard Moon', password: 'Password!' }
+
+/**
+ * Get unique values from an array
+ * 
+ * @param {array} arr Array to derive unique values from.
+ * @returns {array} Return array with unique values.
+ */
+const createUniqueValuesArrayFromArray = arr => {
+    return [...new Set(arr)];
+};
+
+// examples 
+const arrayWithNonUniqueValues = [1, 2, 3, 3]
+
+const arrayWithUniqueValues = createUniqueValuesArrayFromArray(arrayWithNonUniqueValues);
+
+console.log(arrayWithUniqueValues);
