@@ -108,3 +108,23 @@ const query = {
 };
 
 console.log(query); // {collection: "Users", sort: "ASC", state: "The State"}
+
+// Create empty object
+
+let emptyObject = Object.create(null);
+
+// dict.__proto__ === "undefined"
+// No object properties exist until you add them
+
+console.log(emptyObject);
+
+// Get query string parameters
+// Assuming "?post=1234&action=edit"
+
+var urlParams = new URLSearchParams(window.location.search);
+
+console.log(urlParams.has('post')); // true
+console.log(urlParams.get('action')); // "edit"
+console.log(urlParams.getAll('action')); // ["edit"]
+console.log(urlParams.toString()); // "?post=1234&action=edit"
+console.log(urlParams.append('active', '1')); // "?post=1234&action=edit&active=1"
