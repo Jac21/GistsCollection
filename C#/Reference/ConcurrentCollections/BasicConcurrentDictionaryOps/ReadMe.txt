@@ -1,1 +1,0 @@
-Visual Studio 2013 project containing demo code for C# Concurrent Collections Module 2
