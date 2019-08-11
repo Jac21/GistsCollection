@@ -40,3 +40,46 @@ logger(timestampDate);
 // With no arguments
 var noArgumentDate = new Date();
 logger(noArgumentDate, 'warn');
+
+// # Formatting a date
+
+const date = new Date(2019, 0, 23, 17, 23, 42)
+logger(date.toString());
+
+// Writing a custom date format
+const d = new Date(2019, 0, 23);
+const year = d.getFullYear(); // 2019
+const newDate = d.getDate(); // 23
+
+const months = [
+  'January',
+  'February',
+  'March',
+  'April',
+  'May',
+  'June',
+  'July',
+  'August',
+  'September',
+  'October',
+  'November',
+  'December'
+];
+
+const monthName = months[d.getMonth()];
+logger(monthName);
+
+const days = [
+  'Sun',
+  'Mon',
+  'Tue',
+  'Wed',
+  'Thu',
+  'Fri',
+  'Sat'
+]
+
+const dayName = days[d.getDay()] // Thu
+
+const formatted = `${dayName}, ${newDate} ${monthName} ${year}`
+logger(formatted) // Thu, 23 January 2019
