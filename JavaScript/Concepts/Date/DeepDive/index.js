@@ -83,3 +83,24 @@ const dayName = days[d.getDay()] // Thu
 
 const formatted = `${dayName}, ${newDate} ${monthName} ${year}`
 logger(formatted) // Thu, 23 January 2019
+
+// # Comparing dates
+
+const earlier = new Date(2019, 0, 26);
+const later = new Date(2019, 0, 27);
+
+logger(earlier < later); // true
+
+const isSameTime = (a, b) => {
+  return a.getTime() === b.getTime()
+};
+
+const a = new Date(2019, 0, 26);
+const b = new Date(2019, 0, 26);
+
+logger(isSameTime(a, b)); // true
+
+// # Automatic date correction
+
+// 33rd March => 2nd April
+new Date(2019, 2, 33)
