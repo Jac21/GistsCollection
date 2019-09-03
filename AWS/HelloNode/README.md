@@ -233,3 +233,5 @@ sam package --output-template packaged.yaml --s3-bucket bucketname
 
 ## Step 4 - Deploy your application
 sam deploy --template-file packaged.yaml --region us-west-2 --capabilities CAPABILITY_IAM --stack-name aws-sam-getting-started
+
+# Even more docs for the toolset - https://aws.amazon.com/blogs/developer/announcing-aws-toolkit-for-visual-studio-code/
