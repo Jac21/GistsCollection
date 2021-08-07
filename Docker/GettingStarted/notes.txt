@@ -19,3 +19,9 @@
 > docker tag docker101tutorial jac21/docker101tutorial
 
 > docker push jac21/docker101tutorial
+
+-- kube
+
+> minikube start
+
+> kubectl get nodes
