@@ -38,3 +38,23 @@
 > diff core.c old-core.c
 
 > diff -y -W 70 core.c old-core.c
+
+# Find Your IP address: ip addr
+
+> ip addr
+
+# Uncover Network Information: netstat
+
+> netstat -lt
+
+# Troubleshoot Connectivity Issues: ping
+
+> ping -c 4 www.google.com
+
+# Discover Hardware Details: lshw
+
+> sudo lshw | less
+
+# Determine a Packet’s Route: traceroute
+
+> traceroute www.blarneycastle.ie
