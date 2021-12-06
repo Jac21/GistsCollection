@@ -14,7 +14,7 @@
     "cross-env": "^7.0.3",
     "seneca-redis-transport": "0.3.0",
     "seneca-repl": "1.1.2",
-    "seneca": "3.4.2",
+    "seneca": "3.9.0",
     "seneca-balance-client": "0.6.1",
     "seneca-monitor": "0.1.0",
     "seneca-entity": "2.0.2",
