@@ -12,7 +12,7 @@
   "dependencies": {
     "cross-env": "^7.0.3",
     "handlebars": "4.7.7",
-    "hapi": "16.1.0",
+    "hapi": "18.1.0",
     "inert": "4.1.0",
     "seneca": "3.9.0",
     "seneca-balance-client": "0.6.1",
