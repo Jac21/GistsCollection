@@ -8,6 +8,16 @@
 
 > kubectl delete -f pod.yaml
 
+# Deployments
+
+> kubectl apply -f bb.yaml
+
+> kubectl get deployments
+
+> kubectl get services
+
+> kubectl delete -f bb.yaml
+
 # Docker Swarm set-up and usage
 
 > docker swarm init
