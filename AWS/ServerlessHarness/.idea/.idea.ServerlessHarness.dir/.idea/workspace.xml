@@ -2,21 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e3fee30b-062b-49db-b1d3-d2a78e025145" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/.idea.ServerlessHarness.dir/.idea/aws.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/.idea.ServerlessHarness.dir/.idea/indexLayout.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/.idea.ServerlessHarness.dir/.idea/projectSettingsUpdater.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/.idea.ServerlessHarness.dir/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/.idea.ServerlessHarness.dir/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/events/event.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/omnisharp.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/HelloWorld/Function.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/HelloWorld/HelloWorld.csproj" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/HelloWorld/aws-lambda-tools-defaults.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/template.yaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test/HelloWorld.Test/FunctionTest.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test/HelloWorld.Test/HelloWorld.Tests.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.ServerlessHarness.dir/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ServerlessHarness.dir/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -49,7 +35,7 @@
       <updated>1640540189384</updated>
       <workItem from="1640540202076" duration="258000" />
       <workItem from="1640540739723" duration="383000" />
-      <workItem from="1640541709047" duration="453000" />
+      <workItem from="1640541709047" duration="1362000" />
     </task>
     <servers />
   </component>
