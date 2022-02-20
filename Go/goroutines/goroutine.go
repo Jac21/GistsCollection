@@ -23,6 +23,34 @@ func sum(s []int, c chan int) {
 	c <- sum // send sum to c with channel operator '<-'
 }
 
+// close the channel at the end of the function call
+func fibonacci(n int, c chan int) {
+	x, y := 0, 1
+	for i := 0; i < n; i++ {
+		c <- x
+		x, y = y, x+y
+	}
+
+	close(c)
+}
+
+// select lets a goroutine wait on multiple communication ops
+func fibonacci_select(c, quit chan int) {
+	x, y := 0, 1
+	for {
+		select {
+		case c <- x:
+			x, y = y, x+y
+		case <-quit:
+			fmt.Println("quit")
+			return
+		default: // ran if no other case is ready
+			fmt.Println("    .")
+			time.Sleep(50 * time.Millisecond)
+		}
+	}
+}
+
 func main() {
 	// A goroutine is a lightweight thread managed by the Go runtime.
 	// e.g., go f(x, y, z)
@@ -50,4 +78,22 @@ func main() {
 	ch <- 2
 	fmt.Println(<-ch)
 	fmt.Println(<-ch)
+
+	// receive values in range loop until channel closes
+	cha := make(chan int, 10)
+	go fibonacci(cap(cha), cha)
+	for i := range cha {
+		fmt.Println(i)
+	}
+
+	// select blocks until one of its cases are run
+	select_ch := make(chan int)
+	quit := make(chan int)
+	go func() {
+		for i := 0; i < 10; i++ {
+			fmt.Println(<-select_ch)
+		}
+		quit <- 0
+	}()
+	fibonacci_select(select_ch, quit)
 }
