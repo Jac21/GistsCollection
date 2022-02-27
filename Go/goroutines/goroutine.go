@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"sync"
 	"time"
 )
 
@@ -51,6 +52,29 @@ func fibonacci_select(c, quit chan int) {
 	}
 }
 
+// safe to use concurrently due to mutex usage
+type SafeCounter struct {
+	mu sync.Mutex
+	v  map[string]int
+}
+
+func (c *SafeCounter) Inc(key string) {
+	c.mu.Lock()
+
+	// locked, so only one goroutine at a time can
+	// access c.v
+	c.v[key]++
+	c.mu.Unlock()
+}
+
+func (c *SafeCounter) Value(key string) int {
+	c.mu.Lock()
+
+	// ensure mutex will be unlocked via defer call
+	defer c.mu.Unlock()
+	return c.v[key]
+}
+
 func main() {
 	// A goroutine is a lightweight thread managed by the Go runtime.
 	// e.g., go f(x, y, z)
@@ -96,4 +120,13 @@ func main() {
 		quit <- 0
 	}()
 	fibonacci_select(select_ch, quit)
+
+	// mutex work
+	mc := SafeCounter{v: make(map[string]int)}
+	for i := 0; i < 1001; i++ {
+		go mc.Inc("somekey")
+	}
+
+	time.Sleep(time.Second)
+	fmt.Println(mc.Value("somekey"))
 }
