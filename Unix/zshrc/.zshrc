@@ -99,3 +99,6 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+
+alias node16='export PATH="/usr/local/bin:/usr/local/opt/node@16/bin:$PATH"; node -v'
+alias node14='export PATH="/usr/local/opt/node@14/bin:$PATH"; node -v'
