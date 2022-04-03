@@ -1,1 +1,17 @@
-cargo rustc -- -C link-args="-e __start -static -nostartfiles"
+> cargo rustc -- -C link-args="-e __start -static -nostartfiles"
+
+> cargo build --target x86_64-blog_os.json
+
+> rustup component add rust-src --toolchain nightly-aarch64-apple-darwin
+
+> cargo install bootimage
+
+> rustup component add llvm-tools-preview
+
+> cargo bootimage
+
+> brew install qemu
+
+> qemu-system-x86_64 -drive format=raw,file=target/x86_64-blog_os/debug/bootimage-my_os.bin
+
+> dd if=target/x86_64-blog_os/debug/bootimage-blog_os.bin of=/dev/sdX && sync
