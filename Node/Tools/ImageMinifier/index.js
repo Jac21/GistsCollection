@@ -2,12 +2,12 @@ import { ImagePool } from "@squoosh/lib";
 import { cpus } from "os";
 import fs from "fs/promises";
 
-async function processFiles() {
+async function processFiles(fileName, newImagePath) {
   // create new image pools
   const imagePool = new ImagePool(cpus().length);
 
   // ingest image
-  const file = await fs.readFile("./tests/image.png");
+  const file = await fs.readFile(fileName);
 
   const image = imagePool.ingestImage(file);
 
@@ -22,8 +22,6 @@ async function processFiles() {
 
   const job = image.encode(encodeOptions).then(async () => {
     // write encoded images to the file system
-    const newImagePath = "./tests/encoded/image."; //extension is added automatically
-
     for (const encodedImage of Object.values(image.encodedWith)) {
       fs.writeFile(
         newImagePath + (await encodedImage).extension,
@@ -41,4 +39,4 @@ async function processFiles() {
   await imagePool.close();
 }
 
-processFiles();
+processFiles("./tests/image.png", "./tests/encoded/image.");
