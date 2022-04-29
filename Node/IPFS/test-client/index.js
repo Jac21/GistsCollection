@@ -4,8 +4,9 @@ import Types from "./types.js";
 import fs from "fs/promises";
 import path from "path";
 
-const ipfsApiUrl = "https://ipfs.infura.io:5001";
-const ipfsWebUrl = "http://ipfs.infura.io/ipfs/";
+const ipfsApiUrl = "https://ipfs.io:5001";
+const ipfsWebUrl = "http://ipfs.io/ipfs/";
+const ipfsLocalDaemon = "/ip4/127.0.0.1/tcp/5001";
 
 let ipfsClient;
 let app;
@@ -63,7 +64,7 @@ async function addFolder({ ipfsPath, content }) {
   return writtenFiles;
 }
 
-initialize(ipfsApiUrl);
+initialize(ipfsLocalDaemon);
 
 app.get("/", (req, res) => {
   return res.send("Welcome to my IPFS client application!");
@@ -82,12 +83,12 @@ app.post("/upload", async (req, res) => {
       fileData = await addText(data);
 
       console.log(fileData);
-      return res.send(`https://ipfs.infura.io/ipfs/${fileData.cid}`);
+      return res.send(`https://ipfs.io/ipfs/${fileData.cid}`);
     case "file":
       fileData = await addFile(data);
 
       console.log(fileData);
-      return res.send(`https://ipfs.infura.io/ipfs/${fileData.cid}`);
+      return res.send(`https://ipfs.io/ipfs/${fileData.cid}`);
     case "folder":
       fileData = await addFolder(data);
 
@@ -96,7 +97,7 @@ app.post("/upload", async (req, res) => {
       let ipfsUrls = [];
 
       fileData.forEach(function (entry) {
-        ipfsUrls.push(`https://ipfs.infura.io/ipfs/${entry.cid}`);
+        ipfsUrls.push(`https://ipfs.io/ipfs/${entry.cid}`);
       });
 
       return res.send(ipfsUrls);
