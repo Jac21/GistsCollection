@@ -1,0 +1,19 @@
+{
+  "attributes": [
+    { "trait_type": "Background", "value": "Shattered Diamond" },
+    { "trait_type": "Costume", "value": "Trenchcoat" },
+    { "trait_type": "Platter", "value": "Silver" },
+    { "trait_type": "Bubble", "value": "Round" },
+    { "trait_type": "Items", "value": "IOU" },
+    { "trait_type": "Hair", "value": "Elvis" },
+    { "trait_type": "Mouth", "value": "Shaven" },
+    { "trait_type": "Eyes", "value": "Halflid Eye" },
+    { "trait_type": "Ears", "value": "Hoop Earring" }
+  ],
+  "image": "https://ipfs.infura.io/ipfs/QmaR6rHPMbo1QJbnUa6W6AgrRHZK47o8yzHi6dCm4CDWKe",
+  "external_url": "https://ipfs.infura.io/ipfs/QmaR6rHPMbo1QJbnUa6W6AgrRHZK47o8yzHi6dCm4CDWKe",
+  "description": "A Butler!",
+  "name": "Butler",
+  "background_color": "4a4a4a",
+  "hash": "QmaR6rHPMbo1QJbnUa6W6AgrRHZK47o8yzHi6dCm4CDWKe"
+}
