@@ -64,6 +64,7 @@ async function addFolder({ ipfsPath, content }) {
   return writtenFiles;
 }
 
+// > ipfs daemon
 initialize(ipfsLocalDaemon);
 
 app.get("/", (req, res) => {
