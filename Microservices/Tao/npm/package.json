@@ -13,7 +13,7 @@
     "seneca": "3.9.0",
     "seneca-balance-client": "0.6.1",
     "seneca-monitor": "0.1.0",
-    "seneca-mesh": "0.11.0",
+    "seneca-mesh": "1.5.0",
     "seneca-entity": "2.0.2",
     "seneca-jsonfile-store": "1.0.0",
     "seneca-redis-transport": "0.3.0",
@@ -22,6 +22,6 @@
   },
   "devDependencies": {
     "code": "4.1.x",
-    "lab": "14.0.x"
+    "lab": "14.3.x"
   }
 }
