@@ -24,7 +24,7 @@
   },
   "devDependencies": {
     "code": "4.1.x",
-    "lab": "14.3.x",
+    "lab": "18.0.x",
     "wreck": "10.0.x"
   }
 }
