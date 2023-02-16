@@ -230,3 +230,4 @@ bower_components
 
 # Custom
 *.env
+.DS_Store
