@@ -46,7 +46,7 @@ func fibonacci_select(c, quit chan int) {
 			fmt.Println("quit")
 			return
 		default: // ran if no other case is ready
-			fmt.Println("    .")
+			fmt.Println(".....")
 			time.Sleep(50 * time.Millisecond)
 		}
 	}
@@ -85,14 +85,14 @@ func main() {
 	s := []int{7, 2, 8, -9, 4, 0}
 
 	// explicitly create a channel
-	c := make(chan int)
+	slicedChannel := make(chan int)
 
 	// sums the number in a slice between two goroutines
-	go sum(s[:len(s)/2], c)
-	go sum(s[len(s)/2:], c)
+	go sum(s[:len(s)/2], slicedChannel)
+	go sum(s[len(s)/2:], slicedChannel)
 
 	// blocks until completion without explicit synchronization
-	x, y := <-c, <-c // receive from c
+	x, y := <-slicedChannel, <-slicedChannel // receive from c
 
 	fmt.Println(x, y, x+y)
 
