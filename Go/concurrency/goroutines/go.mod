@@ -1,3 +1,3 @@
-module main
+module goroutine
 
 go 1.20
