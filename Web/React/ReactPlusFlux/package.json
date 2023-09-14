@@ -16,7 +16,7 @@
     "gulp-concat": "^2.6.0",
     "gulp-connect": "^5.7.0",
     "gulp-eslint": "^6.0.0",
-    "gulp-open": "^1.0.0",
+    "gulp-open": "^3.0.1",
     "jquery": "^3.5.0",
     "lodash": "^4.17.21",
     "object-assign": "^4.0.1",
