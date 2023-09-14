@@ -47,7 +47,7 @@
     "cross-env": "1.0.7",
     "css-loader": "6.7.1",
     "enzyme": "2.2.0",
-    "eslint": "2.9.0",
+    "eslint": "8.49.0",
     "eslint-plugin-import": "1.6.1",
     "eslint-plugin-react": "5.0.1",
     "eslint-watch": "2.1.11",
