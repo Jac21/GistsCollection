@@ -8,7 +8,7 @@ Roll: Wolfen NC500 Color Negative Film
 Settings -
  - ISO: 400
  - Shutter Speed: 8
- - Aperture: 3.5
+ - Aperture: 3.5 ^ba24c9
 
 References - 
 	https://www.bhphotovideo.com/c/product/1749597-REG/wolfen_nc500_500_iso_35mm_x.html
