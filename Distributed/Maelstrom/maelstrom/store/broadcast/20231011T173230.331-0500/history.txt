@@ -1,0 +1,10 @@
+0	:invoke	:broadcast	0
+0	:info	:broadcast	0	:net-timeout
+1	:invoke	:broadcast	1
+1	:info	:broadcast	1	:net-timeout
+2	:invoke	:broadcast	2
+2	:info	:broadcast	2	:net-timeout
+3	:invoke	:broadcast	3
+3	:info	:broadcast	3	:net-timeout
+4	:invoke	:read	nil
+4	:fail	:read	nil	:net-timeout
