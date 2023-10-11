@@ -1,0 +1,42 @@
+0	:invoke	:generate	nil
+:nemesis	:info	:start-partition	:majority
+2	:invoke	:generate	nil
+:nemesis	:info	:start-partition	[:isolated {"n1" #{"n2" "n0"}, "n2" #{"n1"}, "n0" #{"n1"}}]
+1	:invoke	:generate	nil
+1	:info	:generate	nil	:net-timeout
+2	:info	:generate	nil	:net-timeout
+4	:invoke	:generate	nil
+5	:invoke	:generate	nil
+0	:info	:generate	nil	:net-timeout
+3	:invoke	:generate	nil
+:nemesis	:info	:stop-partition	nil
+:nemesis	:info	:stop-partition	:network-healed
+4	:info	:generate	nil	:net-timeout
+7	:invoke	:generate	nil
+5	:info	:generate	nil	:net-timeout
+8	:invoke	:generate	nil
+3	:info	:generate	nil	:net-timeout
+6	:invoke	:generate	nil
+7	:info	:generate	nil	:net-timeout
+10	:invoke	:generate	nil
+6	:info	:generate	nil	:net-timeout
+8	:info	:generate	nil	:net-timeout
+9	:invoke	:generate	nil
+11	:invoke	:generate	nil
+9	:info	:generate	nil	:net-timeout
+10	:info	:generate	nil	:net-timeout
+12	:invoke	:generate	nil
+13	:invoke	:generate	nil
+11	:info	:generate	nil	:net-timeout
+14	:invoke	:generate	nil
+:nemesis	:info	:start-partition	:one
+:nemesis	:info	:start-partition	[:isolated {"n1" #{"n2" "n0"}, "n2" #{"n1"}, "n0" #{"n1"}}]
+13	:info	:generate	nil	:net-timeout
+16	:invoke	:generate	nil
+12	:info	:generate	nil	:net-timeout
+14	:info	:generate	nil	:net-timeout
+15	:invoke	:generate	nil
+17	:invoke	:generate	nil
+15	:info	:generate	nil	:net-timeout
+17	:info	:generate	nil	:net-timeout
+16	:info	:generate	nil	:net-timeout
