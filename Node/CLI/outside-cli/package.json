@@ -21,7 +21,7 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "axios": "^0.21.2",
+    "axios": "^1.6.0",
     "minimist": "^1.2.6",
     "ora": "^2.1.0"
   }
