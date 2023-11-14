@@ -12,9 +12,9 @@ import (
 )
 
 type BroadcastMessage struct {
-	Src     string  `json:src,omitempty`
-	Type    string  `json:type`
-	Message float64 `json:message`
+	Src     string  `json:"src,omitempty"`
+	Type    string  `json:"type"`
+	Message float64 `json:"message"`
 }
 
 type SrcMessage struct {
