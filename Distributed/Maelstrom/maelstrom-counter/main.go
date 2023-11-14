@@ -10,8 +10,8 @@ import (
 )
 
 type AddMessage struct {
-	Type  string `json:type`
-	Delta int    `json:delta`
+	Type  string `json:"type"`
+	Delta int    `json:"delta"`
 }
 
 func main() {
