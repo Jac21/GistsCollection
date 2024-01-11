@@ -54,4 +54,51 @@ Settings -
 References -
 	https://www.nocolorstudio.com/product-page/experimental-no-5 
 
+## Austin, Dia De Los Muertos Photo Walk
+
+Dates: 10/28
+
+Roll: Kodak Professional Tri-X 400 Black and White Negative Film
+
+Settings - 
+- ISO: 400
+- Shutter Speed: 250
+- Aperture: 8
+
+## Leavenworth, Washington
+
+Dates: 12/24
+
+Roll: Kodak Professional Tri-X 400 Black and White Negative Film
+
+Settings - 
+- ISO: 400
+- Shutter Speed: 250
+- Aperture: 8
+
+Roll: Showa
+
+Settings - 
+- ISO: 400
+- Shutter Speed: 250
+- Aperture: 8
+
+## Cle Elum, Washington 
+
+Dates: 12/25, 12/26
+
+Roll: no.10 Wide Spectrum
+
+Settings - 
+- ISO: 400
+- Shutter Speed: 60
+- Aperture: 5.6
+
+Roll: 50Daylight Fine Grain Color Negative Film, 35mm
+
+Settings -
+- ISO: 100
+- Shutter Speed: 250
+- Aperture: 5.6
+# Links
 ## [Newgrain](newgrain://profile/6ewXqiyIsib9o1xOLTbTnSZn75f2)
