@@ -1,0 +1,38 @@
+:nemesis	:info	:start-partition	:majorities-ring
+1	:invoke	:add	4
+:nemesis	:info	:start-partition	[:isolated {"n0" #{"n1"}, "n1" #{"n2"}, "n2" #{"n0"}}]
+2	:invoke	:add	1
+0	:invoke	:read	nil
+0	:ok	:read	0
+0	:invoke	:add	1
+1	:info	:add	4	indeterminate: Client read timeout
+4	:invoke	:add	2
+2	:info	:add	1	indeterminate: Client read timeout
+5	:invoke	:read	nil
+0	:info	:add	1	indeterminate: Client read timeout
+3	:invoke	:read	nil
+4	:info	:add	2	indeterminate: Client read timeout
+7	:invoke	:read	nil
+5	:info	:read	nil	indeterminate: Client read timeout
+8	:invoke	:add	0
+3	:info	:read	nil	indeterminate: Client read timeout
+6	:invoke	:read	nil
+7	:info	:read	nil	indeterminate: Client read timeout
+10	:invoke	:add	3
+8	:info	:add	0	indeterminate: Client read timeout
+11	:invoke	:read	nil
+6	:info	:read	nil	indeterminate: Client read timeout
+9	:invoke	:read	nil
+:nemesis	:info	:stop-partition	nil
+:nemesis	:info	:stop-partition	:network-healed
+10	:info	:add	3	indeterminate: Client read timeout
+11	:info	:read	nil	indeterminate: Client read timeout
+9	:info	:read	nil	indeterminate: Client read timeout
+:nemesis	:info	:stop-partition	nil
+:nemesis	:info	:stop-partition	:network-healed
+13	:invoke	:read	nil
+12	:invoke	:read	nil
+14	:invoke	:read	nil
+14	:info	:read	nil	indeterminate: Client read timeout
+12	:info	:read	nil	indeterminate: Client read timeout
+13	:info	:read	nil	indeterminate: Client read timeout
