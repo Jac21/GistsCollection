@@ -101,4 +101,19 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 alias node16='export PATH="/usr/local/bin:/usr/local/opt/node@16/bin:$PATH"; node -v'
-alias node14='export PATH="/usr/local/opt/node@14/bin:$PATH"; node -v'
+alias node14='export PATH="/usr/local/opt/node@14/bin:$PATH"; node -v'export PATH="/opt/homebrew/opt/node@16/bin:$PATH"
+export PATH="/opt/homebrew/opt/openjdk/bin:$PATH"
+
+
+# Load Angular CLI autocompletion.
+source <(ng completion script)
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/jeremycantu/Downloads/Development/GCP/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/jeremycantu/Downloads/Development/GCP/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/jeremycantu/Downloads/Development/GCP/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/jeremycantu/Downloads/Development/GCP/google-cloud-sdk/completion.zsh.inc'; fi
+
+# NVM
+export NVM_DIR=~/.nvm
+source $(brew --prefix nvm)/nvm.sh
