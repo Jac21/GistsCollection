@@ -100,5 +100,12 @@ Settings -
 - ISO: 100
 - Shutter Speed: 250
 - Aperture: 5.6
+
+Roll: Rollei Retro 400s Black and White Negative Film
+
+Settings - 
+- ISO: 400
+- Shutter Speed: 250
+- Aperture: 16
 # Links
 ## [Newgrain](newgrain://profile/6ewXqiyIsib9o1xOLTbTnSZn75f2)

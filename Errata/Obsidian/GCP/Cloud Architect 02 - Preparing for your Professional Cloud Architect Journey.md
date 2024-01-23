@@ -1,8 +1,6 @@
-# 02 - Preparing for your Professional Cloud Architect Journey
+# Introduction to the Professional Cloud Architect Certification
 
-## Introduction to the Professional Cloud Architect Certification
-
-### Diagnostic Questions
+## Diagnostic Questions
 check_
 
 1.
@@ -163,7 +161,7 @@ Specify Cymbal Direct’s project as the Shared VPC host project, and then confi
 
 Correct! VPC Peering allows for shared networking between organizations.
 
-### Knowledge Check
+## Knowledge Check
 
 check_
 
@@ -201,9 +199,9 @@ KPIs
 
 Correct! The Cloud pricing calculator allows you to estimate the costs for Google Cloud Products and Services.
 
-## Managing and Provisioning a Solution Infrustructure
+# Managing and Provisioning a Solution Infrustructure
 
-### Diagnostic Questions
+## Diagnostic Questions
 
 _check_
 
@@ -365,7 +363,7 @@ Deploy the web application using the App Engine standard environment with a glob
 
 Correct! Using App Engine allows for dynamic scaling based on demand, as does a managed instance group. Using an external network load balancer preserves the client's IP address.
 
-### Knowledge Check
+## Knowledge Check
 
 _check_
 
@@ -399,9 +397,9 @@ Archive
 
 Correct! Standard is appropriate for frequent use.
 
-## Designing for Security and Compliance
+# Designing for Security and Compliance
 
-### Diagnostic Questions
+## Diagnostic Questions
 
 check_
 
@@ -563,7 +561,7 @@ _check_Use multiple projects with established trust boundaries, and change the r
 
 Correct! Because the environment has evolved, update the IAM resource hierarchy to reflect the changes. Use projects to group resources that share the same trust boundary.
 
-### Knowledge Check
+## Knowledge Check
 
 check_
 
