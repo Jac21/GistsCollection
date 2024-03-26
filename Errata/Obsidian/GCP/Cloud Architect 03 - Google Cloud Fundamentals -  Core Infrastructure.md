@@ -156,3 +156,52 @@ Correct!
 
 # Storage in the Cloud
 
+## Quiz
+
+_check_
+
+1.
+
+Which database service can scale to higher database sizes?
+
+Cloud Bigtable
+
+Firestore
+
+Cloud SQL
+
+_check_Cloud Spanner
+
+Correct! Cloud Spanner can scale to petabyte database sizes, while Cloud SQL is limited by the size of the database instances you choose. At the time this quiz was created, the maximum was 10,230 GB.
+
+_check_
+
+2.
+
+What is the correct use case for Cloud Storage?
+
+_check_Cloud Storage is well suited to providing durable and highly available object storage.
+
+Cloud Storage is well suited to providing RDBMS services.
+
+Cloud Storage is well suited to providing the root file system of a Linux virtual machine.
+
+Cloud Storage is well suited to providing data warehousing services.
+
+That's correct! Cloud Storage is object storage rather than filestorage.
+
+_check_
+
+3.
+
+You are building a small application. If possible, you'd like this application's data storage to be at no additional charge. Which service has a free daily quota, separate from any free trials?
+
+Bigtable
+
+Cloud Spanner
+
+_check_Firestore
+
+Cloud SQL
+
+Correct!

@@ -107,5 +107,73 @@ Settings -
 - ISO: 400
 - Shutter Speed: 250
 - Aperture: 16
+
+# Puerto Rico - March, 2024
+
+## Campanilla
+
+Roll: Harman Phoenix 200
+
+Settings -
+- ISO: 200
+- Shutter Speed: 250
+- Aperture: 16
+
+Roll: Kodak Tri-X 400
+
+Settings -
+- ISO: 400
+- Shutter Speed: 500
+- Aperture: 16
+
+## Cayey
+
+Roll: FilmNeverDie Chameleon 100
+
+Settings -
+- ISO: 100
+- Shutter Speed: 250
+- Aperture: 11
+
+## El Yunque
+
+Roll: Kodak Proimage 100 
+
+Settings -
+- ISO: 100
+- Shutter Speed: 250
+- Aperture: 8
+
+Roll: no.10 Wide Spectrum
+
+Settings -
+- ISO: 100
+- Shutter Speed: 125
+- Aperture: 8
+
+## Vega Alta & San Juan
+
+Roll: Kodak UltraMax 400
+
+Settings -
+- ISO: 400
+- Shutter Speed: 500
+- Aperture: 22 in Vega Alta, 11 in San Juan
+
+Roll: Rollei Retro 400S 
+
+Settings -
+- ISO: 400
+- Shutter Speed: 500
+- Aperture: 11
+
+## Cabo Rojo
+
+Roll: Cinestill 50D
+
+Settings -
+- ISO: 50
+- Shutter Speed: 500
+- Aperture: 11
 # Links
 ## [Newgrain](newgrain://profile/6ewXqiyIsib9o1xOLTbTnSZn75f2)
