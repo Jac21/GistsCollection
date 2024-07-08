@@ -22,7 +22,7 @@ type TransactionOkMessage struct {
 	Type         string           `json:"type"`
 	MessageId    float64          `json:"msg_id"`
 	InReplyTo    float64          `json:"in_reply_to"`
-	Transactions [][3]interface{} `json:"txns"`
+	Transactions [][3]interface{} `json:"txn"`
 }
 
 func main() {
@@ -81,7 +81,9 @@ func main() {
 		mu.Lock()
 		for _, txn := range body.Transactions {
 			txnType := txn[0].(string)
+
 			targetKey := txn[1].(float64)
+
 			if txnType == "w" {
 				kv[string(rune(targetKey))] = txn[2].(float64)
 			}
