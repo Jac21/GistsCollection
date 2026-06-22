@@ -118,3 +118,62 @@ if [ -f '/Users/jeremycantu/Downloads/Development/GCP/google-cloud-sdk/completio
 # NVM
 export NVM_DIR=~/.nvm
 source $(brew --prefix nvm)/nvm.sh
+
+# custom gemini prompt invocation
+gemini() {
+    # Check if a prompt was provided
+    if [ -z "$1" ]; then
+        echo "Usage: gemini 'Your prompt here'"
+        return 1
+    fi
+
+    # Listen for the exported environment variable
+    if [ -z "$GEMINI_API_KEY" ]; then
+        echo "Error: GEMINI_API_KEY environment variable is not set."
+        echo "Make sure you have 'export GEMINI_API_KEY=\"your_key\"' in your ~/.zshrc."
+        return 1
+    fi
+    local API_KEY="${GEMINI_API_KEY}"
+
+    # Safely build the JSON payload
+    local PAYLOAD=$(jq -n --arg text "$1" '{"contents":[{"parts":[{"text":$text}]}]}')
+    
+    # Create a temporary file to safely store the API response body
+    local TMP_FILE=$(mktemp)
+    
+    echo "Thinking (Pro)..."
+
+    # Use -o to send the JSON body to the temp file, and -w to output ONLY the HTTP status code
+    local HTTP_STATUS=$(curl -s -o "$TMP_FILE" -w "%{http_code}" -H 'Content-Type: application/json' \
+         -X POST \
+         -d "$PAYLOAD" \
+         "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent?key=$API_KEY")
+
+    # Check if the Pro limit was hit (HTTP 429)
+    if [ "$HTTP_STATUS" -eq 429 ]; then
+        # Overwrite the previous "Thinking" line
+        echo -e "\033[1A\033[KThinking (Flash Fallback)..."
+        
+        # Fallback to the active Flash model
+        HTTP_STATUS=$(curl -s -o "$TMP_FILE" -w "%{http_code}" -H 'Content-Type: application/json' \
+             -X POST \
+             -d "$PAYLOAD" \
+             "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:generateContent?key=$API_KEY")
+    fi
+
+    # Clear the "Thinking..." line
+    echo -e "\033[1A\033[K" 
+    
+    # Parse the final output directly from the temp file
+    if [ "$HTTP_STATUS" -eq 200 ]; then
+        # Success: Output the text
+        jq -r '.candidates[0].content.parts[0].text // "Error: Could not parse response."' "$TMP_FILE"
+    else
+        # Failure: Output the specific API error
+        echo "API Error (HTTP $HTTP_STATUS):"
+        jq -r '.error.message // "Unknown error occurred."' "$TMP_FILE"
+    fi
+    
+    # Clean up the temporary file so we don't clutter your /tmp directory
+    rm -f "$TMP_FILE"
+}
