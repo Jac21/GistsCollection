@@ -1,7 +1,5 @@
 # GistsCollection
 
-[![MIT Licence](https://badges.frapst.com/os/mit/mit.svg?v=103)](https://opensource.org/licenses/mit-license.php)
-
 A collection of miniature projects, programming challenges, experiments, and reusable code snippets spanning many languages and frameworks. The repository is organized primarily by technology so examples can be found, run, studied, or adapted independently.
 
 ## Contents
